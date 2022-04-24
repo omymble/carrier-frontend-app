@@ -1,24 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+    BrowserRouter as Router,
+    Route, Routes
+} from "react-router-dom";
+import './App.scss';
+import {Header} from "./components/Header/Header";
+import {SignInPage} from "./pages/SignInPage/SignInPage";
+import {PassengerPage} from "./pages/PassengerPage/PassengerPage";
+import {DriverPage} from "./pages/DriverPage/DriverPage";
+import {FoundDriversPage} from "./pages/FoundDriversPage/FoundDriversPage";
+import {FoundPassengersPage} from "./pages/FoundPassengersPage/FoundPassengersPage";
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+        <Router>
+            <Header/>
+            <h1>app</h1>
+            <Routes>
+                <Route path="/sign-in" element={<SignInPage/>}/>
+                <Route path="/passenger" element={<PassengerPage />} />
+                <Route path="/driver" element={<DriverPage />} />
+                <Route path="/drivers-list" element={<FoundDriversPage />} />
+                <Route path="/passengers-list" element={<FoundPassengersPage />} />
+                {/*<Route path="/*" element={<NotFoundPage />} />*/}
+            </Routes>
+        </Router>
     </div>
   );
 }
