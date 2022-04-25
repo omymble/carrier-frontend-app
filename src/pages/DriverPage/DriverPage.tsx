@@ -1,6 +1,8 @@
-export const DriverPage = () => {
+import classes from "./DriverPage.module.scss";
+
+export const DriverPage = (props: object) => {
     return (
-        <div>
+        <div className={classes.driverForm}>
             <h1>DriverPage</h1>
         </div>
     )

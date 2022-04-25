@@ -7,13 +7,54 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+
+
+let passengers = [
+    {name: 'Илья Морозов',
+        telephone: '+79432735838',
+        startTime: '15:30',
+        pointFrom: {longitude: 34.8573487, latitude: 67.24534},
+        pointTo: {longitude: 34.8573487, latitude: 67.24534}
+    },
+    {name: 'Ева Савельева',
+        telephone: '+78765423',
+        startTime: '19:30',
+        pointFrom: {longitude: 34.8573487, latitude: 67.24534},
+        pointTo: {longitude: 34.8573487, latitude: 67.24534}
+    },
+    {name: 'Олег Васильев',
+        telephone: '+78674537575',
+        startTime: '12:00',
+        pointFrom: {longitude: 34.8573487, latitude: 67.24534},
+        pointTo: {longitude: 34.8573487, latitude: 67.24534}
+    }
+]
+
+let drivers = [
+    {name: 'Ольга Макарова',
+        telephone: '+79432735838',
+        startTime: '15:30',
+        pointFrom: {longitude: 34.8573487, latitude: 67.24534},
+        pointTo: {longitude: 34.8573487, latitude: 67.24534}
+    },
+    {name: 'Илья Воробьев',
+        telephone: '+78765423',
+        startTime: '19:30',
+        pointFrom: {longitude: 34.8573487, latitude: 67.24534},
+        pointTo: {longitude: 34.8573487, latitude: 67.24534}
+    },
+    {name: 'Анна Журавлева',
+        telephone: '+78674537575',
+        startTime: '12:00',
+        pointFrom: {longitude: 34.8573487, latitude: 67.24534},
+        pointTo: {longitude: 34.8573487, latitude: 67.24534}
+    }
+]
 root.render(
   <React.StrictMode>
-    <App />
+    <App passengers={passengers} drivers={drivers}/>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
