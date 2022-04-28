@@ -23,9 +23,9 @@ export const DriverInfo = (props : any) => {
                     {props.driverData.pointFrom.latitude}
                 </Typography>
             </CardContent>
-            <CardActions>
-                <Button size="small">Learn More</Button>
-            </CardActions>
+            {/*<CardActions>
+                <Button size="small">Connect</Button>
+            </CardActions>*/}
         </React.Fragment>
     );
     return (

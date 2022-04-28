@@ -1,14 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-
-
 
 let passengers = [
     {name: 'Илья Морозов',
@@ -51,10 +45,12 @@ let drivers = [
         pointTo: {longitude: 34.8573487, latitude: 67.24534}
     }
 ]
-root.render(
-  <React.StrictMode>
-    <App passengers={passengers} drivers={drivers}/>
-  </React.StrictMode>
+
+ReactDOM.render(
+    <React.StrictMode>
+        <App passengers={passengers} drivers={drivers}/>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 reportWebVitals();
