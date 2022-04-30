@@ -6,8 +6,9 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
+import {PassengerObject} from "../../types";
 
-export const PassengerInfo = (props : any) => {
+export const PassengerInfo = (props : {passengerData: PassengerObject; key: number}) => {
     const card = (
         <React.Fragment>
             <CardContent>

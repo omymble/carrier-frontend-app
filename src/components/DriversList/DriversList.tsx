@@ -5,19 +5,14 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import {DriverObject} from "../../types";
 
-export const DriversList = (props : any) => {
-    let tsxDriversList = props.drivers.map((item:any, i:number) =>
+export const DriversList = (props: {drivers: Array<DriverObject>}) => {
+    let tsxDriversList =  props.drivers.map((item:DriverObject, i:number) =>
         <DriverInfo driverData={item} key={i}/>
     )
-    console.log(props.drivers)
     return (
         <>
-            <div className={classes.driversList}>
-                <h1>DriversList</h1>
-                {tsxDriversList}
-            </div>
-            <span>============</span>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                     {Array.from(tsxDriversList).map((item, index) => (
@@ -27,8 +22,6 @@ export const DriversList = (props : any) => {
                     ))}
                 </Grid>
             </Box>
-
-
         </>
     )
 }

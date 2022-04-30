@@ -4,8 +4,10 @@
 
 .navList {
   list-style-type: none;
+  text-decoration: none;
 }
 
-.navList__item > * {
+.navList__item {
   text-decoration: none;
+  color: white;
 }
