@@ -101,9 +101,9 @@ export const Navbar = (props: any) => {
                                 {props.links.map((link:any, index:number) => (
                                     <MenuItem key={index} onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center">
-                                            <Link underline="hover">
-                                                <NavLink className={classes.navList__item} to={link.url}>{link.title}</NavLink>
-                                            </Link>
+                                            {/*<Link underline="hover">*/}
+                                                <NavLink className={classes.navList__item} to={link.url} >{link.title}</NavLink>
+                                            {/*</Link>*/}
 
                                         </Typography>
                                     </MenuItem>

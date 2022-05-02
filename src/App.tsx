@@ -14,7 +14,7 @@ import {NotFoundPage} from "./pages/NotFoundPage/NotFoundPage";
 import {StateObject} from "./types";
 
 
-function App(props: StateObject) {
+function App(props: {state: StateObject, addPassenger: Function}) {
     return (
         <div className="App">
             <Router>
@@ -22,10 +22,10 @@ function App(props: StateObject) {
                 <Routes>
                     <Route path="/sign-in" element={<SignInPage/>}/>
                     <Route path="/sign-out" element={<SignInPage/>}/>
-                    <Route path="/passenger" element={<PassengerPage/>}/>
+                    <Route path="/passenger" element={<PassengerPage addPassenger={props.addPassenger}/>}/>
                     <Route path="/driver" element={<DriverPage/>}/>
-                    <Route path="/drivers-list" element={<FoundDriversPage drivers={props.drivers}/>}/>
-                    <Route path="/passengers-list" element={<FoundPassengersPage passengers={props.passengers}/>}/>
+                    <Route path="/drivers-list" element={<FoundDriversPage drivers={props.state.drivers}/>}/>
+                    <Route path="/passengers-list" element={<FoundPassengersPage passengers={props.state.passengers} addPassenger={props.addPassenger}/>}/>
                     <Route path="/*" element={<NotFoundPage/>} />
                 </Routes>
             </Router>

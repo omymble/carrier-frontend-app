@@ -1,4 +1,5 @@
 import * as type from "../types";
+import {DriverObject, PassengerObject} from "../types";
 
 let state:type.StateObject = {
     passengers: [
@@ -145,4 +146,15 @@ let state:type.StateObject = {
     ]
 }
 
-export {state}
+let addPassenger = (formData: PassengerObject) => {
+    let newPassenger: PassengerObject = {
+        name: formData.name,
+        telephone: formData.telephone,
+        startTime: formData.startTime,
+        pointFrom: {longitude: formData.pointFrom.longitude, latitude: formData.pointFrom.latitude},
+        pointTo: {longitude: formData.pointTo.longitude, latitude: formData.pointTo.latitude}
+    }
+    state.passengers.push(newPassenger)
+}
+
+export {state, addPassenger}
