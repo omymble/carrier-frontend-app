@@ -2,26 +2,27 @@ import * as React from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {Button} from "@mui/material";
-import {addPassenger} from "../../redux/state";
-import {PassengerObject} from "../../types";
+import {DriverObject, PassengerObject} from "../../types";
 
-export const RideForm = (props: {addPassenger: Function}) => {
+export const DriverForm = (props: {dispatch: Function}) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
-            name: data.get('name'),
-            tel: data.get('telephone')
+            name: data.get('name')
         });
-        let newPassenger: PassengerObject = {
+        let newDriver: DriverObject = {
             name: String(data.get('name')),
             telephone: String(data.get('telephone')),
+            emptySeats: Number(data.get('seats')),
+            startTime: String(data.get('time')),
             pointFrom: {longitude: Number(data.get('pointFrom')), latitude: Number(data.get('pointFrom'))},
             pointTo: {longitude: Number(data.get('pointTo')), latitude: Number(data.get('pointTo'))},
-            startTime: String(data.get('time'))
+
         }
-        props.addPassenger(newPassenger)
+        // props.addDriver(newDriver)
+        props.dispatch({type: 'ADD-DRIVER', formDriverData: newDriver})
     };
 
     return (
@@ -35,8 +36,9 @@ export const RideForm = (props: {addPassenger: Function}) => {
             onSubmit={handleSubmit}
         >
             <TextField id="name" label="Имя" variant="outlined" name="name" type='text'/>
+            <TextField id="telephone" label="Телефон" variant="outlined" name="telephone" type='tel'/>
             <br/>
-            <TextField id="telephone" label="Телефон" variant="outlined" name="telephone"/>
+            <TextField id="seats" label="Свободные места" variant="outlined" name="seats" type='number'/>
             <TextField id="time" label="Время" variant="outlined" name="time"/>
             <br/>
             <TextField id="pointFrom" label="Начало маршрута" variant="outlined" name="pointFrom" type='number'/>

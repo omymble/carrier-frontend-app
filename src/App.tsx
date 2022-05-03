@@ -14,20 +14,38 @@ import {NotFoundPage} from "./pages/NotFoundPage/NotFoundPage";
 import {StateObject} from "./types";
 
 
-function App(props: {state: StateObject, addPassenger: Function}) {
+function App(props: {state: StateObject, dispatch: Function /*addPassenger: Function, addDriver: Function, updateTelephone: Function*/}) {
     return (
         <div className="App">
             <Router>
                 <Header/>
+                <section>
                 <Routes>
                     <Route path="/sign-in" element={<SignInPage/>}/>
                     <Route path="/sign-out" element={<SignInPage/>}/>
-                    <Route path="/passenger" element={<PassengerPage addPassenger={props.addPassenger}/>}/>
-                    <Route path="/driver" element={<DriverPage/>}/>
-                    <Route path="/drivers-list" element={<FoundDriversPage drivers={props.state.drivers}/>}/>
-                    <Route path="/passengers-list" element={<FoundPassengersPage passengers={props.state.passengers} addPassenger={props.addPassenger}/>}/>
+                    <Route path="/passenger" element={<PassengerPage
+                        dispatch={props.dispatch}
+                        // updateTelephone={props.updateTelephone}
+                        telInput={props.state.telInput}
+                        // addPassenger={props.addPassenger}
+                        drivers={props.state.drivers}
+                        passengers={props.state.passengers}
+                    />}/>
+                    <Route path="/driver" element={<DriverPage
+                        dispatch={props.dispatch}
+                        // addDriver={props.addDriver}
+                        passengers={props.state.passengers}
+                        drivers={props.state.drivers}
+                    />}/>
+                    <Route path="/drivers-list" element={<FoundDriversPage
+                        drivers={props.state.drivers}
+                    />}/>
+                    <Route path="/passengers-list" element={<FoundPassengersPage
+                        passengers={props.state.passengers}
+                    />}/>
                     <Route path="/*" element={<NotFoundPage/>} />
                 </Routes>
+                </section>
             </Router>
         </div>
     );

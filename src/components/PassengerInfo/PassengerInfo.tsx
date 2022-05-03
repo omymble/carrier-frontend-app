@@ -13,6 +13,9 @@ export const PassengerInfo = (props : {passengerData: PassengerObject; key: numb
         <React.Fragment>
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    ПАССАЖИР
+                </Typography>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     {props.passengerData.name}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">

@@ -7,7 +7,10 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import {DriverObject} from "../../types";
 
+
+
 export const DriversList = (props: {drivers: Array<DriverObject>}) => {
+
     let tsxDriversList =  props.drivers.map((item:DriverObject, i:number) =>
         <DriverInfo driverData={item} key={i}/>
     )
@@ -25,9 +28,6 @@ export const DriversList = (props: {drivers: Array<DriverObject>}) => {
         </>
     )
 }
-
-
-
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',

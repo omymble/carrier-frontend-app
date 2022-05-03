@@ -1,11 +1,20 @@
 import classes from "./DriverPage.module.scss";
-import {RideForm} from "../../components/RideForm/RideForm";
+import {DriverObject, PassengerObject} from "../../types";
+import {DriverForm} from "../../components/DriverForm/DriverForm";
+import {PassengersList} from "../../components/PassengersList/PassengersList";
+import {DriversList} from "../../components/DriversList/DriversList";
 
-export const DriverPage = (props: object) => {
+export const DriverPage = (props: {
+    dispatch: Function,
+    passengers: Array<PassengerObject>,
+    drivers: Array<DriverObject>
+}) => {
     return (
         <div className={classes.driverForm}>
             <h1>DriverPage</h1>
-            {/*<RideForm></RideForm>*/}
+            <DriverForm dispatch={props.dispatch}/>
+            <DriversList drivers={props.drivers}/>
+            <PassengersList passengers={props.passengers}/>
         </div>
     )
 }

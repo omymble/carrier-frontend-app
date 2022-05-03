@@ -9,9 +9,13 @@ import Typography from '@mui/material/Typography';
 import {DriverObject} from "../../types";
 
 export const DriverInfo = (props : {driverData: DriverObject; key: number}) => {
+
     const card = (
         <React.Fragment>
             <CardContent>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    ВОДИТЕЛЬ
+                </Typography>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     {props.driverData.name}
                 </Typography>

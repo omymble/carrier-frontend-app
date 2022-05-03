@@ -1,6 +1,5 @@
 import classes from './FoundDriversPage.module.scss'
 import {DriversList} from "../../components/DriversList/DriversList";
-import * as type from "../../types";
 import {DriverObject} from "../../types";
 
 export const FoundDriversPage = (props: {drivers: Array<DriverObject>}) => {
