@@ -21,6 +21,9 @@ export const PassengerInfo = (props : {passengerData: PassengerObject; key: numb
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                     {props.passengerData.telephone}
                 </Typography>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    {props.passengerData.startTime}
+                </Typography>
                 <Typography variant="body2">
                     {props.passengerData.pointFrom.longitude}
                     <br />

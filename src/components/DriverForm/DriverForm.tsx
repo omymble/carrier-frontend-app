@@ -2,9 +2,10 @@ import * as React from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {Button} from "@mui/material";
-import {DriverObject, PassengerObject} from "../../types";
+import {DriverObject} from "../../types";
+import {addDriverActionCreator, updateTelephoneActionCreator} from "../../redux/driversReducer";
 
-export const DriverForm = (props: {dispatch: Function}) => {
+export const DriverForm = (props: {dispatch: Function, telInput: String}) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -21,9 +22,14 @@ export const DriverForm = (props: {dispatch: Function}) => {
             pointTo: {longitude: Number(data.get('pointTo')), latitude: Number(data.get('pointTo'))},
 
         }
-        // props.addDriver(newDriver)
-        props.dispatch({type: 'ADD-DRIVER', formDriverData: newDriver})
+        props.dispatch(addDriverActionCreator(newDriver))
     };
+
+    const onFormChange = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        let data = new FormData(event.currentTarget)
+        props.dispatch(updateTelephoneActionCreator(String(data.get('telephone'))))
+    }
 
     return (
         <Box
@@ -34,15 +40,45 @@ export const DriverForm = (props: {dispatch: Function}) => {
             noValidate
             autoComplete="off"
             onSubmit={handleSubmit}
+            onChange={onFormChange}
         >
-            <TextField id="name" label="Имя" variant="outlined" name="name" type='text'/>
-            <TextField id="telephone" label="Телефон" variant="outlined" name="telephone" type='tel'/>
+            <TextField id="name"
+                       label="Имя"
+                       variant="outlined"
+                       name="name"
+                       type='text'
+            />
+            <TextField id="telephone"
+                       label="Телефон"
+                       variant="outlined"
+                       name="telephone"
+                       type='tel'
+                       defaultValue={props.telInput}
+            />
             <br/>
-            <TextField id="seats" label="Свободные места" variant="outlined" name="seats" type='number'/>
-            <TextField id="time" label="Время" variant="outlined" name="time"/>
+            <TextField id="seats"
+                       label="Свободные места"
+                       variant="outlined"
+                       name="seats"
+                       type='number'
+            />
+            <TextField id="time"
+                       label="Время"
+                       variant="outlined"
+                       name="time"
+            />
             <br/>
-            <TextField id="pointFrom" label="Начало маршрута" variant="outlined" name="pointFrom" type='number'/>
-            <TextField id="pointTo" label="Конец маршрута" variant="outlined" name="pointTo"/>
+            <TextField id="pointFrom"
+                       label="Начало маршрута"
+                       variant="outlined"
+                       name="pointFrom"
+                       type='number'
+            />
+            <TextField id="pointTo"
+                       label="Конец маршрута"
+                       variant="outlined"
+                       name="pointTo"
+            />
             <br/>
             <Button
                 type="submit"

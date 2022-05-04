@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {store} from "./redux/state";
+import {store} from "./redux/store";
 import {StateObject} from "./types";
 
 // addPassenger({name: 'yoyoyo', telephone: '9999', pointTo: {longitude: 333, latitude: 333}, pointFrom: {longitude: 111, latitude: 111}, startTime: '12:30'})

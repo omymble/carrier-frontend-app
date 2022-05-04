@@ -33,6 +33,7 @@ function App(props: {state: StateObject, dispatch: Function /*addPassenger: Func
                     />}/>
                     <Route path="/driver" element={<DriverPage
                         dispatch={props.dispatch}
+                        telInput={props.state.telInput}
                         // addDriver={props.addDriver}
                         passengers={props.state.passengers}
                         drivers={props.state.drivers}

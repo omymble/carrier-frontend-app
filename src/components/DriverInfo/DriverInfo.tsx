@@ -22,6 +22,9 @@ export const DriverInfo = (props : {driverData: DriverObject; key: number}) => {
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                     {props.driverData.telephone}
                 </Typography>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    {props.driverData.startTime}
+                </Typography>
                 <Typography variant="body2">
                     {props.driverData.pointFrom.longitude}
                     <br />

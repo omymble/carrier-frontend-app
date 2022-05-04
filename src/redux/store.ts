@@ -1,10 +1,6 @@
 import {StoreObject, DriverObject, PassengerObject, StateObject} from "../types";
-
-const ADD_PASSENGER: string = 'ADD-PASSENGER'
-const ADD_DRIVER: string = 'ADD-DRIVER'
-const UPDATE_TELEPHONE: string = 'UPDATE-TELEPHONE'
-
-
+import {passengersReducer} from "./passengersReducer";
+import {driversReducer} from "./driversReducer";
 
 let store: StoreObject = {
     _state: {
@@ -162,37 +158,14 @@ let store: StoreObject = {
         // @ts-ignore
         this._callSubscriber = observer
     },
-/*    updateTelephone(telephone:string) {
-        this._state.telInput = telephone
-        this._callSubscriber(this._state)
-    },
-    addPassenger(formPassengerData: PassengerObject) {
-        let newPassenger: PassengerObject = {
-            name: formPassengerData.name,
-            telephone: formPassengerData.telephone,
-            startTime: formPassengerData.startTime,
-            pointFrom: {longitude: formPassengerData.pointFrom.longitude, latitude: formPassengerData.pointFrom.latitude},
-            pointTo: {longitude: formPassengerData.pointTo.longitude, latitude: formPassengerData.pointTo.latitude}
-        }
-        this._state.passengers.push(newPassenger)
-        this._callSubscriber(this._state)
-    },
-    addDriver(formDriverData: DriverObject) {
-        let newDriver: DriverObject = {
-            name: formDriverData.name,
-            telephone: formDriverData.telephone,
-            emptySeats: formDriverData.emptySeats,
-            startTime: formDriverData.startTime,
-            pointFrom: {longitude: formDriverData.pointFrom.longitude, latitude: formDriverData.pointFrom.latitude},
-            pointTo: {longitude: formDriverData.pointTo.longitude, latitude: formDriverData.pointTo.latitude}
-        }
-        this._state.drivers.push(newDriver)
-        this._callSubscriber(this._state)
-    },*/
-
 
     dispatch(action: any) {
-        if (action.type === ADD_PASSENGER) {
+        this._state.passengers = passengersReducer(this._state.passengers, action)
+        this._state.drivers = driversReducer(this._state.drivers, action)
+
+        this._callSubscriber(this._state)
+
+/*        if (action.type === ADD_PASSENGER) {
             let formPassengerData: PassengerObject = action.formPassengerData
             let newPassenger: PassengerObject = {
                 name: formPassengerData.name,
@@ -203,7 +176,9 @@ let store: StoreObject = {
             }
             this._state.passengers.push(newPassenger)
             this._callSubscriber(this._state)
-        } else if (action.type === ADD_DRIVER) {
+        }
+
+        else if (action.type === ADD_DRIVER) {
             let formDriverData: DriverObject = action.formDriverData
             let newDriver: DriverObject = {
                 name: formDriverData.name,
@@ -215,24 +190,34 @@ let store: StoreObject = {
             }
             this._state.drivers.push(newDriver)
             this._callSubscriber(this._state)
-        } else if (action.type === UPDATE_TELEPHONE) {
+        }
+
+        else if (action.type === UPDATE_TELEPHONE) {
             this._state.telInput = action.telephone
             this._callSubscriber(this._state)
-        }
+        }*/
     }
 }
 
-const addPassengerActionCreator = (newPassenger: PassengerObject) => {
+/*const addPassengerActionCreator = (newPassenger: PassengerObject) => {
     return {
-        type: 'ADD-PASSENGER',
+        type: ADD_PASSENGER,
         formPassengerData: newPassenger
     }
 }
-const updateTelephoneActionCreator = (telephone: string) => {
+
+const addDriverActionCreator = (newDriver: DriverObject) => {
     return {
-        type: 'UPDATE-TELEPHONE',
-        telephone: telephone
+        type: ADD_DRIVER,
+        formDriverData: newDriver
     }
 }
 
-export {store, addPassengerActionCreator, updateTelephoneActionCreator}
+const updateTelephoneActionCreator = (telephone: string) => {
+    return {
+        type: UPDATE_TELEPHONE,
+        telephone: telephone
+    }
+}*/
+
+export {store}
