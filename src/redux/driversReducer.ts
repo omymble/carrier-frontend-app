@@ -1,11 +1,10 @@
-import {DriverObject, PassengerObject} from "../types";
+import {DriverObject} from "../types";
 
 const ADD_DRIVER: string = 'ADD-DRIVER'
 const UPDATE_TELEPHONE: string = 'UPDATE-TELEPHONE'
 
 const driversReducer = (state: any, action: any) => {
     switch (action.type) {
-
         case ADD_DRIVER:
             let formDriverData: DriverObject = action.formDriverData
             let newDriver: DriverObject = {
@@ -16,15 +15,13 @@ const driversReducer = (state: any, action: any) => {
                 pointFrom: {longitude: formDriverData.pointFrom.longitude, latitude: formDriverData.pointFrom.latitude},
                 pointTo: {longitude: formDriverData.pointTo.longitude, latitude: formDriverData.pointTo.latitude}
             }
-            state.drivers.push(newDriver)
+            state.push(newDriver)
             // this._callSubscriber(this._state)
             return state
-
         case UPDATE_TELEPHONE:
             state.telInput = action.telephone
             // this._callSubscriber(this._state)
             return state
-
         default:
             return state
     }

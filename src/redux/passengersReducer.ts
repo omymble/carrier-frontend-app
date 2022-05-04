@@ -1,4 +1,4 @@
-import {DriverObject, PassengerObject} from "../types";
+import {PassengerObject} from "../types";
 
 const ADD_PASSENGER: string = 'ADD-PASSENGER'
 const UPDATE_TELEPHONE: string = 'UPDATE-TELEPHONE'
@@ -24,7 +24,6 @@ const passengersReducer = (state: any /*Array<PassengerObject>*/, action: any) =
             return state
             // state.passengers.push(newPassenger)
             // this._callSubscriber(this._state)
-
         case UPDATE_TELEPHONE:
             state.telInput = action.telephone
             // this._callSubscriber(this._state)

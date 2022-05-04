@@ -66,6 +66,7 @@ export const DriverForm = (props: {dispatch: Function, telInput: String}) => {
                        label="Время"
                        variant="outlined"
                        name="time"
+                       type="time"
             />
             <br/>
             <TextField id="pointFrom"
