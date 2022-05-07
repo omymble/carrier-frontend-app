@@ -52,7 +52,7 @@ export const SignInPage = () => {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Войдите по номеру телефона
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
@@ -60,7 +60,7 @@ export const SignInPage = () => {
                             required
                             fullWidth
                             id="telephone"
-                            label="Telephone"
+                            label="телефон"
                             name="telephone"
                             autoComplete="telephone"
                             autoFocus
@@ -71,7 +71,7 @@ export const SignInPage = () => {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign In
+                            войти
                         </Button>
                     </Box>
                 </Box>

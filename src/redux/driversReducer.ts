@@ -1,9 +1,44 @@
-import {DriverObject} from "../types";
+import {DriverObject, DriversDataObject} from "../types";
 
 const ADD_DRIVER: string = 'ADD-DRIVER'
 const UPDATE_TELEPHONE: string = 'UPDATE-TELEPHONE'
 
-const driversReducer = (state: any, action: any) => {
+let initialDriversState: DriversDataObject = {
+    telInput: '89093337772',
+    drivers: [
+        {name: 'Ольга Макарова',
+            telephone: '+79432735838',
+            emptySeats: 4,
+            startTime: '15:30',
+            pointFrom: {longitude: 34.8573487, latitude: 67.24534},
+            pointTo: {longitude: 34.8573487, latitude: 67.24534}
+        },
+        {name: 'Илья Воробьев',
+            telephone: '+78765423',
+            emptySeats: 2,
+            startTime: '19:30',
+            pointFrom: {longitude: 34.8573487, latitude: 67.24534},
+            pointTo: {longitude: 34.8573487, latitude: 67.24534}
+        },
+        {name: 'Анна Журавлева',
+            telephone: '+78674537575',
+            emptySeats: 2,
+            startTime: '12:00',
+            pointFrom: {longitude: 34.8573487, latitude: 67.24534},
+            pointTo: {longitude: 34.8573487, latitude: 67.24534}
+        },
+        {name: 'Ольга Макарова',
+            telephone: '+79432735838',
+            emptySeats: 1,
+            startTime: '15:30',
+            pointFrom: {longitude: 34.8573487, latitude: 67.24534},
+            pointTo: {longitude: 34.8573487, latitude: 67.24534}
+        }
+    ]
+}
+
+const driversReducer = (state: DriversDataObject = initialDriversState, action: any) => {
+
     switch (action.type) {
         case ADD_DRIVER:
             let formDriverData: DriverObject = action.formDriverData
@@ -15,13 +50,13 @@ const driversReducer = (state: any, action: any) => {
                 pointFrom: {longitude: formDriverData.pointFrom.longitude, latitude: formDriverData.pointFrom.latitude},
                 pointTo: {longitude: formDriverData.pointTo.longitude, latitude: formDriverData.pointTo.latitude}
             }
-            state.push(newDriver)
-            // this._callSubscriber(this._state)
+            state.drivers.push(newDriver)
             return state
+
         case UPDATE_TELEPHONE:
             state.telInput = action.telephone
-            // this._callSubscriber(this._state)
             return state
+
         default:
             return state
     }

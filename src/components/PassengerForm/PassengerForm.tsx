@@ -3,10 +3,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {Button} from "@mui/material";
 import {PassengerObject} from "../../types";
-import {addPassengerActionCreator, updateTelephoneActionCreator} from "../../redux/passengersReducer";
 
-
-export const PassengerForm = (props: {dispatch: Function, telInput: String}) => {
+export const PassengerForm = (props: { updateTelephone: Function, addPassenger: Function, telInput: String }) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -21,14 +19,13 @@ export const PassengerForm = (props: {dispatch: Function, telInput: String}) => 
             pointTo: {longitude: Number(data.get('pointTo')), latitude: Number(data.get('pointTo'))},
             startTime: String(data.get('time'))
         }
-        props.dispatch(addPassengerActionCreator(newPassenger))
+        props.addPassenger(newPassenger)
     };
 
     const onFormChange = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         let data = new FormData(event.currentTarget)
-        console.log(typeof data.get('time'))
-        props.dispatch(updateTelephoneActionCreator(String(data.get('telephone'))))
+        props.updateTelephone(data.get('telephone'))
     }
 
     return (
@@ -44,7 +41,7 @@ export const PassengerForm = (props: {dispatch: Function, telInput: String}) => 
         >
             <TextField id="name"
                        label="Имя"
-                       variant="outlined"
+                       variant="filled"
                        name="name"
                        type='text'
                        required
@@ -52,32 +49,32 @@ export const PassengerForm = (props: {dispatch: Function, telInput: String}) => 
             <br/>
             <TextField id="telephone"
                        label="Телефон"
-                       variant="outlined"
+                       variant="filled"
                        name="telephone"
                        type='tel'
                        defaultValue={props.telInput}
-                       // required
             />
             <TextField id="time"
-                       label="Время"
-                       variant="outlined"
+                       variant="filled"
                        name="time"
                        type="time"
-                       // required
+                       helperText="во сколько поедете"
+                // required
             />
             <br/>
             <TextField id="pointFrom"
                        label="Начало маршрута"
-                       variant="outlined"
+                       variant="filled"
                        name="pointFrom"
                        type='number'
-                       // required
+                // required
             />
             <TextField id="pointTo"
                        label="Конец маршрута"
-                       variant="outlined"
+                       variant="filled"
                        name="pointTo"
-                       // required
+                       type='number'
+                // required
             />
             <br/>
             <Button

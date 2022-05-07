@@ -1,25 +1,32 @@
-type StoreObject = {
+export type StoreObject = {
     _state: StateObject;
     _callSubscriber: Function;
     getState: Function;
     subscribe: Function;
-    // updateTelephone: Function;
-    // addPassenger: Function;
-    // addDriver: Function;
     dispatch: Function;
 }
-type StateObject = {
-    [key: string]: any;
+export type PassengersDataObject = {
+    telInput: string;
     passengers: Array<PassengerObject>;
+}
+
+export type DriversDataObject = {
+    telInput: string;
     drivers: Array<DriverObject>;
+}
+
+export type StateObject = {
+    [key: string]: any;
+    passengersData: PassengersDataObject;
+    driversData: DriversDataObject;
 };
 
-type PointObj = {
+export type PointObj = {
     longitude: number;
     latitude: number;
 }
 
-type UserObject = {
+export type PassengerObject = {
     name: string;
     telephone: string;
     startTime: string;
@@ -27,15 +34,7 @@ type UserObject = {
     pointTo: PointObj;
 }
 
-type PassengerObject = {
-    name: string;
-    telephone: string;
-    startTime: string;
-    pointFrom: PointObj;
-    pointTo: PointObj;
-}
-
-type DriverObject = {
+export type DriverObject = {
     name: string;
     telephone: string;
     emptySeats: number;
@@ -43,5 +42,3 @@ type DriverObject = {
     pointFrom: PointObj;
     pointTo: PointObj;
 }
-
-export type {StoreObject, PointObj, StateObject, DriverObject, PassengerObject}

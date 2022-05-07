@@ -3,9 +3,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {Button} from "@mui/material";
 import {DriverObject} from "../../types";
-import {addDriverActionCreator, updateTelephoneActionCreator} from "../../redux/driversReducer";
 
-export const DriverForm = (props: {dispatch: Function, telInput: String}) => {
+export const DriverForm = (props: { updateTelephone: Function, addDriver: Function, telInput: String }) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -22,13 +21,13 @@ export const DriverForm = (props: {dispatch: Function, telInput: String}) => {
             pointTo: {longitude: Number(data.get('pointTo')), latitude: Number(data.get('pointTo'))},
 
         }
-        props.dispatch(addDriverActionCreator(newDriver))
+        props.addDriver(newDriver)
     };
 
     const onFormChange = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         let data = new FormData(event.currentTarget)
-        props.dispatch(updateTelephoneActionCreator(String(data.get('telephone'))))
+        props.updateTelephone(data.get('telephone'))
     }
 
     return (
@@ -36,6 +35,7 @@ export const DriverForm = (props: {dispatch: Function, telInput: String}) => {
             component="form"
             sx={{
                 '& > :not(style)': {m: 1, width: '25ch'},
+                '& .MuiTextField-root': {m: 1, width: '25ch'},
             }}
             noValidate
             autoComplete="off"
@@ -44,41 +44,46 @@ export const DriverForm = (props: {dispatch: Function, telInput: String}) => {
         >
             <TextField id="name"
                        label="Имя"
-                       variant="outlined"
+                       variant="filled"
                        name="name"
                        type='text'
             />
             <TextField id="telephone"
                        label="Телефон"
-                       variant="outlined"
+                       variant="filled"
                        name="telephone"
                        type='tel'
                        defaultValue={props.telInput}
+                // helperText="ваш номер"
             />
             <br/>
             <TextField id="seats"
                        label="Свободные места"
-                       variant="outlined"
+                       variant="filled"
                        name="seats"
                        type='number'
+
             />
+
             <TextField id="time"
-                       label="Время"
-                       variant="outlined"
+                       variant="filled"
                        name="time"
                        type="time"
+                       helperText="во сколько поедете"
+                // required
             />
             <br/>
             <TextField id="pointFrom"
                        label="Начало маршрута"
-                       variant="outlined"
+                       variant="filled"
                        name="pointFrom"
-                       type='number'
+                       type="number"
             />
             <TextField id="pointTo"
                        label="Конец маршрута"
-                       variant="outlined"
+                       variant="filled"
                        name="pointTo"
+                       type="number"
             />
             <br/>
             <Button

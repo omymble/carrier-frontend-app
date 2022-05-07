@@ -1,9 +1,40 @@
-import {PassengerObject} from "../types";
+import {PassengerObject, PassengersDataObject} from "../types";
 
 const ADD_PASSENGER: string = 'ADD-PASSENGER'
 const UPDATE_TELEPHONE: string = 'UPDATE-TELEPHONE'
 
-const passengersReducer = (state: any /*Array<PassengerObject>*/, action: any) => {
+let initialPassengersState: PassengersDataObject = {
+    telInput: '89093337772',
+    passengers: [
+        {name: 'Илья Морозов',
+            telephone: '+79432735838',
+            startTime: '15:30',
+            pointFrom: {longitude: 34.8573487, latitude: 67.24534},
+            pointTo: {longitude: 34.8573487, latitude: 67.24534}
+        },
+        {name: 'Ева Савельева',
+            telephone: '+78765423',
+            startTime: '19:30',
+            pointFrom: {longitude: 34.8573487, latitude: 67.24534},
+            pointTo: {longitude: 34.8573487, latitude: 67.24534}
+        },
+        {name: 'Олег Васильев',
+            telephone: '+78674537575',
+            startTime: '12:00',
+            pointFrom: {longitude: 34.8573487, latitude: 67.24534},
+            pointTo: {longitude: 34.8573487, latitude: 67.24534}
+        },
+        {name: 'Илья Морозов',
+            telephone: '+79432735838',
+            startTime: '15:30',
+            pointFrom: {longitude: 34.8573487, latitude: 67.24534},
+            pointTo: {longitude: 34.8573487, latitude: 67.24534}
+        }
+    ]
+}
+
+const passengersReducer = (state: PassengersDataObject = initialPassengersState, action: any) => {
+
     switch(action.type) {
         case ADD_PASSENGER:
             let formPassengerData: PassengerObject = action.formPassengerData
@@ -20,14 +51,13 @@ const passengersReducer = (state: any /*Array<PassengerObject>*/, action: any) =
                     latitude: formPassengerData.pointTo.latitude
                 }
             }
-            state.push(newPassenger)
+            state.passengers.push(newPassenger)
             return state
-            // state.passengers.push(newPassenger)
-            // this._callSubscriber(this._state)
+
         case UPDATE_TELEPHONE:
             state.telInput = action.telephone
-            // this._callSubscriber(this._state)
             return state
+
         default:
             return state
     }

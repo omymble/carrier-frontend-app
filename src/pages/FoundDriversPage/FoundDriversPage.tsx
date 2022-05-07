@@ -5,7 +5,7 @@ import {DriverObject} from "../../types";
 export const FoundDriversPage = (props: {drivers: Array<DriverObject>}) => {
     return (
         <div className={classes.foundDriversPage}>
-            <h1>FoundDriversPage</h1>
+            <h1>Нашлись водители:</h1>
             <DriversList drivers={props.drivers}/>
         </div>
     )
