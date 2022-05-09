@@ -13,10 +13,10 @@ export const DriverInfo = (props : {driverData: DriverObject; key: number}) => {
     const card = (
         <React.Fragment>
             <CardContent>
-                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
                     ВОДИТЕЛЬ
                 </Typography>
-                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                <Typography sx={{ fontSize: 24 }} color="text.secondary" gutterBottom>
                     {props.driverData.name}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
