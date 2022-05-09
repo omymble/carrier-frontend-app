@@ -36,11 +36,12 @@ let initialDriversState: DriversDataObject = {
         }
     ]
 }
-
+//video react
 const driversReducer = (state: DriversDataObject = initialDriversState, action: any) => {
+// надо сделать глубокую копию приходящего объекта, чтобы соблюдать принцип чистых функций
 
     switch (action.type) {
-        case ADD_DRIVER:
+        case ADD_DRIVER: {
             let formDriverData: DriverObject = action.formDriverData
             let newDriver: DriverObject = {
                 name: formDriverData.name,
@@ -50,13 +51,18 @@ const driversReducer = (state: DriversDataObject = initialDriversState, action: 
                 pointFrom: {longitude: formDriverData.pointFrom.longitude, latitude: formDriverData.pointFrom.latitude},
                 pointTo: {longitude: formDriverData.pointTo.longitude, latitude: formDriverData.pointTo.latitude}
             }
-            state.drivers.push(newDriver)
-            return state
-
-        case UPDATE_TELEPHONE:
-            state.telInput = action.telephone
-            return state
-
+            // stateCopy.drivers.push(newDriver)
+            return {
+                ...state,
+                drivers: [...state.drivers, newDriver] //вместо push
+            }
+        }
+        case UPDATE_TELEPHONE: {
+            return {
+                ...state,
+                telInput: action.telephone
+            }
+        }
         default:
             return state
     }

@@ -18,6 +18,7 @@ export const PassengerFormContainer = (props: { store: StoreObject }) => {
     return (
         <PassengerForm updateTelephone={updateTelephone}
                        addPassenger={addPassenger}
-                       telInput={props.store.getState().passengersData.telInput}/>
+                       telInput={props.store.getState().passengersData.telInput}
+        />
     );
 }

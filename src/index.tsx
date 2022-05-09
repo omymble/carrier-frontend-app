@@ -3,25 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {store} from "./redux/reduxStore";
-import {StoreObject} from "./types";
+import {Provider} from "react-redux";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import {setUpStore} from "./redux/store/store";
 
-let rerenderTree = (store: StoreObject) => {
-    ReactDOM.render(
-        <React.StrictMode>
-            <App state={{...store.getState()}}
-                 store={store}
-                 dispatch={store.dispatch.bind(store)}
-            />
-        </React.StrictMode>,
-        document.getElementById('root')
-    );
-}
+const store = setUpStore()
 
-rerenderTree(store)
-// @ts-ignore
-store.subscribe(() => {
-    rerenderTree(store)
-})
+ReactDOM.render(
+    <React.StrictMode>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
+);
 
 reportWebVitals();

@@ -1,8 +1,9 @@
-import * as React from "react";
+import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {Button} from "@mui/material";
 import {PassengerObject} from "../../types";
+
 
 export const PassengerForm = (props: { updateTelephone: Function, addPassenger: Function, telInput: String }) => {
 
@@ -25,6 +26,7 @@ export const PassengerForm = (props: { updateTelephone: Function, addPassenger: 
     const onFormChange = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         let data = new FormData(event.currentTarget)
+        console.log(data.get('telephone'))
         props.updateTelephone(data.get('telephone'))
     }
 

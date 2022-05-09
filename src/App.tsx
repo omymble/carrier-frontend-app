@@ -11,44 +11,52 @@ import {DriverPage} from "./pages/DriverPage/DriverPage";
 import {FoundDriversPage} from "./pages/FoundDriversPage/FoundDriversPage";
 import {FoundPassengersPage} from "./pages/FoundPassengersPage/FoundPassengersPage";
 import {NotFoundPage} from "./pages/NotFoundPage/NotFoundPage";
-import {StateObject, StoreObject} from "./types";
+import {HomePage} from "./pages/HomePage/HomePage";
 
 
-function App(props: { state: StateObject, dispatch: Function, store: StoreObject }) {
+function App(/*props: { state: StateObject, dispatch: Function, store_my: StoreObject }*/) {
+    // const {} = useAppSelector(state => state.pReducer)
     return (
         <div className="App">
             <Router>
                 <Header/>
                 <section>
                     <Routes>
+                        <Route path="/"
+                               element={<SignInPage/>}
+                        />
+                        <Route path="/home"
+                               element={<HomePage/>}
+                        />
                         <Route path="/sign-in"
-                               element={<SignInPage/>}/>
-                        <Route path="/sign-out"
-                               element={<SignInPage/>}/>
-                        <Route path="/passenger"
+                               element={<SignInPage/>}
+                        />
+                        <Route path="/home/passenger"
                                element={<PassengerPage
-                               store={props.store}
-                               dispatch={props.dispatch}
-                               passengersData={props.state.passengersData}
-                               drivers={props.state.driversData.drivers} //temp
-                               />}/>
-                        <Route path="/driver"
+                               // dispatch={props.dispatch}
+                               // passengersData={props.state.passengersData}
+                               // drivers={props.state.driversData.drivers} //temp
+                               />}
+                        />
+                        <Route path="/home/driver"
                                element={<DriverPage
-                               store={props.store}
-                               dispatch={props.dispatch}
-                               driversData={props.state.driversData}
-                               passengers={props.state.passengersData.passengers} //temp
-                               />}/>
+                               // store={props.store_my}
+                               // dispatch={props.dispatch}
+                               // driversData={props.state.driversData}
+                               // passengers={props.state.passengersData.passengers} //temp
+                               />}
+                        />
                         <Route path="/drivers-list"
                                element={<FoundDriversPage
-                               drivers={props.state.driversData.drivers}
+                               // drivers={props.state.driversData.drivers}
                                />}/>
                         <Route path="/passengers-list"
                                element={<FoundPassengersPage
-                               passengers={props.state.passengersData.passengers}
+                               // passengers={props.state.passengersData.passengers}
                                />}/>
                         <Route path="/*"
-                               element={<NotFoundPage/>}/>
+                               element={<NotFoundPage/>}
+                        />
                     </Routes>
                 </section>
             </Router>

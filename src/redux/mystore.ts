@@ -2,7 +2,7 @@ import {StoreObject, StateObject} from "../types";
 import {passengersReducer} from "./passengersReducer";
 import {driversReducer} from "./driversReducer";
 
-let store: StoreObject = {
+export const mystore: StoreObject = {
     _state: {
         passengersData: {
             telInput: '89093337772',
@@ -85,4 +85,4 @@ let store: StoreObject = {
     }
 }
 
-export default store
+

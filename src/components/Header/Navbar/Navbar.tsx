@@ -10,14 +10,10 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-// import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 // import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import Link from '@mui/material/Link';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export const Navbar = (props: any) => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -65,7 +61,7 @@ export const Navbar = (props: any) => {
                             component="div"
                             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                         >
-                            CARRIER APP
+                            <NavLink to={'/home'} >CARRIER APP</NavLink>
                         </Typography>
 
                         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -101,10 +97,7 @@ export const Navbar = (props: any) => {
                                 {props.links.map((link:any, index:number) => (
                                     <MenuItem key={index} onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center">
-                                            {/*<Link underline="hover">*/}
                                                 <NavLink className={classes.navList__item} to={link.url} >{link.title}</NavLink>
-                                            {/*</Link>*/}
-
                                         </Typography>
                                     </MenuItem>
                                 ))}
@@ -142,36 +135,6 @@ export const Navbar = (props: any) => {
                                 </Button>
                             ))}
                         </Box>
-
-                        {/*<Box sx={{ flexGrow: 0 }}>
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                                </IconButton>
-                            </Tooltip>
-                            <Menu
-                                sx={{ mt: '45px' }}
-                                id="menu-appbar"
-                                anchorEl={anchorElUser}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorElUser)}
-                                onClose={handleCloseUserMenu}
-                            >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{setting}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
-                        </Box>*/}
 
                     </Toolbar>
                 </Container>
