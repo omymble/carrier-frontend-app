@@ -14,8 +14,7 @@ import {NotFoundPage} from "./pages/NotFoundPage/NotFoundPage";
 import {HomePage} from "./pages/HomePage/HomePage";
 
 
-function App(/*props: { state: StateObject, dispatch: Function, store_my: StoreObject }*/) {
-    // const {} = useAppSelector(state => state.pReducer)
+function App() {
     return (
         <div className="App">
             <Router>
@@ -32,28 +31,17 @@ function App(/*props: { state: StateObject, dispatch: Function, store_my: StoreO
                                element={<SignInPage/>}
                         />
                         <Route path="/home/passenger"
-                               element={<PassengerPage
-                               // dispatch={props.dispatch}
-                               // passengersData={props.state.passengersData}
-                               // drivers={props.state.driversData.drivers} //temp
-                               />}
+                               element={<PassengerPage/>}
                         />
                         <Route path="/home/driver"
-                               element={<DriverPage
-                               // store={props.store_my}
-                               // dispatch={props.dispatch}
-                               // driversData={props.state.driversData}
-                               // passengers={props.state.passengersData.passengers} //temp
-                               />}
+                               element={<DriverPage/>}
                         />
                         <Route path="/drivers-list"
-                               element={<FoundDriversPage
-                               // drivers={props.state.driversData.drivers}
-                               />}/>
+                               element={<FoundDriversPage/>}
+                        />
                         <Route path="/passengers-list"
-                               element={<FoundPassengersPage
-                               // passengers={props.state.passengersData.passengers}
-                               />}/>
+                               element={<FoundPassengersPage/>}
+                        />
                         <Route path="/*"
                                element={<NotFoundPage/>}
                         />

@@ -20,7 +20,8 @@ export const ChooseRole = (props: {id: string, role: string, text:string, img: s
                 <CardMedia
                     component="img"
                     // height="240"
-                    image={props.img}
+                    src={props.img}
+                    // image={props.img}
                     alt="роль пользователя"
                 />
                 <CardContent>

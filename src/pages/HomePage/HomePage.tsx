@@ -2,6 +2,8 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import {ChooseRole} from "../../components/СhooseRole/ChooseRole";
 import Box from "@mui/material/Box";
+import driverPhoto from "../../assets/driver.jpeg"
+import passengerPhoto from "../../assets/passengers.jpeg"
 
 
 export const HomePage = (props: any) => {
@@ -13,14 +15,14 @@ export const HomePage = (props: any) => {
                         <ChooseRole id={"driver"}
                                     role={"водитель"}
                                     text={"ищу пассажиров в дорогу"}
-                                    img={"src/assets/driver.jpeg"}
+                                    img={driverPhoto}
                         />
                     </Grid>
                     <Grid item xs={2} sm={4} md={4}>
                         <ChooseRole id={"passenger"}
                                     role={"пассажир"}
                                     text={"ищу водителя в дорогу" }
-                                    img={"src/assets/passengers.jpeg"}
+                                    img={"https://1gai.ru/uploads/posts/2013-09/1379424637_annoying-passengers-backseat-soprano.jpg"}
                         />
                     </Grid>
 

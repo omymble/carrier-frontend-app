@@ -10,9 +10,8 @@ export const PassengersList = (props: {passengers: Array<PassengerObject>}) => {
         <PassengerInfo passengerData={item} key={i}/>
     )
     return (
-        <>
             <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                     {Array.from(tsxPassengersList).map((item, index) => (
                         <Grid item xs={2} sm={4} md={4} key={index}>
                             {tsxPassengersList[index]}
@@ -20,7 +19,6 @@ export const PassengersList = (props: {passengers: Array<PassengerObject>}) => {
                     ))}
                 </Grid>
             </Box>
-        </>
     )
 }
 
