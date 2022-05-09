@@ -4,11 +4,11 @@ export const links = [
         title: 'войти',
     },
     {
-        url: '/passenger',
+        url: '/home/passenger',
         title: 'пассажир',
     },
     {
-        url: '/driver',
+        url: '/home/driver',
         title: 'водитель',
     },
     {

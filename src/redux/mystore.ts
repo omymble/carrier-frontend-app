@@ -1,6 +1,4 @@
 import {StoreObject, StateObject} from "../types";
-import {passengersReducer} from "./passengersReducer";
-import {driversReducer} from "./driversReducer";
 
 export const mystore: StoreObject = {
     _state: {
@@ -79,8 +77,8 @@ export const mystore: StoreObject = {
     },
 
     dispatch(action: any) {
-        this._state.passengers = passengersReducer(this._state.passengersData, action)
-        this._state.drivers = driversReducer(this._state.driversData, action)
+        // this._state.passengers = passengersReducer(this._state.passengersData, action)
+        // this._state.drivers = driversReducer(this._state.driversData, action)
         this._callSubscriber(this._state)
     }
 }

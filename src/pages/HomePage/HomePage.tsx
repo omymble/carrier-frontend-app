@@ -22,7 +22,7 @@ export const HomePage = (props: any) => {
                         <ChooseRole id={"passenger"}
                                     role={"пассажир"}
                                     text={"ищу водителя в дорогу" }
-                                    img={"https://1gai.ru/uploads/posts/2013-09/1379424637_annoying-passengers-backseat-soprano.jpg"}
+                                    img={passengerPhoto}
                         />
                     </Grid>
 
