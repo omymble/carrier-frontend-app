@@ -13,9 +13,14 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 // import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks"
+import {authSlice} from "../../../redux/store/reducers/authSlice";
 
 
-export const Navbar = (props: any) => {
+export const Navbar = (props: { any }) => {
+    const {signIn, signOut} = authSlice.actions
+    const {telephone, isSignIn} = useAppSelector(state => state.authReducer)
+
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     // const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -61,7 +66,7 @@ export const Navbar = (props: any) => {
                             component="div"
                             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                         >
-                            <NavLink to={'/home'} >CARRIER APP</NavLink>
+                            <NavLink to={'/home'} >Войти</NavLink>
                         </Typography>
 
                         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

@@ -3,7 +3,7 @@ import {IAuth} from "../models/IAuth";
 
 const initialState: IAuth = {
     telephone: '',
-    isLogin: false
+    isSignIn: false
 }
 
 export const authSlice = createSlice({
@@ -12,11 +12,11 @@ export const authSlice = createSlice({
     reducers: {
         signIn(state, action: PayloadAction<string>) {
             state.telephone = action.payload
-            state.isLogin = true
+            state.isSignIn = true
         },
         signOut(state, action: PayloadAction<string>) {
             state.telephone = ''
-            state.isLogin = false
+            state.isSignIn = false
         }
     }
 })
