@@ -11,7 +11,7 @@ export const ChooseRole = (props: {id: string, role: string, text:string, img: s
 
     function onCardClick(event: any) {
         event.preventDefault()
-        navigate(`${props.id}`)
+        navigate(`${props.id}`, {replace: true})
     }
 
     return (
