@@ -2,11 +2,13 @@ import {combineReducers} from "redux";
 import {configureStore} from "@reduxjs/toolkit";
 import driversReducer from "./reducers/driversSlice"
 import passengersReducer from "./reducers/passengersSlice"
+import foundDriversReducer from "./reducers/foundDriversSlice"
 import authReducer from "./reducers/authSlice"
 
 let rootReducer = combineReducers({
     driversReducer,
     passengersReducer,
+    foundDriversReducer,
     authReducer
 })
 

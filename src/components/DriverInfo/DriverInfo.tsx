@@ -6,9 +6,9 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 // import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {DriverObject} from "../../types";
+import {IFoundDriver} from "../../redux/store/models/IFoundDriver";
 
-export const DriverInfo = (props : {driverData: DriverObject; key: number}) => {
+export const DriverInfo = (props : {foundDriverData: IFoundDriver; key: number}) => {
 
     const card = (
         <React.Fragment>
@@ -17,18 +17,18 @@ export const DriverInfo = (props : {driverData: DriverObject; key: number}) => {
                     ВОДИТЕЛЬ
                 </Typography>
                 <Typography sx={{ fontSize: 24 }} color="text.secondary" gutterBottom>
-                    {props.driverData.name}
+                    {props.foundDriverData.name}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {props.driverData.telephone}
+                    {props.foundDriverData.telephone}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {props.driverData.startTime}
+                    {props.foundDriverData.time}
                 </Typography>
                 <Typography variant="body2">
-                    {props.driverData.pointFrom.longitude}
+                    {props.foundDriverData.from}
                     <br />
-                    {props.driverData.pointFrom.latitude}
+                    {props.foundDriverData.to}
                 </Typography>
             </CardContent>
             {/*<CardActions>

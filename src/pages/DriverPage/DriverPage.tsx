@@ -21,7 +21,6 @@ export const DriverPage = (props: {}) => {
     const updateTelephoneOnChange = (tel: string) => {
         dispatch(updateTelInput(tel))
     }
-
     return (
         <div className={classes.driverForm}>
             <h1>Данные о водителе:</h1>
@@ -29,7 +28,7 @@ export const DriverPage = (props: {}) => {
                            addDriver={addDriverOnSubmit}
                            telInput={telInput}
             />
-            <DriversList drivers={drivers}/>
+            {/*<DriversList drivers={drivers}/>*/}
         </div>
     )
 }

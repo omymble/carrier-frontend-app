@@ -1,18 +1,74 @@
 import classes from './DriversList.module.scss'
 import  {DriverInfo} from "../DriverInfo/DriverInfo";
 import * as React from 'react';
-import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import {DriverObject} from "../../types";
+import {IFoundDriver} from "../../redux/store/models/IFoundDriver";
+// import axios from "axios";
+
+
+const URL = "../../assets/data/driversData.json"
+
+
+export const DriversList = (props: {drivers: Array<IFoundDriver>, setDrivers: Function}) => {
+
+    /*let foundDriversJSON: Array<IFoundDriver> = [
+        {
+            "name": "Илья Воробьев",
+            "telephone": "+79095678439",
+            "time": "15:30",
+            "seats": 3,
+            "from": "Невский проспект, 39Б",
+            "to": "Кронверкский проспект, 49"
+        },
+        {
+            "name": "Даниил Мартынов",
+            "telephone": "+79095678439",
+            "time": "16:00",
+            "seats": 1,
+            "from": "улица Ломоносова, 9",
+            "to": "Кронверкский проспект, 49"
+        },
+        {
+            "name": "Никита Логвиненко",
+            "telephone": "+79095678439",
+            "time": "12:20",
+            "seats": 2,
+            "from": "Невский проспект, 39Б",
+            "to": "Кронверкская улица, 13"
+        },
+        {
+            "name": "Саша Блашенков",
+            "telephone": "+79095678439",
+            "time": "11:50",
+            "seats": 3,
+            "from": "Невский проспект, 39Б",
+            "to": "Кронверкский проспект, 49"
+        },
+        {
+            "name": "Сергей Ельников",
+            "telephone": "+79095678439",
+            "time": "11:30",
+            "seats": 3,
+            "from": "Невский проспект, 39Б",
+            "to": "Кронверкский проспект, 49"
+        },
+    ]*/
+    if (props.drivers.length === 0) {
+        // props.setDrivers(foundDriversJSON)
+        const res =  fetch(URL)
+         // axios.get(URL)
+         //     .then(response => {
+         //     debugger
+         //     props.setDrivers()
+         // })
+
+    }
 
 
 
-export const DriversList = (props: {drivers: Array<DriverObject>}) => {
-
-    let tsxDriversList =  props.drivers.map((item:DriverObject, i:number) =>
-        <DriverInfo driverData={item} key={i}/>
+    let tsxDriversList =  props.drivers.map((item:IFoundDriver, i:number) =>
+        <DriverInfo foundDriverData={item} key={i}/>
     )
     return (
         <>
@@ -27,26 +83,4 @@ export const DriversList = (props: {drivers: Array<DriverObject>}) => {
             </Box>
         </>
     )
-}
-
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
-
-export default function ResponsiveGrid() {
-    return (
-        <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                {Array.from(Array(6)).map((_, index) => (
-                    <Grid item xs={2} sm={4} md={4} key={index}>
-                        <Item>xs=2</Item>
-                    </Grid>
-                ))}
-            </Grid>
-        </Box>
-    );
 }

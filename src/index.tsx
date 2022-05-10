@@ -10,6 +10,8 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import {setUpStore} from "./redux/store/store";
 
+export const axios = require('axios').default;
+
 const store = setUpStore()
 
 ReactDOM.render(

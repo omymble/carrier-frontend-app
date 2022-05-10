@@ -25,7 +25,6 @@ export const HomePage = (props: any) => {
                                     img={passengerPhoto}
                         />
                     </Grid>
-
                 </Grid>
             </Box>
         </>
