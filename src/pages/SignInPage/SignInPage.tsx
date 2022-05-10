@@ -1,5 +1,3 @@
-import classes from './SignInPage.module.scss'
-
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -11,6 +9,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
+import {IAuth} from "../../redux/store/models/IAuth";
+import {authSlice} from "../../redux/store/reducers/authSlice";
+import  {useNavigate} from "react-router";
 
 function Copyright(props: any) {
     return (
@@ -28,12 +30,20 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export const SignInPage = () => {
+
+    let {telephone, isAuth} = useAppSelector(state => state.authReducer)
+    let {signIn, signOut} = authSlice.actions
+    const dispatch = useAppDispatch()
+    let navigate = useNavigate();
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
             telephone: data.get('telephone')
         });
+        dispatch(signIn(String(data.get('telephone'))))
+        navigate('/home', {replace: false})
     };
 
     return (

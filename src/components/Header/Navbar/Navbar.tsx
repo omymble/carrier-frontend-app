@@ -1,4 +1,5 @@
 import React from "react";
+import {useState, useEffect} from "react";
 import {NavLink} from "react-router-dom";
 import classes from './Navbar.module.scss'
 
@@ -10,51 +11,26 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-// import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks"
 import {authSlice} from "../../../redux/store/reducers/authSlice";
 
 
-export const Navbar = (props: { any }) => {
-    const {signIn, signOut} = authSlice.actions
-    const {telephone, isSignIn} = useAppSelector(state => state.authReducer)
+export const Navbar = (props: { isAuth: boolean, telephone: string, onAuthClick: Function }) => {
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-    // const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
-    // const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    //     setAnchorElUser(event.currentTarget);
-    // };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    // const handleCloseUserMenu = () => {
-    //     setAnchorElUser(null);
-    // };
-/*    return (
-        <nav className="classes.nav">
-            <ul className={classes.navList}>
-                <li className={classes.navList__item}><NavLink to={'/sign-in'}>войти</NavLink></li>
-                <li className={classes.navList__item}><NavLink to={'/passenger'}>я - пассажир</NavLink></li>
-                <li className={classes.navList__item}><NavLink to={'/driver'}>я - водитель</NavLink></li>
-                <li className={classes.navList__item}><NavLink to={'/drivers-list'}>список водителей</NavLink></li>
-                <li className={classes.navList__item}><NavLink to={'/passengers-list'}>список пассажиров</NavLink></li>
-            </ul>
-        </nav>
-
-
-
-
-
-    const ResponsiveAppBar = () => {*/
-
+    const onAuthClick = () => {
+        props.onAuthClick(props.telephone)
+    };
 
         return (
             <AppBar position="static">
@@ -66,7 +42,7 @@ export const Navbar = (props: { any }) => {
                             component="div"
                             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                         >
-                            <NavLink to={'/home'} >Войти</NavLink>
+                            <NavLink to={'/home'} >CARRIER APP</NavLink>
                         </Typography>
 
                         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -99,13 +75,38 @@ export const Navbar = (props: { any }) => {
                                     display: { xs: 'block', md: 'none' },
                                 }}
                             >
-                                {props.links.map((link:any, index:number) => (
+                                <MenuItem onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">
+                                        <NavLink className={classes.navList__item} to={'/sign-in'} onClick={onAuthClick}>{(props.isAuth) ? "выйти" : "войти"}</NavLink>
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">
+                                        <NavLink className={classes.navList__item} to={'/passenger'} >пассажир</NavLink>
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">
+                                        <NavLink className={classes.navList__item} to={'/driver'} >водитель</NavLink>
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">
+                                        <NavLink className={classes.navList__item} to={'/drivers-list'} >водители</NavLink>
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">
+                                        <NavLink className={classes.navList__item} to={'/passengers-list'} >пассажиры</NavLink>
+                                    </Typography>
+                                </MenuItem>
+                                {/*{props.links.map((link:any, index:number) => (
                                     <MenuItem key={index} onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center">
                                                 <NavLink className={classes.navList__item} to={link.url} >{link.title}</NavLink>
                                         </Typography>
                                     </MenuItem>
-                                ))}
+                                ))}*/}
                             </Menu>
                         </Box>
 
@@ -119,7 +120,34 @@ export const Navbar = (props: { any }) => {
                             CARRIER APP
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                            {props.links.map((link:any, index:number) => (
+
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">
+                                    <NavLink className={classes.navList__item} to={'/sign-in'} onClick={onAuthClick} >{(props.isAuth) ? "выйти" : "войти"}</NavLink>
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">
+                                    <NavLink className={classes.navList__item} to={'/passenger'} >пассажир</NavLink>
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">
+                                    <NavLink className={classes.navList__item} to={'/driver'} >водитель</NavLink>
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">
+                                    <NavLink className={classes.navList__item} to={'/drivers-list'} >водители</NavLink>
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">
+                                    <NavLink className={classes.navList__item} to={'/passengers-list'} >пассажиры</NavLink>
+                                </Typography>
+                            </MenuItem>
+
+                            {/*{props.links.map((link:any, index:number) => (
                                 <Button
                                     key={index}
                                     onClick={handleCloseNavMenu}
@@ -138,7 +166,7 @@ export const Navbar = (props: { any }) => {
 
 
                                 </Button>
-                            ))}
+                            ))}*/}
                         </Box>
 
                     </Toolbar>
