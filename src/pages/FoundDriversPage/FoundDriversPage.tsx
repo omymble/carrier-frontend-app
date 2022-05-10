@@ -9,7 +9,8 @@ import {useEffect} from "react";
 import {fetchDrivers} from "../../redux/store/reducers/ActionCreators";
 
 // import from "../../../public/data/driversData.json"
-const URL = "../../../public/data/driversData.json"
+// const URL = "../../../public/data/driversData.json"
+const URL = "my-json-server.typicode.com/omymble/demo/blob/master/db.json"
 
 export const FoundDriversPage = (props: {}) => {
     let {setFoundDrivers, addDriver} = foundDriversSlice.actions

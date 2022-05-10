@@ -4,6 +4,7 @@ import {IFoundDriver} from "../models/IFoundDriver";
 import {foundDriversSlice} from "./foundDriversSlice";
 
 // const URL = "../../../../public/data/driversData.json"
+// const URL = "my-json-server.typicode.com/omymble/carrier-frontend-app/blob/feature/query/public/data/driversData.json"
 
 export const fetchDrivers = (URL: string) => async (dispatch: AppDispatch) => {
     try {
