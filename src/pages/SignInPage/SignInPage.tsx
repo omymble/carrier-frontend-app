@@ -37,13 +37,16 @@ export const SignInPage = () => {
     let navigate = useNavigate();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+        // event.preventDefault();
         const data = new FormData(event.currentTarget);
+        let telephone = data.get('telephone')
         console.log({
-            telephone: data.get('telephone')
+            telephone: telephone
         });
-        dispatch(signIn(String(data.get('telephone'))))
-        navigate('/home', {replace: false})
+        if (telephone !== "") {
+            dispatch(signIn(String(data.get('telephone'))))
+            navigate('/home', {replace: false})
+        }
     };
 
     return (

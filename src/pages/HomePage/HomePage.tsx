@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import {ChooseRole} from "../../components/СhooseRole/ChooseRole";
 import Box from "@mui/material/Box";
 import driverPhoto from "../../assets/driver.jpeg"
+import passengerPhoto from "../../assets/passenger.jpeg"
 
 
 export const HomePage = (props: any) => {

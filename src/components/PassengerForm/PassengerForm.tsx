@@ -46,7 +46,7 @@ export const PassengerForm = (props: { updateTelephone: Function, addPassenger: 
                        variant="filled"
                        name="name"
                        type='text'
-                       required
+                       required={true}
             />
             <br/>
             <TextField id="telephone"
@@ -55,13 +55,14 @@ export const PassengerForm = (props: { updateTelephone: Function, addPassenger: 
                        name="telephone"
                        type='tel'
                        defaultValue={props.telInput}
+                       required={true}
             />
             <TextField id="time"
                        variant="filled"
                        name="time"
                        type="time"
                        helperText="во сколько поедете"
-                // required
+                       required={true}
             />
             <br/>
             <TextField id="pointFrom"
@@ -69,14 +70,14 @@ export const PassengerForm = (props: { updateTelephone: Function, addPassenger: 
                        variant="filled"
                        name="pointFrom"
                        type='number'
-                // required
+                       required={true}
             />
             <TextField id="pointTo"
                        label="Конец маршрута"
                        variant="filled"
                        name="pointTo"
                        type='number'
-                // required
+                       required={true}
             />
             <br/>
             <Button

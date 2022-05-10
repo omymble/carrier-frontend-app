@@ -47,6 +47,7 @@ export const DriverForm = (props: { updateTelephone: Function, addDriver: Functi
                        variant="filled"
                        name="name"
                        type='text'
+                       required={true}
             />
             <TextField id="telephone"
                        label="Телефон"
@@ -54,7 +55,7 @@ export const DriverForm = (props: { updateTelephone: Function, addDriver: Functi
                        name="telephone"
                        type='tel'
                        defaultValue={props.telInput}
-                // helperText="ваш номер"
+                       required={true}
             />
             <br/>
             <TextField id="seats"
@@ -62,7 +63,7 @@ export const DriverForm = (props: { updateTelephone: Function, addDriver: Functi
                        variant="filled"
                        name="seats"
                        type='number'
-
+                       required={true}
             />
 
             <TextField id="time"
@@ -70,7 +71,7 @@ export const DriverForm = (props: { updateTelephone: Function, addDriver: Functi
                        name="time"
                        type="time"
                        helperText="во сколько поедете"
-                // required
+                       required={true}
             />
             <br/>
             <TextField id="pointFrom"
@@ -78,12 +79,14 @@ export const DriverForm = (props: { updateTelephone: Function, addDriver: Functi
                        variant="filled"
                        name="pointFrom"
                        type="number"
+                       required={true}
             />
             <TextField id="pointTo"
                        label="Конец маршрута"
                        variant="filled"
                        name="pointTo"
                        type="number"
+                       required={true}
             />
             <br/>
             <Button
