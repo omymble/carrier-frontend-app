@@ -1,14 +1,17 @@
 import classes from './FoundPassengersPage.module.scss'
 import {PassengersList} from "../../components/PassengersList/PassengersList";
-import {useAppSelector} from "../../redux/hooks/hooks";
+import {queryAPI} from "../../redux/services/queryService";
 
 export const FoundPassengersPage = (props: {}) => {
-    const {telInput, passengers, isLoading, error} = useAppSelector(state => state.passengersReducer)
+
+    const {data: foundPassengers, error, isLoading} = queryAPI.useFetchAllFoundPassengersQuery()
 
     return (
         <div className={classes.foundPassengersPage}>
             <h1>Нашлись пассажиры:</h1>
-            <PassengersList passengers={passengers}/>
+            {isLoading && <h1>Loading</h1>}
+            {error && <h1>error</h1>}
+            {foundPassengers && <PassengersList passengers={foundPassengers}/>}
         </div>
     )
 }

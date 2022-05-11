@@ -1,18 +1,39 @@
-import {AppDispatch} from "../store";
 import axios from "axios";
+import {IFoundPassenger} from "../models/IFoundPassenger";
 import {IFoundDriver} from "../models/IFoundDriver";
-import {foundDriversSlice} from "./foundDriversSlice";
+import {createAsyncThunk} from "@reduxjs/toolkit";
+import {IUser} from "../models/IUser";
 
-// const URL = "../../../../public/data/driversData.json"
-// const URL = "my-json-server.typicode.com/omymble/carrier-frontend-app/blob/feature/query/public/data/driversData.json"
+const URL = "https://raw.githubusercontent.com/omymble/demo/master/db.json" //работает
 
-export const fetchDrivers = (URL: string) => async (dispatch: AppDispatch) => {
-    try {
-        dispatch(foundDriversSlice.actions.foundDriversFetching())
-        const response = await axios.get<IFoundDriver[]>(URL)
-        debugger
-        dispatch(foundDriversSlice.actions.foundDriversFetchingSuccess(response.data))
-    } catch (e: any) {
-        dispatch(foundDriversSlice.actions.foundDriversFetchingError(e))
+export const fetchUsers = createAsyncThunk(
+    'user/fetchAllUsers',
+    async(_, thunkAPI) => {
+        const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users')
+        return response.data
     }
-}
+)
+
+export const fetchFoundDrivers = createAsyncThunk(
+    'foundDrivers/fetchFoundDrivers',
+    async (_ , thunkAPI) => {
+        try {
+            const response = await axios.get<IFoundDriver[]>(URL)
+            return response.data
+        } catch (e) {
+            return thunkAPI.rejectWithValue("Error with loading data")
+        }
+    }
+)
+
+export const fetchFoundPassengers = createAsyncThunk(
+    'foundPassengers/fetchFoundPassengers',
+    async (_ , thunkAPI) => {
+        try {
+            const response = await axios.get<IFoundPassenger[]>(URL)
+            return response.data
+        } catch (e) {
+            return thunkAPI.rejectWithValue("Error with loading data")
+        }
+    }
+)

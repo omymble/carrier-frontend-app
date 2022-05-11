@@ -9,7 +9,7 @@ export interface PassengersState {
 }
 
 const initialState: PassengersState = {
-    telInput: '+79990000000',
+    telInput: '',
     passengers: [],
     isLoading: false,
     error: '',

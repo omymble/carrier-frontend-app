@@ -1,14 +1,15 @@
 import {IFoundDriver} from "../models/IFoundDriver";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {axios} from "../../../index";
+import {fetchFoundDrivers} from "./ActionCreators";
 
-export interface DriversState {
+
+export interface IFoundDriversList {
     foundDrivers: Array<IFoundDriver>;
     isLoading: boolean;
     error: string;
 }
 
-const initialState: DriversState = {
+const initialState: IFoundDriversList = {
     foundDrivers: [],
     isLoading: false,
     error: '',
@@ -23,21 +24,22 @@ export const foundDriversSlice = createSlice({
         },
         addDriver(state, action: PayloadAction<IFoundDriver>) {
             state.foundDrivers.push(action.payload)
-        },
-        foundDriversFetching(state) {
-            state.isLoading = true
-        },
-        foundDriversFetchingSuccess(state, action: PayloadAction<IFoundDriver[]>) {
+        }
+    },
+    extraReducers: {
+        [fetchFoundDrivers.fulfilled.type]: (state, action: PayloadAction<IFoundDriver[]>) => {
             state.foundDrivers = action.payload
             state.isLoading = false
             state.error = ''
         },
-        foundDriversFetchingError(state, action: PayloadAction<string>) {
+        [fetchFoundDrivers.pending.type]: (state, action: PayloadAction<IFoundDriver[]>) => {
+            state.isLoading = true
+        },
+        [fetchFoundDrivers.rejected.type]: (state, action: PayloadAction<any>) => {
             state.isLoading = false
             state.error = action.payload
-        }
+        },
     }
 })
 
-export const {setFoundDrivers, addDriver} = foundDriversSlice.actions
 export default foundDriversSlice.reducer

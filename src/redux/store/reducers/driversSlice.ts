@@ -9,7 +9,7 @@ export interface DriversState {
 }
 
 const initialState: DriversState = {
-    telInput: '+79991111111',
+    telInput: '',
     drivers: [],
     isLoading: false,
     error: '',

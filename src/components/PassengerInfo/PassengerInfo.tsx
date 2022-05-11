@@ -6,9 +6,9 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import {PassengerObject} from "../../types";
+import {IFoundPassenger} from "../../redux/store/models/IFoundPassenger";
 
-export const PassengerInfo = (props : {passengerData: PassengerObject; key: number}) => {
+export const PassengerInfo = (props : {foundPassengerData: IFoundPassenger; key: number}) => {
     const card = (
         <React.Fragment>
             <CardContent>
@@ -16,18 +16,18 @@ export const PassengerInfo = (props : {passengerData: PassengerObject; key: numb
                     ПАССАЖИР
                 </Typography>
                 <Typography sx={{ fontSize: 24 }} color="text.secondary" gutterBottom>
-                    {props.passengerData.name}
+                    {props.foundPassengerData.name}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {props.passengerData.telephone}
+                    {props.foundPassengerData.telephone}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {props.passengerData.startTime}
+                    {props.foundPassengerData.time}
                 </Typography>
                 <Typography variant="body2">
-                    {props.passengerData.pointFrom.longitude}
+                    {props.foundPassengerData.from}
                     <br />
-                    {props.passengerData.pointFrom.latitude}
+                    {props.foundPassengerData.to}
                 </Typography>
             </CardContent>
             <CardActions>

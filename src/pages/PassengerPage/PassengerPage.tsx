@@ -30,7 +30,7 @@ export const PassengerPage = (props: {}) => {
                            telInput={telInput}
             />
             {/*<PassengerFormContainer store={props.store}/>*/}
-            <PassengersList passengers={passengers}/>
+            {/*<PassengersList passengers={passengers}/>*/}
             {/*<DriversList drivers={props.drivers}/>*/}
         </div>
     )
