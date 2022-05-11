@@ -1,28 +1,45 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {IFoundPassenger} from "../store/models/IFoundPassenger";
 import {IFoundDriver} from "../store/models/IFoundDriver";
+import {IDriver} from "../store/models/IDriver";
+import {IPassenger} from "../store/models/IPassenger";
 
 
 export const queryAPI = createApi({
     reducerPath: 'queryAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://raw.githubusercontent.com/omymble/demo/master/'
+        baseUrl: 'http://localhost:80/'
     }),
     endpoints: (build) => ({
+
         fetchAllFoundDrivers: build.query<IFoundDriver[], number | void>({
             query: () => ({
-                url: 'db_drivers.json',
+                url: 'foundDrivers',
                 // params: {
                 //     _limit: limit
                 // }
             })
-
         }),
         fetchAllFoundPassengers: build.query<IFoundPassenger[], number | void>({
             query: () => ({
-                url: 'db_passengers.json'
+                url: 'foundPassengers'
             })
-        })
+        }),
+
+        createDriver: build.mutation<IDriver, IDriver>({
+            query: (driver) => ({
+                url: 'drivers',
+                method: 'POST',
+                body: driver
+            })
+        }),
+        createUser: build.mutation<IPassenger, IPassenger>({
+            query: (passenger) => ({
+                url: 'passengers',
+                method: 'POST',
+                body: passenger
+            })
+        }),
     })
 })
 

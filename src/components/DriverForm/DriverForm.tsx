@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import {Button} from "@mui/material";
 import {DriverObject} from "../../types";
 
-export const DriverForm = (props: { updateTelephone: Function, addDriver: Function, telInput: String }) => {
+export const DriverForm = (props: { /*updateTelephone: Function,*/ addDriver: Function/*, telInput: String */}) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -27,7 +27,7 @@ export const DriverForm = (props: { updateTelephone: Function, addDriver: Functi
     const onFormChange = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         let data = new FormData(event.currentTarget)
-        props.updateTelephone(data.get('telephone'))
+        // props.updateTelephone(data.get('telephone'))
     }
 
     return (
@@ -40,7 +40,7 @@ export const DriverForm = (props: { updateTelephone: Function, addDriver: Functi
             noValidate
             autoComplete="off"
             onSubmit={handleSubmit}
-            onChange={onFormChange}
+            // onChange={onFormChange}
         >
             <TextField id="name"
                        label="Имя"
@@ -54,7 +54,7 @@ export const DriverForm = (props: { updateTelephone: Function, addDriver: Functi
                        variant="filled"
                        name="telephone"
                        type='tel'
-                       defaultValue={props.telInput}
+                       // defaultValue={props.telInput}
                        required={true}
             />
             <br/>
