@@ -3,6 +3,7 @@ import {fetchUsers} from "./ActionCreators";
 import {IUser} from "../models/IUser";
 
 
+/*
 export interface UserState {
     users: IUser[]
     isLoadingUsers: boolean;
@@ -36,4 +37,4 @@ export const userSlice = createSlice({
     }
 })
 
-export default userSlice.reducer
+export default userSlice.reducer*/

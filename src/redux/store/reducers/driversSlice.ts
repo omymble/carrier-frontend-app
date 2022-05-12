@@ -2,14 +2,14 @@ import {IDriver} from "../models/IDriver";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export interface DriversState {
-    telInput: string;
+    // telInput: string;
     drivers: Array<IDriver>;
     isLoading: boolean;
     error: string;
 }
 
 const initialState: DriversState = {
-    telInput: '',
+    // telInput: '',
     drivers: [],
     isLoading: false,
     error: '',
@@ -23,7 +23,7 @@ export const driversSlice = createSlice({
             state.drivers.push(action.payload)
         },
         updateTelInput(state, action: PayloadAction<string>) {
-            state.telInput = action.payload
+            // state.telInput = action.payload
         }
     }
 })

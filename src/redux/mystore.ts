@@ -1,6 +1,6 @@
 import {StoreObject, StateObject} from "../types";
 
-export const mystore: StoreObject = {
+/*export const mystore: StoreObject = {
     _state: {
         passengersData: {
             telInput: '89093337772',
@@ -81,6 +81,6 @@ export const mystore: StoreObject = {
         // this._state.drivers = driversReducer(this._state.driversData, action)
         this._callSubscriber(this._state)
     }
-}
+}*/
 
 

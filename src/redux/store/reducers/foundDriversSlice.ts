@@ -2,7 +2,6 @@ import {IFoundDriver} from "../models/IFoundDriver";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {fetchFoundDrivers} from "./ActionCreators";
 
-
 export interface IFoundDriversList {
     foundDrivers: Array<IFoundDriver>;
     isLoading: boolean;

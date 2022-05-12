@@ -4,14 +4,11 @@ import TextField from '@mui/material/TextField';
 import {Button} from "@mui/material";
 import {DriverObject} from "../../types";
 
-export const DriverForm = (props: { /*updateTelephone: Function,*/ addDriver: Function/*, telInput: String */}) => {
+export const DriverForm = (props: { addDriver: Function, telInput: String }) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            name: data.get('name')
-        });
         let newDriver: DriverObject = {
             name: String(data.get('name')),
             telephone: String(data.get('telephone')),
@@ -19,14 +16,13 @@ export const DriverForm = (props: { /*updateTelephone: Function,*/ addDriver: Fu
             startTime: String(data.get('time')),
             pointFrom: {longitude: Number(data.get('pointFrom')), latitude: Number(data.get('pointFrom'))},
             pointTo: {longitude: Number(data.get('pointTo')), latitude: Number(data.get('pointTo'))},
-
         }
         props.addDriver(newDriver)
     };
 
     const onFormChange = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        let data = new FormData(event.currentTarget)
+        // event.preventDefault()
+        // let data = new FormData(event.currentTarget)
         // props.updateTelephone(data.get('telephone'))
     }
 
@@ -40,7 +36,6 @@ export const DriverForm = (props: { /*updateTelephone: Function,*/ addDriver: Fu
             noValidate
             autoComplete="off"
             onSubmit={handleSubmit}
-            // onChange={onFormChange}
         >
             <TextField id="name"
                        label="Имя"
@@ -54,7 +49,7 @@ export const DriverForm = (props: { /*updateTelephone: Function,*/ addDriver: Fu
                        variant="filled"
                        name="telephone"
                        type='tel'
-                       // defaultValue={props.telInput}
+                       defaultValue={props.telInput}
                        required={true}
             />
             <br/>

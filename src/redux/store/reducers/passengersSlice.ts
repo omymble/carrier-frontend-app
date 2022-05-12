@@ -2,14 +2,14 @@ import {IPassenger} from "../models/IPassenger";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export interface PassengersState {
-    telInput: string;
+    // telInput: string;
     passengers: Array<IPassenger>;
     isLoading: boolean;
     error: string;
 }
 
 const initialState: PassengersState = {
-    telInput: '',
+    // telInput: '',
     passengers: [],
     isLoading: false,
     error: '',
@@ -23,7 +23,7 @@ export const passengersSlice = createSlice({
             state.passengers.push(action.payload)
         },
         updateTelInput(state, action: PayloadAction<string>) {
-            state.telInput = action.payload
+            // state.telInput = action.payload
         }
     }
 })

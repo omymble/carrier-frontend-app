@@ -13,6 +13,7 @@ import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import {IAuth} from "../../redux/store/models/IAuth";
 import {authSlice} from "../../redux/store/reducers/authSlice";
 import  {useNavigate} from "react-router";
+import {queryAPI} from "../../redux/services/queryService";
 
 function Copyright(props: any) {
     return (
@@ -36,16 +37,21 @@ export const SignInPage = () => {
     const dispatch = useAppDispatch()
     let navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        // event.preventDefault();
+    const [createAuth, {error: createAuthError}] = queryAPI.useCreateAuthMutation()
+
+    const authOnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         const data = new FormData(event.currentTarget);
         let telephone = data.get('telephone')
-        console.log({
-            telephone: telephone
-        });
+        console.log({telephone: telephone});
+
         if (telephone !== "") {
-            dispatch(signIn(String(data.get('telephone'))))
+            console.log('before await')
+            await createAuth({telephone, isAuth: true} as IAuth)
+            console.log('before dispatch after await')
+            dispatch(signIn(String(telephone)))
             navigate('/home', {replace: false})
+            console.log('after all')
         }
     };
 
@@ -67,7 +73,7 @@ export const SignInPage = () => {
                     <Typography component="h1" variant="h5">
                         Войдите по номеру телефона
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={authOnSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
                             required

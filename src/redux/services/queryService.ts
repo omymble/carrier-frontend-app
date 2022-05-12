@@ -28,23 +28,23 @@ export const queryAPI = createApi({
 
         createDriver: build.mutation<IDriver, IDriver>({
             query: (driver) => ({
-                url: 'drivers',
+                url: 'driver',
                 method: 'POST',
                 body: driver
             })
         }),
 
-        createUser: build.mutation<IPassenger, IPassenger>({
+        createPassenger: build.mutation<IPassenger, IPassenger>({
             query: (passenger) => ({
-                url: 'passengers',
+                url: 'passenger',
                 method: 'POST',
                 body: passenger
             })
         }),
 
-        signIn: build.mutation<IAuth, IAuth>({
+        createAuth: build.mutation<IAuth, IAuth>({
             query: (auth) => ({
-                url: 'login',
+                url: 'authUser',
                 method: 'POST',
                 body: auth
             })
@@ -52,4 +52,3 @@ export const queryAPI = createApi({
 
     })
 })
-
