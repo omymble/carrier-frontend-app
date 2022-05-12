@@ -3,6 +3,7 @@ import {IFoundPassenger} from "../store/models/IFoundPassenger";
 import {IFoundDriver} from "../store/models/IFoundDriver";
 import {IDriver} from "../store/models/IDriver";
 import {IPassenger} from "../store/models/IPassenger";
+import {IAuth} from "../store/models/IAuth";
 
 
 export const queryAPI = createApi({
@@ -10,16 +11,15 @@ export const queryAPI = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:80/'
     }),
+
     endpoints: (build) => ({
 
         fetchAllFoundDrivers: build.query<IFoundDriver[], number | void>({
             query: () => ({
-                url: 'foundDrivers',
-                // params: {
-                //     _limit: limit
-                // }
+                url: 'foundDrivers'
             })
         }),
+
         fetchAllFoundPassengers: build.query<IFoundPassenger[], number | void>({
             query: () => ({
                 url: 'foundPassengers'
@@ -33,6 +33,7 @@ export const queryAPI = createApi({
                 body: driver
             })
         }),
+
         createUser: build.mutation<IPassenger, IPassenger>({
             query: (passenger) => ({
                 url: 'passengers',
@@ -40,6 +41,15 @@ export const queryAPI = createApi({
                 body: passenger
             })
         }),
+
+        signIn: build.mutation<IAuth, IAuth>({
+            query: (auth) => ({
+                url: 'login',
+                method: 'POST',
+                body: auth
+            })
+        }),
+
     })
 })
 

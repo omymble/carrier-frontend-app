@@ -11,7 +11,7 @@ export const DriverPage = (props: {}) => {
     // const {telInput, drivers, isLoading, error} = useAppSelector(state => state.driversReducer)
     // const dispatch = useAppDispatch()
 
-    const [createDriver, {}] = queryAPI.useCreateDriverMutation()
+    const [createDriver, {error: createError}] = queryAPI.useCreateDriverMutation()
     const addDriverOnSubmit = async (newDriver: IDriver) => {
         await createDriver({name: newDriver.name, telephone: newDriver.telephone} as IDriver)
     }
