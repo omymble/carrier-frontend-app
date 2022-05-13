@@ -1,32 +1,33 @@
-import {IPassenger} from "../models/IPassenger";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {IPassenger} from "../models/IPassenger";
 
-export interface PassengersState {
-    // telInput: string;
-    passengers: Array<IPassenger>;
+export interface IPassengerTrip {
+    passengerTrip: IPassenger;
     isLoading: boolean;
     error: string;
 }
 
-const initialState: PassengersState = {
-    // telInput: '',
-    passengers: [],
+const initialState: IPassengerTrip = {
+    passengerTrip: {
+        name: '',
+        telephone: '',
+        startTime: 0,
+        from: {longitude: 0, latitude: 0},
+        to: {longitude: 0, latitude: 0},
+    },
     isLoading: false,
     error: '',
 }
 
 export const passengersSlice = createSlice({
-    name: 'passengers',
+    name: 'passenger',
     initialState,
     reducers: {
         addPassenger(state, action: PayloadAction<IPassenger>) {
-            state.passengers.push(action.payload)
-        },
-        updateTelInput(state, action: PayloadAction<string>) {
-            // state.telInput = action.payload
+            state.passengerTrip = action.payload
         }
     }
 })
 
-export const {addPassenger, updateTelInput} = passengersSlice.actions
+export const {addPassenger} = passengersSlice.actions
 export default passengersSlice.reducer

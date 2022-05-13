@@ -124,7 +124,7 @@
     }
   ],
   "authUser": {
-    "telephone": "6",
+    "telephone": "666",
     "isAuth": true
   },
   "driver": {
@@ -132,8 +132,8 @@
     "telephone": "434"
   },
   "passenger": {
-    "name": "maria",
-    "telephone": "776733"
+    "name": "12323",
+    "telephone": ""
   },
   "drivers": [],
   "passengers": []

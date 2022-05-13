@@ -1,10 +1,9 @@
 import {IPoint} from "./IPoint";
 
-export interface IDriver {
+export interface IPassengerServer {
     name: string;
     telephone: string;
-    emptySeats: number;
     startTime: number;
-    from: IPoint;
-    to: IPoint;
+    pointFrom: IPoint;
+    pointTo: IPoint;
 }

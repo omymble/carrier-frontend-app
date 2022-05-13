@@ -7,8 +7,9 @@ import {DriverForm} from "../../components/DriverForm/DriverForm";
 import {queryAPI} from "../../redux/services/queryService";
 
 export const DriverPage = (props: {}) => {
-    const {addDriver, updateTelInput} = driversSlice.actions
-    const {drivers, isLoading, error} = useAppSelector(state => state.driversReducer)
+
+    const {addDriver} = driversSlice.actions
+    const {driverTrip, isLoading, error} = useAppSelector(state => state.driversReducer)
     const {telephone, isAuth} = useAppSelector(state => state.authReducer)
     const dispatch = useAppDispatch()
 
@@ -23,9 +24,6 @@ export const DriverPage = (props: {}) => {
             })
     }
 
-    // const updateTelephoneOnChange = (tel: string) => {
-    //     dispatch(updateTelInput(tel))
-    // }
     return (
         <div className={classes.driverForm}>
             <h1>Данные о водителе:</h1>

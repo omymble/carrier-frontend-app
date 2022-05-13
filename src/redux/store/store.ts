@@ -3,6 +3,7 @@ import {configureStore} from "@reduxjs/toolkit";
 import driversReducer from "./reducers/driversSlice"
 import passengersReducer from "./reducers/passengersSlice"
 import foundDriversReducer from "./reducers/foundDriversSlice"
+import foundPassengersReducer from "./reducers/foundPassengersSlice";
 import authReducer from "./reducers/authSlice"
 import {queryAPI} from "../services/queryService"
 
@@ -10,11 +11,9 @@ let rootReducer = combineReducers({
     driversReducer,
     passengersReducer,
     foundDriversReducer,
+    foundPassengersReducer,
     authReducer,
-    // userReducer,
-    // [postAPI.reducerPath]: postAPI.reducer,
     [queryAPI.reducerPath]: queryAPI.reducer
-    // [foundPassengersServiceAPI.reducerPath]: foundPassengersServiceAPI.reducer
 })
 
 export const setUpStore = () => {

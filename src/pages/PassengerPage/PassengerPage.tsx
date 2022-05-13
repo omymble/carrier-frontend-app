@@ -9,8 +9,8 @@ import {queryAPI} from "../../redux/services/queryService";
 
 export const PassengerPage = (props: {}) => {
 
-    const {addPassenger, updateTelInput} = passengersSlice.actions
-    const {passengers, isLoading, error} = useAppSelector(state => state.passengersReducer)
+    const {addPassenger} = passengersSlice.actions
+    const {passengerTrip, isLoading, error} = useAppSelector(state => state.passengersReducer)
     const {telephone, isAuth} = useAppSelector(state => state.authReducer)
     const dispatch = useAppDispatch()
 
@@ -25,9 +25,6 @@ export const PassengerPage = (props: {}) => {
             })
     }
 
-    const updateTelephoneOnChange = (tel: string) => {
-        // dispatch(updateTelInput(tel))
-    }
 
     return (
         <div className={classes.passengerPage}>

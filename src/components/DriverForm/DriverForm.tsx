@@ -2,29 +2,23 @@ import * as React from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {Button} from "@mui/material";
-import {DriverObject} from "../../types";
+import {IDriver} from "../../redux/store/models/IDriver";
 
 export const DriverForm = (props: { addDriver: Function, telInput: String }) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        let newDriver: DriverObject = {
+        let newDriver: IDriver = {
             name: String(data.get('name')),
             telephone: String(data.get('telephone')),
             emptySeats: Number(data.get('seats')),
-            startTime: String(data.get('time')),
-            pointFrom: {longitude: Number(data.get('pointFrom')), latitude: Number(data.get('pointFrom'))},
-            pointTo: {longitude: Number(data.get('pointTo')), latitude: Number(data.get('pointTo'))},
+            startTime: Number(data.get('time')),
+            from: {longitude: Number(data.get('pointFrom')), latitude: Number(data.get('pointFrom'))},
+            to: {longitude: Number(data.get('pointTo')), latitude: Number(data.get('pointTo'))},
         }
         props.addDriver(newDriver)
     };
-
-    const onFormChange = (event: React.FormEvent<HTMLFormElement>) => {
-        // event.preventDefault()
-        // let data = new FormData(event.currentTarget)
-        // props.updateTelephone(data.get('telephone'))
-    }
 
     return (
         <Box

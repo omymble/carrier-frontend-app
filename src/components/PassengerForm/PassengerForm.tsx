@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {Button} from "@mui/material";
-import {PassengerObject} from "../../types";
+import {IPassenger} from "../../redux/store/models/IPassenger";
 
 
 export const PassengerForm = (props: { addPassenger: Function, telInput: String }) => {
@@ -10,22 +10,15 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const data = new FormData(event.currentTarget);
-        let newPassenger: PassengerObject = {
+        let newPassenger: IPassenger = {
             name: String(data.get('name')),
             telephone: String(data.get('telephone')),
-            pointFrom: {longitude: Number(data.get('pointFrom')), latitude: Number(data.get('pointFrom'))},
-            pointTo: {longitude: Number(data.get('pointTo')), latitude: Number(data.get('pointTo'))},
-            startTime: String(data.get('time'))
+            startTime: Number(data.get('time')),
+            from: {longitude: Number(data.get('pointFrom')), latitude: Number(data.get('pointFrom'))},
+            to: {longitude: Number(data.get('pointTo')), latitude: Number(data.get('pointTo'))},
         }
         props.addPassenger(newPassenger)
     };
-
-    const onFormChange = (event: React.FormEvent<HTMLFormElement>) => {
-        // event.preventDefault()
-        // let data = new FormData(event.currentTarget)
-        // console.log(data.get('telephone'))
-        // props.updateTelephone(data.get('telephone'))
-    }
 
     return (
         <Box
@@ -36,7 +29,6 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
             noValidate
             autoComplete="off"
             onSubmit={handleSubmit}
-            onChange={onFormChange}
         >
             <TextField id="name"
                        label="Имя"

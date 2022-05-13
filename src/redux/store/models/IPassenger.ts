@@ -1,9 +1,9 @@
-import {PointObj} from "../../../types";
+import {IPoint} from "./IPoint";
 
 export interface IPassenger {
     name: string;
     telephone: string;
-    startTime: string;
-    pointFrom: PointObj;
-    pointTo: PointObj;
+    startTime: number;
+    from: IPoint;
+    to: IPoint;
 }

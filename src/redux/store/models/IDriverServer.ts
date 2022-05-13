@@ -5,6 +5,6 @@ export interface IDriver {
     telephone: string;
     emptySeats: number;
     startTime: number;
-    from: IPoint;
-    to: IPoint;
+    pointFrom: IPoint;
+    pointTo: IPoint;
 }
