@@ -1,4 +1,32 @@
 {
+  "foundDrivers": {
+    "bestTime": [
+
+    ],
+    "bestRoute": [
+
+    ],
+    "more": [
+
+    ]
+  },
+  "foundPassengers": {
+    "bestTime": [],
+    "bestRoute": [],
+    "more": []
+  },
+  "authUser": {
+    "telephone": "+79037361629",
+    "isAuth": true
+  },
+  "driver": {
+
+  },
+  "passenger": {
+
+  },
+
+
   "foundDrivers": [
     {
       "name": "Даниил Мартынов",
@@ -124,12 +152,12 @@
     }
   ],
   "authUser": {
-    "telephone": "+79037361629",
+    "telephone": "666",
     "isAuth": true
   },
   "driver": {
-    "name": "Арина",
-    "telephone": "+79037361629"
+    "name": "ffdfed",
+    "telephone": "434"
   },
   "passenger": {
     "name": "12323",

@@ -13,16 +13,21 @@ export const queryAPI = createApi({
     }),
 
     endpoints: (build) => ({
-
         fetchAllFoundDrivers: build.query<IFoundDriver[], number | void>({
             query: () => ({
                 url: 'foundDrivers'
             })
         }),
-
         fetchAllFoundPassengers: build.query<IFoundPassenger[], number | void>({
             query: () => ({
                 url: 'foundPassengers'
+            })
+        }),
+        createAuth: build.mutation<IAuth, IAuth>({
+            query: (auth) => ({
+                url: 'authUser',
+                method: 'POST',
+                body: auth
             })
         }),
 
@@ -42,13 +47,7 @@ export const queryAPI = createApi({
             })
         }),
 
-        createAuth: build.mutation<IAuth, IAuth>({
-            query: (auth) => ({
-                url: 'authUser',
-                method: 'POST',
-                body: auth
-            })
-        }),
+
 
     })
 })

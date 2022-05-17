@@ -1,83 +1,111 @@
-import * as React from "react";
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import {Button} from "@mui/material";
-import {IPassenger} from "../../redux/store/models/IPassenger";
+// @ts-nocheck
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { Button } from "@mui/material";
+import { Map, YMaps, RoutePanel } from "react-yandex-maps";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
+const validationSchema = yup.object({
+    name: yup.string().required(),
+    pointFromCoords: yup.array().required(),
+    pointToCoords: yup.array().required(),
+});
 
-export const PassengerForm = (props: { addPassenger: Function, telInput: String }) => {
+const routePanelOptions = {
+    routePanelReverseGeocoding: true,
+    autofocus: false,
+    routePanelTypes: { auto: true },
+    float: "right",
+    maxWidth: 270,
+    position: {
+        top: 15,
+        right: 15,
+    },
+};
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        const data = new FormData(event.currentTarget);
-        let newPassenger: IPassenger = {
-            name: String(data.get('name')),
-            telephone: String(data.get('telephone')),
-            startTime: Number(data.get('time')),
-            from: {longitude: Number(data.get('pointFrom')), latitude: Number(data.get('pointFrom'))},
-            to: {longitude: Number(data.get('pointTo')), latitude: Number(data.get('pointTo'))},
-        }
-        props.addPassenger(newPassenger)
-    };
+export const PassengerForm = () => {
+    const formik = useFormik({
+        initialValues: {
+            name: "",
+            pointFromCoords: null,
+            pointToCoords: null,
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values) => {
+            alert(JSON.stringify(values, null, 2));
+        },
+    });
 
     return (
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': {m: 1, width: '25ch'},
-            }}
-            noValidate
-            autoComplete="off"
-            onSubmit={handleSubmit}
-        >
-            <TextField id="name"
-                       label="Имя"
-                       variant="filled"
-                       name="name"
-                       type='text'
-                       required={true}
-            />
-            <br/>
-            <TextField id="telephone"
-                       label="Телефон"
-                       variant="filled"
-                       name="telephone"
-                       type='tel'
-                       defaultValue={props.telInput}
-                       required={true}
-            />
-            <TextField id="time"
-                       variant="filled"
-                       name="time"
-                       type="time"
-                       helperText="во сколько поедете"
-                       required={true}
-            />
-            <br/>
-            <TextField id="pointFrom"
-                       label="Начало маршрута"
-                       variant="filled"
-                       name="pointFrom"
-                       type='number'
-                       required={true}
-            />
-            <TextField id="pointTo"
-                       label="Конец маршрута"
-                       variant="filled"
-                       name="pointTo"
-                       type='number'
-                       required={true}
-            />
-            <br/>
-            <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{mt: 3, mb: 2}}
+        <>
+            <Box
+                component="form"
+                sx={{
+                    "& > :not(style)": { m: 1, width: "25ch" },
+                }}
+                noValidate
+                autoComplete="off"
+                onSubmit={formik.handleSubmit}
             >
-                Подтвердить
-            </Button>
+                <TextField
+                    id="name"
+                    name="name"
+                    label="Имя"
+                    variant="filled"
+                    type="text"
+                    required
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    error={formik.touched.name && Boolean(formik.errors.name)}
+                    helperText={formik.touched.name && formik.errors.name}
+                />
 
-        </Box>
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                >
+                    Подтвердить
+                </Button>
+            </Box>
+
+            <YMaps
+                query={{
+                    apikey: "f53fb552-fa13-43bb-80f6-18ef906b6437",
+                }}
+            >
+                <Map
+                    width={"100%"}
+                    height={500}
+                    modules={["geocode", "suggest"]}
+                    defaultState={{
+                        center: [55.751574, 37.573856],
+                        zoom: 9,
+                        controls: [],
+                    }}
+                >
+                    <RoutePanel
+                        instanceRef={async (r) => {
+                            if (!r) return;
+                            const route = await r.routePanel.getRouteAsync();
+                            if (route && !r.routePanel.__eventAdded) {
+                                route.model.events.add("requestsuccess", function (x) {
+                                    const coords = x.originalEvent.target
+                                        .getPoints()
+                                        .map((x) => x.properties.get("coordinates"));
+
+                                    formik.setFieldValue("pointFromCoords", coords[0]);
+                                    formik.setFieldValue("pointToCoords", coords[1]);
+                                });
+                                r.routePanel.__eventAdded = true;
+                            }
+                        }}
+                        options={routePanelOptions}
+                    />
+                </Map>
+            </YMaps>
+        </>
     );
-}
+};
