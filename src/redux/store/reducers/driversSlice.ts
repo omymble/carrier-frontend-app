@@ -2,17 +2,17 @@ import {IDriver} from "../models/IDriver";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export interface IDriverTrip {
-    driverTrip: IDriver;
+    driver: IDriver;
     isLoading: boolean;
     error: string;
 }
 
 const initialState: IDriverTrip = {
-    driverTrip: {
+    driver: {
         name: '',
         telephone: '',
-        emptySeats: 0,
-        startTime: 0,
+        seats: 0,
+        time: 0,
         from: {longitude: 0, latitude: 0},
         to: {longitude: 0, latitude: 0},
     },
@@ -25,7 +25,7 @@ export const driversSlice = createSlice({
     initialState,
     reducers: {
         addDriver(state, action: PayloadAction<IDriver>) {
-            state.driverTrip = action.payload
+            state.driver = action.payload
         }
     }
 })

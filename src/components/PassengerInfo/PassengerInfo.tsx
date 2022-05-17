@@ -6,9 +6,9 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import {IFoundPassenger} from "../../redux/store/models/IFoundPassenger";
+import {IPassenger} from "../../redux/store/models/IPassenger";
 
-export const PassengerInfo = (props : {foundPassengerData: IFoundPassenger; key: number}) => {
+export const PassengerInfo = (props : {foundPassengerData: IPassenger; key: number}) => {
     const card = (
         <React.Fragment>
             <CardContent>

@@ -5,64 +5,70 @@
       "telephone": "+79095678439",
       "time": "16:00",
       "seats": 1,
-      "from": "улица Ломоносова, 9",
-      "to": "Кронверкский проспект, 49"
-    },
-    {
-      "name": "Илья Воробьев",
-      "telephone": "+79095678439",
-      "time": "15:30",
-      "seats": 3,
-      "from": "Невский проспект, 39Б",
-      "to": "Кронверкский проспект, 49"
+      "from": {
+        "longitude": 55.2323,
+        "latitude": 23.3212
+      },
+      "to": {
+        "longitude": 55.2323,
+        "latitude": 23.3212
+      }
     },
     {
       "name": "Даниил Мартынов",
       "telephone": "+79095678439",
       "time": "16:00",
       "seats": 1,
-      "from": "улица Ломоносова, 9",
-      "to": "Кронверкский проспект, 49"
+      "from": {
+        "longitude": 55.2323,
+        "latitude": 23.3212
+      },
+      "to": {
+        "longitude": 55.2323,
+        "latitude": 23.3212
+      }
     },
     {
-      "name": "Никита Логвиненко",
+      "name": "Даниил Мартынов",
       "telephone": "+79095678439",
-      "time": "12:20",
-      "seats": 2,
-      "from": "Невский проспект, 39Б",
-      "to": "Кронверкская улица, 13"
+      "time": "16:00",
+      "seats": 1,
+      "from": {
+        "longitude": 55.2323,
+        "latitude": 23.3212
+      },
+      "to": {
+        "longitude": 55.2323,
+        "latitude": 23.3212
+      }
     },
     {
-      "name": "Саша Блашенков",
+      "name": "Даниил Мартынов",
       "telephone": "+79095678439",
-      "time": "11:50",
-      "seats": 3,
-      "from": "Невский проспект, 39Б",
-      "to": "Кронверкский проспект, 49"
+      "time": "16:00",
+      "seats": 1,
+      "from": {
+        "longitude": 55.2323,
+        "latitude": 23.3212
+      },
+      "to": {
+        "longitude": 55.2323,
+        "latitude": 23.3212
+      }
     },
     {
-      "name": "Никита Логвиненко",
+      "name": "Даниил Мартынов",
       "telephone": "+79095678439",
-      "time": "12:20",
-      "seats": 2,
-      "from": "Невский проспект, 39Б",
-      "to": "Кронверкская улица, 13"
-    },
-    {
-      "name": "Сергей Ельников",
-      "telephone": "+79095678439",
-      "time": "11:30",
-      "seats": 3,
-      "from": "Невский проспект, 39Б",
-      "to": "Кронверкский проспект, 49"
-    },
-    {
-      "name": "Никита Логвиненко",
-      "telephone": "+79095678439",
-      "time": "12:20",
-      "seats": 2,
-      "from": "Невский проспект, 39Б",
-      "to": "Кронверкская улица, 13"
+      "time": "16:00",
+      "seats": 1,
+      "from": {
+        "longitude": 55.2323,
+        "latitude": 23.3212
+      },
+      "to": {
+        "longitude": 55.2323,
+        "latitude": 23.3212
+      }
     }
   ],
   "foundPassengers": [
@@ -124,17 +130,34 @@
     }
   ],
   "authUser": {
-    "telephone": "+79037361629",
+    "telephone": "+79037263636",
     "isAuth": true
   },
   "driver": {
-    "name": "Арина",
-    "telephone": "+79037361629"
+    "name": "tttt",
+    "telephone": "5345345",
+    "seats": 2,
+    "time": null,
+    "from": {
+      "longitude": 333,
+      "latitude": 333
+    },
+    "to": {
+      "longitude": 222,
+      "latitude": 222
+    }
   },
   "passenger": {
-    "name": "12323",
-    "telephone": ""
-  },
-  "drivers": [],
-  "passengers": []
+    "name": null,
+    "telephone": null,
+    "time": null,
+    "from": {
+      "longitude": null,
+      "latitude": null
+    },
+    "to": {
+      "longitude": null,
+      "latitude": null
+    }
+  }
 }

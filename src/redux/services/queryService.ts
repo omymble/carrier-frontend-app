@@ -1,6 +1,4 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {IFoundPassenger} from "../store/models/IFoundPassenger";
-import {IFoundDriver} from "../store/models/IFoundDriver";
 import {IDriver} from "../store/models/IDriver";
 import {IPassenger} from "../store/models/IPassenger";
 import {IAuth} from "../store/models/IAuth";
@@ -13,12 +11,12 @@ export const queryAPI = createApi({
     }),
 
     endpoints: (build) => ({
-        fetchAllFoundDrivers: build.query<IFoundDriver[], number | void>({
+        fetchAllFoundDrivers: build.query<IDriver[], number | void>({
             query: () => ({
                 url: 'foundDrivers'
             })
         }),
-        fetchAllFoundPassengers: build.query<IFoundPassenger[], number | void>({
+        fetchAllFoundPassengers: build.query<IPassenger[], number | void>({
             query: () => ({
                 url: 'foundPassengers'
             })

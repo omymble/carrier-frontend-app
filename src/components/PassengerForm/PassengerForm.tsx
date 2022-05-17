@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import { Map, YMaps, RoutePanel } from "react-yandex-maps";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import {IPassenger} from "../../redux/store/models/IPassenger";
 
 const validationSchema = yup.object({
     name: yup.string().required(),
@@ -24,7 +25,7 @@ const routePanelOptions = {
     },
 };
 
-export const PassengerForm = () => {
+export const PassengerForm = (props: {addPassengerOnSubmit: Function}) => {
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -34,6 +35,15 @@ export const PassengerForm = () => {
         validationSchema: validationSchema,
         onSubmit: (values) => {
             alert(JSON.stringify(values, null, 2));
+            console.log(values)
+            let newPassenger: IPassenger = {
+                name: values.name,
+                telephone: 'tel',
+                time: String(892834834),
+                from: {longitude: String(values.pointFromCoords[0]), latitude:  String(values.pointFromCoords[1])},
+                to: {longitude: String(values.pointToCoords[0]), latitude:  String(values.pointToCoords[1])}
+            }
+            props.addPassengerOnSubmit(newPassenger)
         },
     });
 

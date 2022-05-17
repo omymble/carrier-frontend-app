@@ -2,16 +2,16 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IPassenger} from "../models/IPassenger";
 
 export interface IPassengerTrip {
-    passengerTrip: IPassenger;
+    passenger: IPassenger;
     isLoading: boolean;
     error: string;
 }
 
 const initialState: IPassengerTrip = {
-    passengerTrip: {
+    passenger: {
         name: '',
         telephone: '',
-        startTime: 0,
+        time: 0,
         from: {longitude: 0, latitude: 0},
         to: {longitude: 0, latitude: 0},
     },
@@ -24,7 +24,7 @@ export const passengersSlice = createSlice({
     initialState,
     reducers: {
         addPassenger(state, action: PayloadAction<IPassenger>) {
-            state.passengerTrip = action.payload
+            state.passenger = action.payload
         }
     }
 })

@@ -3,8 +3,8 @@ import {IPoint} from "./IPoint";
 export interface IDriver {
     name: string;
     telephone: string;
-    emptySeats: number;
-    startTime: number;
+    seats: number;
+    time: number;
     from: IPoint;
     to: IPoint;
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import classes from './PassengersList.module.scss'
 import {PassengerInfo} from "../PassengerInfo/PassengerInfo";
-import {IFoundPassenger} from "../../redux/store/models/IFoundPassenger";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import {IPassenger} from "../../redux/store/models/IPassenger";
 
-export const PassengersList = (props: {passengers: Array<IFoundPassenger>}) => {
-    let tsxPassengersList = props.passengers.map((item:IFoundPassenger, i: number) =>
+export const PassengersList = (props: {passengers: Array<IPassenger>}) => {
+    let tsxPassengersList = props.passengers.map((item:IPassenger, i: number) =>
         <PassengerInfo foundPassengerData={item} key={i}/>
     )
     return (

@@ -5,22 +5,19 @@ import {foundPassengersSlice} from "../../redux/store/reducers/foundPassengersSl
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 
 export const FoundPassengersPage = (props: {}) => {
-    const {setFoundPassengers, addPassenger} = foundPassengersSlice.actions
-    const {foundPassengers} = useAppSelector(state => state.foundPassengersReducer)
-    const dispatch = useAppDispatch()
+    // const {setFoundPassengers, addPassenger} = foundPassengersSlice.actions
+    // const {foundPassengers} = useAppSelector(state => state.foundPassengersReducer)
+    // const dispatch = useAppDispatch()
 
-    const {data: foundPassengersServer, error, isLoading} = queryAPI.useFetchAllFoundPassengersQuery()
+    const {data: foundPassengers, error, isLoading} = queryAPI.useFetchAllFoundPassengersQuery()
 
-    if (foundPassengers.length === 0) {
-        foundPassengersServer && dispatch(setFoundPassengers(foundPassengersServer))
-    }
 
     return (
         <div className={classes.foundPassengersPage}>
             <h1>Нашлись пассажиры:</h1>
             {isLoading && <h1>Loading</h1>}
             {error && <h1>error</h1>}
-            <PassengersList passengers={foundPassengers}/>
+            {foundPassengers && <PassengersList passengers={foundPassengers}/>}
         </div>
     )
 }

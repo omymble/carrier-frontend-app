@@ -10,14 +10,20 @@ import {queryAPI} from "../../redux/services/queryService";
 export const PassengerPage = (props: {}) => {
 
     const {addPassenger} = passengersSlice.actions
-    // const {passengerTrip, isLoading, error} = useAppSelector(state => state.passengersReducer)
-    const {telephone, isAuth} = useAppSelector(state => state.authReducer)
+    // const {passenger, isLoading, error} = useAppSelector(state => state.passengersReducer)
+    // const {telephone, isAuth} = useAppSelector(state => state.authReducer)
     const dispatch = useAppDispatch()
 
     const [createPassenger, {error: createPassengerError}] = queryAPI.useCreatePassengerMutation()
 
     const addPassengerOnSubmit = async (newPassenger: IPassenger) => {
-        await createPassenger({name: newPassenger.name, telephone: newPassenger.telephone} as IPassenger)
+        await createPassenger({
+            name: newPassenger.name,
+            telephone: newPassenger.telephone,
+            time: newPassenger.time,
+            from: {...newPassenger.from},
+            to: {...newPassenger.to}
+        } as IPassenger)
             .then(response => {
                 if (response) {
                     dispatch(addPassenger(newPassenger))
@@ -25,11 +31,10 @@ export const PassengerPage = (props: {}) => {
             })
     }
 
-
     return (
         <div className={classes.passengerPage}>
             <h1>Данные о пассажире:</h1>
-            <PassengerForm />
+            <PassengerForm addPassengerOnSubmit={addPassengerOnSubmit}/>
         </div>
     )
 }

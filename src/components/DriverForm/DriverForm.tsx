@@ -12,8 +12,8 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
         let newDriver: IDriver = {
             name: String(data.get('name')),
             telephone: String(data.get('telephone')),
-            emptySeats: Number(data.get('seats')),
-            startTime: Number(data.get('time')),
+            seats: Number(data.get('seats')),
+            time: Number(data.get('time')),
             from: {longitude: Number(data.get('pointFrom')), latitude: Number(data.get('pointFrom'))},
             to: {longitude: Number(data.get('pointTo')), latitude: Number(data.get('pointTo'))},
         }
