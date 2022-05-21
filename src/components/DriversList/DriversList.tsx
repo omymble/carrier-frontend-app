@@ -3,11 +3,11 @@ import  {DriverInfo} from "../DriverInfo/DriverInfo";
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import {IDriver} from "../../redux/store/models/IDriver";
+import {IFoundDriver} from "../../redux/store/models/IFoundDriver";
 
-export const DriversList = (props: {drivers: Array<IDriver>}) => {
+export const DriversList = (props: {drivers: Array<IFoundDriver>}) => {
 
-    let tsxDriversList =  props.drivers.map((item:IDriver, i:number) =>
+    let tsxDriversList =  props.drivers.map((item:IFoundDriver, i:number) =>
         <DriverInfo foundDriverData={item} key={i}/>
     )
 

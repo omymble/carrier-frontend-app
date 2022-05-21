@@ -25,9 +25,12 @@ export const passengersSlice = createSlice({
     reducers: {
         addPassenger(state, action: PayloadAction<IPassenger>) {
             state.passenger = action.payload
+        },
+        deletePassenger(state, action: PayloadAction<string>) {
+            state.passenger = {...initialState.passenger}
         }
     }
 })
 
-export const {addPassenger} = passengersSlice.actions
+export const {addPassenger, deletePassenger} = passengersSlice.actions
 export default passengersSlice.reducer

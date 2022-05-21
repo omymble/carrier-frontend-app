@@ -4,9 +4,9 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import {IDriver} from "../../redux/store/models/IDriver";
+import {IFoundDriver} from "../../redux/store/models/IFoundDriver";
 
-export const DriverInfo = (props : {foundDriverData: IDriver; key: number}) => {
+export const DriverInfo = (props : {foundDriverData: IFoundDriver; key: number}) => {
 
     const card = (
         <React.Fragment>
@@ -24,9 +24,9 @@ export const DriverInfo = (props : {foundDriverData: IDriver; key: number}) => {
                     {props.foundDriverData.time}
                 </Typography>
                 <Typography variant="body2">
-                    {props.foundDriverData.from.longitude}
+                    {props.foundDriverData.from}
                     <br />
-                    {props.foundDriverData.to.longitude}
+                    {props.foundDriverData.to}
                 </Typography>
             </CardContent>
         </React.Fragment>

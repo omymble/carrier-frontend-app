@@ -4,9 +4,11 @@ import {ChooseRole} from "../../components/СhooseRole/ChooseRole";
 import Box from "@mui/material/Box";
 import driverPhoto from "../../assets/driver.jpeg"
 import passengerPhoto from "../../assets/passenger.jpeg"
+import {getAddress} from "../../formatFunctions";
 
 
 export const HomePage = (props: any) => {
+    // getAddress(30.334463, 59.882808).then(data => console.log(data))
     return (
         <>
             <Box sx={{flexGrow: 1}}>

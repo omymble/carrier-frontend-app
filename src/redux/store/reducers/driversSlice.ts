@@ -26,9 +26,12 @@ export const driversSlice = createSlice({
     reducers: {
         addDriver(state, action: PayloadAction<IDriver>) {
             state.driver = action.payload
+        },
+        deleteDriver(state, action: PayloadAction<string>) {
+            state.driver = {...initialState.driver}
         }
     }
 })
 
-export const {addDriver} = driversSlice.actions
+export const {addDriver, deleteDriver} = driversSlice.actions
 export default driversSlice.reducer

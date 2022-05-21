@@ -2,14 +2,45 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import MenuItem from '@mui/material/MenuItem';
 import {Button} from "@mui/material";
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import ruLocale from 'date-fns/locale/ru';
+import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 import {Map, YMaps, RoutePanel} from "react-yandex-maps";
 import {useFormik} from "formik";
 import * as yup from "yup";
 import {IDriver} from "../../redux/store/models/IDriver";
+import {RU_REG_EXP, API1} from "../../consts";
+import {toUnix} from "../../formatFunctions";
+
+const seats = [
+    {
+        value: 1,
+        label: '1',
+    },
+    {
+        value: 2,
+        label: '2',
+    },
+    {
+        value: 3,
+        label: '3',
+    },
+    {
+        value: 4,
+        label: '4',
+    },
+];
 
 const validationSchema = yup.object({
     name: yup.string().required(),
+    telephone: yup
+        .string()
+        .matches(RU_REG_EXP, 'Phone number is not valid')
+        .required(),
+    seats: yup.number().required(),
     pointFromCoords: yup.array().required(),
     pointToCoords: yup.array().required(),
 });
@@ -27,25 +58,32 @@ const routePanelOptions = {
 };
 
 export const DriverForm = (props: { addDriver: Function, telInput: String }) => {
+    const handleTimeChange = (tempTime: Date) => {
+        formik.setFieldValue("time", tempTime)
+    }
     const formik = useFormik({
         initialValues: {
             name: "",
+            telephone: props.telInput,
+            time: new Date(),
+            seats: 1,
             pointFromCoords: null,
             pointToCoords: null,
         },
         validationSchema: validationSchema,
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
             alert(JSON.stringify(values, null, 2));
             console.log(values)
-            let newPassenger: IDriver = {
+            let numTime = toUnix(values.time)
+            let newDriver: IDriver = {
                 name: values.name,
-                telephone: 'tel',
-                seats: 4,
-                time: String(892834834),
-                from: {longitude: String(values.pointFromCoords[0]), latitude: String(values.pointFromCoords[1])},
-                to: {longitude: String(values.pointToCoords[0]), latitude: String(values.pointToCoords[1])}
+                telephone: values.te,
+                seats: values.seats,
+                time: numTime,
+                from: {longitude: Number(values.pointFromCoords[0]), latitude: Number(values.pointFromCoords[1])},
+                to: {longitude: Number(values.pointToCoords[0]), latitude: Number(values.pointToCoords[1])}
             }
-            props.addPassengerOnSubmit(newPassenger)
+            await props.addDriver(newDriver)
         },
     });
 
@@ -73,6 +111,47 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
                     helperText={formik.touched.name && formik.errors.name}
                 />
 
+                <TextField
+                    id="telephone"
+                    name="telephone"
+                    label="Телефон"
+                    variant="filled"
+                    type="text"
+                    required
+                    value={formik.values.telephone}
+                    onChange={formik.handleChange}
+                    error={formik.touched.name && Boolean(formik.errors.telephone)}
+                    helperText={formik.touched.name && formik.errors.telephone}
+                />
+
+                <TextField
+                    id="seats"
+                    name="seats"
+                    select
+                    label="Свободные места"
+                    variant="filled"
+                    value={formik.values.seats}
+                    onChange={formik.handleChange}
+                    // error={formik.touched.name && Boolean(formik.errors.name)}
+                    // helperText={formik.touched.name && formik.errors.name}
+                >
+                    {seats.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
+                </TextField>
+                <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
+                    <DesktopTimePicker
+                        id="time"
+                        name="time"
+                        label="Время поездки"
+                        variant="filled"
+                        value={formik.values.time}
+                        onChange={(val)=>handleTimeChange(val)}
+                        renderInput={(params: {id: "time", name: "time", label: "Время поездки", variant: "filled"}) => <TextField {...params} />}
+                    />
+                </LocalizationProvider>
                 <Button
                     type="submit"
                     fullWidth
@@ -85,7 +164,7 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
 
             <YMaps
                 query={{
-                    apikey: "f53fb552-fa13-43bb-80f6-18ef906b6437",
+                    apikey: 'da486eeb-9bb5-4a59-b6df-fbf45c37765d',
                 }}
             >
                 <Map

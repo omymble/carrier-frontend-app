@@ -8,3 +8,9 @@ export interface IDriver {
     from: IPoint;
     to: IPoint;
 }
+
+export interface IDriversList {
+    bestTime: IDriver[],
+    bestRoute: IDriver[],
+    rest: IDriver[]
+}

@@ -3,6 +3,7 @@ import React from "react";
 import {Navbar} from "./Navbar/Navbar";
 import {authSlice} from "../../redux/store/reducers/authSlice";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
+import {Outlet} from "react-router-dom"
 import {IAuth} from "../../redux/store/models/IAuth";
 import {links} from "./links";
 
@@ -16,6 +17,9 @@ export const Header = (props: object) => {
     }
 
     return (
-        <Navbar isAuth={isAuth} telephone={telephone} onAuthClick={onAuthClick}/>
+        <>
+            <Navbar isAuth={isAuth} telephone={telephone} onAuthClick={onAuthClick}/>
+            <Outlet/>
+        </>
     )
 }

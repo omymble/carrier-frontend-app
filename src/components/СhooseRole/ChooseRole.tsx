@@ -4,14 +4,14 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import  {  useNavigate} from "react-router";
+import  {  useNavigate} from "react-router-dom";
 
 export const ChooseRole = (props: {id: string, role: string, text:string, img: string}) => {
     let navigate = useNavigate();
 
     function onCardClick(event: any) {
         event.preventDefault()
-        navigate(`${props.id}`, {replace: true})
+        navigate(`/${props.id}`, {replace: false})
     }
 
     return (

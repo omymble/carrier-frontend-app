@@ -5,16 +5,21 @@ import {passengersSlice} from "../../redux/store/reducers/passengersSlice";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import {IPassenger} from "../../redux/store/models/IPassenger";
 import {queryAPI} from "../../redux/services/queryService";
+import Button from "@mui/material/Button";
+import {useNavigate, Link} from "react-router-dom";
 
 
 export const PassengerPage = (props: {}) => {
 
     const {addPassenger} = passengersSlice.actions
     // const {passenger, isLoading, error} = useAppSelector(state => state.passengersReducer)
-    // const {telephone, isAuth} = useAppSelector(state => state.authReducer)
+    const {telephone, isAuth} = useAppSelector(state => state.authReducer)
     const dispatch = useAppDispatch()
 
     const [createPassenger, {error: createPassengerError}] = queryAPI.useCreatePassengerMutation()
+
+    const navigate = useNavigate()
+    const goBack = () => navigate(-1)
 
     const addPassengerOnSubmit = async (newPassenger: IPassenger) => {
         await createPassenger({
@@ -22,19 +27,20 @@ export const PassengerPage = (props: {}) => {
             telephone: newPassenger.telephone,
             time: newPassenger.time,
             from: {...newPassenger.from},
-            to: {...newPassenger.to}
-        } as IPassenger)
+            to: {...newPassenger.to}} as IPassenger)
             .then(response => {
                 if (response) {
                     dispatch(addPassenger(newPassenger))
                 }
             })
+        navigate('/drivers-list')
     }
 
     return (
         <div className={classes.passengerPage}>
             <h1>Данные о пассажире:</h1>
-            <PassengerForm addPassengerOnSubmit={addPassengerOnSubmit}/>
+            <PassengerForm addPassenger={addPassengerOnSubmit} telInput={telephone}/>
+            <Button onClick={goBack}>Назад</Button>
         </div>
     )
 }

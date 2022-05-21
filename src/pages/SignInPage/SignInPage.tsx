@@ -12,21 +12,19 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import {IAuth} from "../../redux/store/models/IAuth";
 import {authSlice} from "../../redux/store/reducers/authSlice";
-import  {useNavigate} from "react-router";
+import  {useNavigate, useLocation} from "react-router-dom";
 import {queryAPI} from "../../redux/services/queryService";
+import {useFormik} from "formik";
+import {RU_REG_EXP} from "../../consts";
+import * as yup from "yup";
 
-function Copyright(props: any) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+
+const validationSchema = yup.object({
+    telephone: yup
+        .string()
+        .matches(RU_REG_EXP, 'Phone number is not valid')
+        .required()
+});
 
 const theme = createTheme();
 
@@ -35,11 +33,25 @@ export const SignInPage = () => {
     let {telephone, isAuth} = useAppSelector(state => state.authReducer)
     let {signIn, signOut} = authSlice.actions
     const dispatch = useAppDispatch()
-    let navigate = useNavigate();
+    const navigate = useNavigate();
+    const location = useLocation()
 
     const [createAuth, {error: createAuthError}] = queryAPI.useCreateAuthMutation()
 
-    const authOnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const formik = useFormik({
+        initialValues: {
+            telephone: ""
+        },
+        validationSchema: validationSchema,
+        onSubmit: async (values) => {
+            console.log('sign-in', values)
+            await createAuth({telephone: values.telephone, isAuth: true} as IAuth)
+            dispatch(signIn(values.telephone))
+            navigate('/home', {replace: true})
+        },
+    });
+
+/*    const authOnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         let telephone = data.get('telephone')
@@ -53,12 +65,12 @@ export const SignInPage = () => {
             navigate('/home', {replace: false})
             console.log('after all')
         }
-    };
+    };*/
 
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
-                <CssBaseline />
+                {/*<CssBaseline />*/}
                 <Box
                     sx={{
                         marginTop: 8,
@@ -73,7 +85,12 @@ export const SignInPage = () => {
                     <Typography component="h1" variant="h5">
                         Войдите по номеру телефона
                     </Typography>
-                    <Box component="form" onSubmit={authOnSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form"
+                         autoComplete="off"
+                         onSubmit={formik.handleSubmit}
+                         noValidate
+                         sx={{ mt: 1 }}
+                    >
                         <TextField
                             margin="normal"
                             required
@@ -83,6 +100,10 @@ export const SignInPage = () => {
                             name="telephone"
                             autoComplete="telephone"
                             autoFocus
+                            value={formik.values.telephone}
+                            onChange={formik.handleChange}
+                            error={formik.touched.telephone && Boolean(formik.errors.telephone)}
+                            helperText={formik.touched.telephone && formik.errors.telephone}
                         />
                         <Button
                             type="submit"
@@ -94,7 +115,6 @@ export const SignInPage = () => {
                         </Button>
                     </Box>
                 </Box>
-                <Copyright sx={{ mt: 8, mb: 4 }} />
             </Container>
         </ThemeProvider>
     );

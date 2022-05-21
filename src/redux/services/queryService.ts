@@ -1,6 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {IDriver} from "../store/models/IDriver";
 import {IPassenger} from "../store/models/IPassenger";
+import {IDriversList} from "../store/models/IDriver"
 import {IAuth} from "../store/models/IAuth";
 
 
@@ -9,9 +10,10 @@ export const queryAPI = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:80/'
     }),
+    tagTypes: ['tripDriver'],
 
     endpoints: (build) => ({
-        fetchAllFoundDrivers: build.query<IDriver[], number | void>({
+        fetchAllFoundDrivers: build.query<IDriversList, number | void>({
             query: () => ({
                 url: 'foundDrivers'
             })
@@ -34,7 +36,8 @@ export const queryAPI = createApi({
                 url: 'driver',
                 method: 'POST',
                 body: driver
-            })
+            }),
+            invalidatesTags: ['tripDriver']
         }),
 
         createPassenger: build.mutation<IPassenger, IPassenger>({
@@ -45,7 +48,23 @@ export const queryAPI = createApi({
             })
         }),
 
+        updateDriverTrip: build.mutation<IDriver, IDriver>({
+            query: (driver) => ({
+                url: `update-trip/${driver.telephone}`,
+                method: 'PUT',
+                body: driver
+            }),
+            invalidatesTags: ['tripDriver']
+        }),
 
+        deleteDriverTrip: build.mutation<IDriver, string>({
+            query: (tel) => ({
+                url: `delete-trip/${tel}`,
+                method: 'DELETE',
+                body: tel
+            }),
+            invalidatesTags: ['tripDriver']
+        }),
 
     })
 })

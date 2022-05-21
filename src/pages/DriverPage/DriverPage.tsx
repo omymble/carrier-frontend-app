@@ -22,13 +22,13 @@ export const DriverPage = (props: {}) => {
             seats: newDriver.seats,
             time: newDriver.time,
             from: {...newDriver.from},
-            to: {...newDriver.to}
-        } as IDriver)
+            to: {...newDriver.to}} as IDriver)
             .then(response => {
                 if (response) {
                     dispatch(addDriver(newDriver))
                 }
             })
+
     }
 
     return (

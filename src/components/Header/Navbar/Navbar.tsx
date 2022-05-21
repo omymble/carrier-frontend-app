@@ -1,6 +1,5 @@
 import React from "react";
-import {useState, useEffect} from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import classes from './Navbar.module.scss'
 
 import AppBar from '@mui/material/AppBar';
@@ -14,11 +13,13 @@ import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks"
 import {authSlice} from "../../../redux/store/reducers/authSlice";
+import {replace} from "formik";
 
 
 export const Navbar = (props: { isAuth: boolean, telephone: string, onAuthClick: Function }) => {
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+    const navigate = useNavigate()
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -30,6 +31,7 @@ export const Navbar = (props: { isAuth: boolean, telephone: string, onAuthClick:
 
     const onAuthClick = () => {
         props.onAuthClick(props.telephone)
+        navigate('/', {replace: true})
     };
 
     return (
@@ -40,12 +42,12 @@ export const Navbar = (props: { isAuth: boolean, telephone: string, onAuthClick:
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+                        sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}
                     >
-                        <NavLink to={'/home'} >CARRIER APP</NavLink>
+                        <NavLink to={'/home'}>CARRIER APP</NavLink>
                     </Typography>
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                    <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -54,7 +56,7 @@ export const Navbar = (props: { isAuth: boolean, telephone: string, onAuthClick:
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >
-                            <MenuIcon />
+                            <MenuIcon/>
                         </IconButton>
 
                         <Menu
@@ -72,32 +74,48 @@ export const Navbar = (props: { isAuth: boolean, telephone: string, onAuthClick:
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                             sx={{
-                                display: { xs: 'block', md: 'none' },
+                                display: {xs: 'block', md: 'none'},
                             }}
-                        >
+                        >{props.isAuth && <MenuItem onClick={handleCloseNavMenu}>
+                            <Typography textAlign="center">
+                                <NavLink to={'/'}
+                                         onClick={onAuthClick}>выйти</NavLink>
+                            </Typography>
+                        </MenuItem>}
+{/*                            {
+
+
+
+                                props.isAuth ?
+                                <MenuItem onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">
+                                        <NavLink to={'/'}
+                                                 onClick={onAuthClick}>{(props.isAuth) ? "выйти" : "войти"}</NavLink>
+                                    </Typography>
+                                </MenuItem> : <></>
+                            }*/}
+
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Typography textAlign="center">
-                                    <NavLink className={classes.navList__item} to={'/sign-in'} onClick={onAuthClick}>{(props.isAuth) ? "выйти" : "войти"}</NavLink>
+                                    <NavLink to={'/passenger'}>пассажир</NavLink>
                                 </Typography>
                             </MenuItem>
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Typography textAlign="center">
-                                    <NavLink className={classes.navList__item} to={'/passenger'} >пассажир</NavLink>
+                                    <NavLink className={({isActive}) => isActive ? 'active' : 'classes.navList__item'}
+                                             to={'/driver'}>водитель</NavLink>
                                 </Typography>
                             </MenuItem>
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Typography textAlign="center">
-                                    <NavLink className={classes.navList__item} to={'/driver'} >водитель</NavLink>
+                                    <NavLink className={classes.navList__item} to={'/drivers-list'}>водители</NavLink>
                                 </Typography>
                             </MenuItem>
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Typography textAlign="center">
-                                    <NavLink className={classes.navList__item} to={'/drivers-list'} >водители</NavLink>
-                                </Typography>
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <NavLink className={classes.navList__item} to={'/passengers-list'} >пассажиры</NavLink>
+                                    <NavLink
+                                        className={({isActive}) => isActive ? 'classes.active' : 'classes.navList__item'}
+                                        to={'/passengers-list'}>пассажиры</NavLink>
                                 </Typography>
                             </MenuItem>
                             {/*{props.links.map((link:any, index:number) => (
@@ -115,35 +133,38 @@ export const Navbar = (props: { isAuth: boolean, telephone: string, onAuthClick:
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+                        sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}
                     >
                         CARRIER APP
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
 
+                        {props.isAuth ?
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">
+                                    <NavLink to={'/'}
+                                             onClick={onAuthClick}>{(props.isAuth) ? "выйти" : "войти"}</NavLink>
+                                </Typography>
+                            </MenuItem> : <></>
+                        }
                         <MenuItem onClick={handleCloseNavMenu}>
                             <Typography textAlign="center">
-                                <NavLink className={classes.navList__item} to={'/sign-in'} onClick={onAuthClick} >{(props.isAuth) ? "выйти" : "войти"}</NavLink>
+                                <NavLink className={classes.navList__item} to={'/passenger'}>пассажир</NavLink>
                             </Typography>
                         </MenuItem>
                         <MenuItem onClick={handleCloseNavMenu}>
                             <Typography textAlign="center">
-                                <NavLink className={classes.navList__item} to={'/passenger'} >пассажир</NavLink>
+                                <NavLink className={classes.navList__item} to={'/driver'}>водитель</NavLink>
                             </Typography>
                         </MenuItem>
                         <MenuItem onClick={handleCloseNavMenu}>
                             <Typography textAlign="center">
-                                <NavLink className={classes.navList__item} to={'/driver'} >водитель</NavLink>
+                                <NavLink className={classes.navList__item} to={'/drivers-list'}>водители</NavLink>
                             </Typography>
                         </MenuItem>
                         <MenuItem onClick={handleCloseNavMenu}>
                             <Typography textAlign="center">
-                                <NavLink className={classes.navList__item} to={'/drivers-list'} >водители</NavLink>
-                            </Typography>
-                        </MenuItem>
-                        <MenuItem onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">
-                                <NavLink className={classes.navList__item} to={'/passengers-list'} >пассажиры</NavLink>
+                                <NavLink className={classes.navList__item} to={'/passengers-list'}>пассажиры</NavLink>
                             </Typography>
                         </MenuItem>
 

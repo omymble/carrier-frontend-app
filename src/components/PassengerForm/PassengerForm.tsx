@@ -5,19 +5,22 @@ import TextField from "@mui/material/TextField";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import ruLocale from 'date-fns/locale/ru';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 import {Button, Stack} from "@mui/material";
 import {Map, YMaps, RoutePanel} from "react-yandex-maps";
 import {useFormik} from "formik";
 import * as yup from "yup";
 import {IPassenger} from "../../redux/store/models/IPassenger";
-import {useState} from "react";
+import {toUnix} from "../../formatFunctions";
+import {RU_REG_EXP, API_1} from "../../consts";
+
 
 const validationSchema = yup.object({
     name: yup.string().required(),
-    telephone: yup.string().required(),
+    telephone: yup
+        .string()
+        .matches(RU_REG_EXP, 'Phone number is not valid')
+        .required(),
     time: yup.date().required(),
     pointFromCoords: yup.array().required(),
     pointToCoords: yup.array().required(),
@@ -35,38 +38,32 @@ const routePanelOptions = {
     },
 };
 
-export const PassengerForm = (props: { addPassengerOnSubmit: Function }) => {
-    const [inputTime, setInputTime] = useState(new Date())
-    const handleTimeChange = (inputTime: Date) => {
-        setInputTime(inputTime)
-        console.log(inputTime)
-        formik.setFieldValue("time", inputTime)
+export const PassengerForm = (props: { addPassenger: Function, telInput: String }) => {
+
+    const handleTimeChange = (tempTime: Date) => {
+        formik.setFieldValue("time", tempTime)
     }
 
     const formik = useFormik({
         initialValues: {
             name: "",
-            telephone: "",
-            time: inputTime,
+            telephone: props.telInput,
+            time: new Date(),
             pointFromCoords: null,
             pointToCoords: null,
         },
         validationSchema: validationSchema,
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
             alert(JSON.stringify(values, null, 2));
-            console.log(values)
-            let numTime = Math.floor(values.time.getTime() / 1000).toFixed(0)
-            console.log('unix', numTime)
-            let strTime = new Date(numTime * 1000)
-            console.log('str', strTime)
+            let numTime = toUnix(values.time)
             let newPassenger: IPassenger = {
                 name: values.name,
                 telephone: values.telephone,
-                time: values.time,
-                from: {longitude: String(values.pointFromCoords[0]), latitude: String(values.pointFromCoords[1])},
-                to: {longitude: String(values.pointToCoords[0]), latitude: String(values.pointToCoords[1])}
+                time: numTime,
+                from: {longitude: Number(values.pointFromCoords[0]), latitude: Number(values.pointFromCoords[1])},
+                to: {longitude: Number(values.pointToCoords[0]), latitude: Number(values.pointToCoords[1])}
             }
-            props.addPassengerOnSubmit(newPassenger)
+            await props.addPassenger(newPassenger)
         }
     });
 
@@ -108,40 +105,17 @@ export const PassengerForm = (props: { addPassengerOnSubmit: Function }) => {
                     error={formik.touched.name && Boolean(formik.errors.telephone)}
                     helperText={formik.touched.name && formik.errors.telephone}
                 />
+
                 <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
-                    <TimePicker
+                    <DesktopTimePicker
                         id="time"
                         name="time"
                         label="Время поездки"
                         variant="filled"
                         value={formik.values.time}
-                        // onChange={formik.handleChange}
-                        onChange={handleTimeChange}
+                        onChange={(val)=>handleTimeChange(val)}
                         renderInput={(params: {id: "time", name: "time", label: "Время поездки", variant: "filled"}) => <TextField {...params} />}
                     />
-                    {/*<Stack spacing={3}>
-                    <MobileTimePicker
-                        label="For mobile"
-                        value={value}
-                        onChange={(newValue) => {
-                            setValue(newValue);
-                        }}
-                        renderInput={(params) => <TextField {...params} />}
-                    />
-                    <DesktopTimePicker
-                        label="For desktop"
-                        value={value}
-                        onChange={(newValue) => {
-                            setValue(newValue);
-                        }}
-                        renderInput={(params) => <TextField {...params} />}
-                    />
-                    <TimePicker
-                        value={value}
-                        onChange={setValue}
-                        renderInput={(params) => <TextField {...params} />}
-                    />
-                </Stack>*/}
                 </LocalizationProvider>
                 <Button
                     type="submit"
@@ -156,7 +130,7 @@ export const PassengerForm = (props: { addPassengerOnSubmit: Function }) => {
 
             <YMaps
                 query={{
-                    apikey: "f53fb552-fa13-43bb-80f6-18ef906b6437",
+                    apikey: API_1,
                 }}
             >
                 <Map
