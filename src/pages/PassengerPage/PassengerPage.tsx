@@ -8,12 +8,12 @@ import {queryAPI} from "../../redux/services/queryService";
 import Button from "@mui/material/Button";
 import {useNavigate, Link} from "react-router-dom";
 import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 
 
 export const PassengerPage = (props: {}) => {
 
     const {addPassenger} = passengersSlice.actions
-    // const {passenger, isLoading, error} = useAppSelector(state => state.passengersReducer)
     const {telephone, isAuth} = useAppSelector(state => state.authReducer)
     const dispatch = useAppDispatch()
 
@@ -39,7 +39,14 @@ export const PassengerPage = (props: {}) => {
 
     return (
         <Container className={classes.passengerPage}>
-            <h2>Заполните данные о желаемой поездке</h2>
+            <Typography variant={'h4'}
+                        gutterBottom={true}
+                        sx={{
+
+                        }}
+            >
+                Заполните данные о желаемой поездке
+            </Typography>
             <PassengerForm addPassenger={addPassengerOnSubmit} telInput={telephone}/>
             <Button onClick={goBack}>Назад</Button>
         </Container>

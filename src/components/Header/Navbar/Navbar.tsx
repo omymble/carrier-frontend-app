@@ -3,6 +3,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import classes from './Navbar.module.scss'
 
 import AppBar from '@mui/material/AppBar';
+import Fab from '@mui/material/Fab';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -11,178 +12,87 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
-import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks"
-import {authSlice} from "../../../redux/store/reducers/authSlice";
-import {replace} from "formik";
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import {AccountCircle} from "@mui/icons-material";
 
 
 export const Navbar = (props: { isAuth: boolean, telephone: string, onAuthClick: Function }) => {
-
-    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const navigate = useNavigate()
-
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(event.currentTarget);
-    };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
 
     const onAuthClick = () => {
         props.onAuthClick(props.telephone)
         navigate('/', {replace: true})
     };
 
-    return (
-        <AppBar position="static">
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}
-                    >
-                        <NavLink to={'/home'}>CARRIER APP</NavLink>
-                    </Typography>
+    const onLogoClick = () => {
+        navigate('/home')
+    }
 
-                    <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    return (
+        <AppBar position="static"
+                sx={{
+                    marginBottom: {xs: '30px', sm: '50px'},
+                    height: 80,
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}
+        >
+            <Toolbar>
+                <IconButton
+                    onClick={onLogoClick}
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{mr: 2}}
+                >
+                    <DirectionsCarIcon sx={{fontSize: 55}}/>
+                </IconButton>
+                <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
+                    CARRIER APP
+                </Typography>
+                {props.isAuth && (
+                    <div>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
+                            onClick={handleMenu}
                             color="inherit"
                         >
-                            <MenuIcon/>
+                            <AccountCircle sx={{fontSize: 55}}/>
                         </IconButton>
-
                         <Menu
                             id="menu-appbar"
-                            anchorEl={anchorElNav}
+                            anchorEl={anchorEl}
                             anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
+                                vertical: 'top',
+                                horizontal: 'right',
                             }}
                             keepMounted
                             transformOrigin={{
                                 vertical: 'top',
-                                horizontal: 'left',
+                                horizontal: 'right',
                             }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: {xs: 'block', md: 'none'},
-                            }}
-                        >{props.isAuth && <MenuItem onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">
-                                <NavLink to={'/'}
-                                         onClick={onAuthClick}>выйти</NavLink>
-                            </Typography>
-                        </MenuItem>}
-
-{/*                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <NavLink to={'/passenger'}>пассажир</NavLink>
-                                </Typography>
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <NavLink className={({isActive}) => isActive ? 'active' : 'classes.navList__item'}
-                                             to={'/driver'}>водитель</NavLink>
-                                </Typography>
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <NavLink className={classes.navList__item} to={'/drivers-list'}>водители</NavLink>
-                                </Typography>
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <NavLink
-                                        className={({isActive}) => isActive ? 'classes.active' : 'classes.navList__item'}
-                                        to={'/passengers-list'}>пассажиры</NavLink>
-                                </Typography>
-                            </MenuItem>*/}
-                            {/*{props.links.map((link:any, index:number) => (
-                                    <MenuItem key={index} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">
-                                                <NavLink className={classes.navList__item} to={link.url} >{link.title}</NavLink>
-                                        </Typography>
-                                    </MenuItem>
-                                ))}*/}
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                        >
+                            <MenuItem onClick={onAuthClick}>выход</MenuItem>
                         </Menu>
-                    </Box>
-
-
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}
-                    >
-                        CARRIER APP
-                    </Typography>
-                    <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
-
-                        {props.isAuth ?
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <NavLink to={'/'}
-                                             onClick={onAuthClick}>{(props.isAuth) ? "выйти" : "войти"}</NavLink>
-                                </Typography>
-                            </MenuItem> : <></>
-                        }
-{/*                        <MenuItem onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">
-                                <NavLink className={classes.navList__item} to={'/passenger'}>пассажир</NavLink>
-                            </Typography>
-                        </MenuItem>
-                        <MenuItem onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">
-                                <NavLink className={classes.navList__item} to={'/driver'}>водитель</NavLink>
-                            </Typography>
-                        </MenuItem>
-                        <MenuItem onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">
-                                <NavLink className={classes.navList__item} to={'/drivers-list'}>водители</NavLink>
-                            </Typography>
-                        </MenuItem>
-                        <MenuItem onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">
-                                <NavLink className={classes.navList__item} to={'/passengers-list'}>пассажиры</NavLink>
-                            </Typography>
-                        </MenuItem>*/}
-
-                        {/*{props.links.map((link:any, index:number) => (
-                                <Button
-                                    key={index}
-                                    onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'white', display: 'block' }}
-                                >
-
-                                        <MenuItem key={index} onClick={handleCloseNavMenu}>
-                                            <Typography textAlign="center">
-
-                                                    <NavLink className={classes.navList__item} to={link.url}>
-                                                            {link.title}
-                                                    </NavLink>
-
-                                            </Typography>
-                                        </MenuItem>
-
-
-                                </Button>
-                            ))}*/}
-                    </Box>
-
-                </Toolbar>
-            </Container>
+                    </div>
+                )}
+            </Toolbar>
         </AppBar>
     );
-    // };
-    // export default ResponsiveAppBar;
-
 }

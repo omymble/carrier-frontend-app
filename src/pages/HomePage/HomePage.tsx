@@ -8,11 +8,15 @@ import {getAddress} from "../../formatFunctions";
 
 
 export const HomePage = (props: any) => {
-    // getAddress(30.334463, 59.882808).then(data => console.log(data))
     return (
         <>
-            <Box sx={{flexGrow: 1, margin: "50px auto"}} >
-                <Grid container justifyContent={"center"} spacing={{xs: 2, md: 3}} >
+            <Box sx={{flexGrow: 1, margin: {xs: "50px auto", md: "100px auto"}}}>
+                <Grid container
+                      direction={{xs: 'column', md: 'row'}}
+                      justifyContent={"center"}
+                      alignContent={'center'}
+                      spacing={{xs: 5, md: 10}}
+                >
                     <Grid item>
                         <ChooseRole id={"driver"}
                                     role={"водитель"}
@@ -23,7 +27,7 @@ export const HomePage = (props: any) => {
                     <Grid item>
                         <ChooseRole id={"passenger"}
                                     role={"пассажир"}
-                                    text={"ищу водителя в дорогу" }
+                                    text={"ищу водителя в дорогу"}
                                     img={passengerPhoto}
                         />
                     </Grid>

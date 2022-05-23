@@ -8,21 +8,20 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import {IAuth} from "../../redux/store/models/IAuth";
 import {authSlice} from "../../redux/store/reducers/authSlice";
-import  {useNavigate, useLocation} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 import {queryAPI} from "../../redux/services/queryService";
 import {useFormik} from "formik";
 import {RU_REG_EXP} from "../../consts";
 import * as yup from "yup";
 
-
 const validationSchema = yup.object({
     telephone: yup
         .string()
-        .matches(RU_REG_EXP, 'Phone number is not valid')
+        .matches(RU_REG_EXP, 'Неверный формат ввода ')
         .required()
 });
 
@@ -44,43 +43,27 @@ export const SignInPage = () => {
         },
         validationSchema: validationSchema,
         onSubmit: async (values) => {
-            console.log('sign-in', values)
             await createAuth({telephone: values.telephone, isAuth: true} as IAuth)
             dispatch(signIn(values.telephone))
             navigate('/home', {replace: true})
         },
     });
 
-/*    const authOnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        let telephone = data.get('telephone')
-        console.log({telephone: telephone});
-
-        if (telephone !== "") {
-            console.log('before await')
-            await createAuth({telephone, isAuth: true} as IAuth)
-            console.log('before dispatch after await')
-            dispatch(signIn(String(telephone)))
-            navigate('/home', {replace: false})
-            console.log('after all')
-        }
-    };*/
-
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 {/*<CssBaseline />*/}
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
+                <Box sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}>
+                    <Avatar sx={{
+                        m: 1,
+                        bgcolor: 'secondary.main'
+                    }}>
+                        <LockOutlinedIcon/>
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Войдите по номеру телефона
@@ -89,7 +72,7 @@ export const SignInPage = () => {
                          autoComplete="off"
                          onSubmit={formik.handleSubmit}
                          noValidate
-                         sx={{ mt: 1 }}
+                         sx={{mt: 1}}
                     >
                         <TextField
                             margin="normal"
@@ -109,7 +92,7 @@ export const SignInPage = () => {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{mt: 3, mb: 2}}
                         >
                             войти
                         </Button>

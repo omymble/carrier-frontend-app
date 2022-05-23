@@ -15,6 +15,9 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import RouteIcon from '@mui/icons-material/Route';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
 export const FoundDriversPage = (props: {}) => {
     const {addPassenger, deletePassenger} = passengersSlice.actions
@@ -64,9 +67,9 @@ export const FoundDriversPage = (props: {}) => {
     return (
         <div className={classes.foundDriversPage}>
 
-            <h1>Для вас нашлись водители</h1>
-            {isLoading && <h1>Loading</h1>}
-            {error && <h1>ошибка на сервере</h1>}
+            <Typography variant={'h4'} gutterBottom={true}>Для вас нашлись водители</Typography>
+            {isLoading && <Typography variant={'h4'} gutterBottom={true}>загрузка</Typography>}
+            {error && <Typography variant={'h4'} gutterBottom={true}>ошибка на сервере</Typography>}
             {driversBestTime &&
                 <>
 
@@ -82,7 +85,9 @@ export const FoundDriversPage = (props: {}) => {
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
                         id="panel1a-header"
+                        sx={{display: 'flex'}}
                     >
+                        <AccessTimeIcon sx={{mr: '20px'}}/>
                         <Typography>Лучшее совпадение времени:</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -95,7 +100,9 @@ export const FoundDriversPage = (props: {}) => {
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel2a-content"
                         id="panel2a-header"
+                        sx={{display: 'flex'}}
                     >
+                        <RouteIcon sx={{mr: '20px'}}/>
                         <Typography>Лучшее совпадение маршрута:</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -108,7 +115,9 @@ export const FoundDriversPage = (props: {}) => {
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel3a-content"
                         id="panel3a-header"
+                        sx={{display: 'flex'}}
                     >
+                        <GroupAddIcon sx={{mr: '20px'}}/>
                         <Typography>Еще водители:</Typography>
                     </AccordionSummary>
                     <AccordionDetails>

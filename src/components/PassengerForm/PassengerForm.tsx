@@ -2,17 +2,17 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import ruLocale from 'date-fns/locale/ru';
-import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
-import {Button, Stack} from "@mui/material";
-import {Map, YMaps, RoutePanel} from "react-yandex-maps";
+import {DesktopTimePicker} from '@mui/x-date-pickers/DesktopTimePicker';
+import {Button} from "@mui/material";
+import {Map, RoutePanel, YMaps} from "react-yandex-maps";
 import {useFormik} from "formik";
 import * as yup from "yup";
 import {IPassenger} from "../../redux/store/models/IPassenger";
 import {toUnix} from "../../formatFunctions";
-import {RU_REG_EXP, API_1} from "../../consts";
+import {API_1, RU_REG_EXP} from "../../consts";
 
 
 const validationSchema = yup.object({
@@ -84,7 +84,7 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
                     id="name"
                     name="name"
                     label="Имя"
-                    variant="filled"
+                    variant="outlined"
                     type="text"
                     required
                     value={formik.values.name}
@@ -97,7 +97,7 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
                     id="telephone"
                     name="telephone"
                     label="Телефон"
-                    variant="filled"
+                    variant="outlined"
                     type="text"
                     required
                     value={formik.values.telephone}
@@ -111,39 +111,32 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
                         id="time"
                         name="time"
                         label="Время поездки"
-                        variant="filled"
                         value={formik.values.time}
                         onChange={(val)=>handleTimeChange(val)}
-                        renderInput={(params: {id: "time", name: "time", label: "Время поездки", variant: "filled"}) => <TextField {...params} />}
+                        renderInput={(params: {id: "time", name: "time", variant: "filled"}) => <TextField {...params} />}
                     />
                 </LocalizationProvider>
                 <br/>
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{mt: 3, mb: 2}}
-                >
-                    Подтвердить
-                </Button>
+
             </Box>
 
 
-            <Box display={"flex"} justifyContent={"center"} margin={"30px auto"}>
             <YMaps
                 query={{
                     apikey: API_1,
                 }}
             >
+            <Box display={"flex"} justifyContent={"center"} margin={"30px auto 20px"}>
                 <Map
                     modules={["geocode", "suggest"]}
                     defaultState={{
-                        center: [55.751574, 37.573856],
+                        center: [59.9311, 30.3609],
                         zoom: 9,
                         controls: [],
                     }}
                     width={"100%"}
                     // height={"40%"}
+                    height={'400px'}
                 >
                     <RoutePanel
                         instanceRef={async (r) => {
@@ -164,9 +157,16 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
                         options={routePanelOptions}
                     />
                 </Map>
-            </YMaps>
             </Box>
-
+            </YMaps>
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{mt: 3, mb: 2}}
+            >
+                Подтвердить
+            </Button>
         </>
     );
 };
