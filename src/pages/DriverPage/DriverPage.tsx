@@ -33,7 +33,7 @@ export const DriverPage = (props: {}) => {
 
     return (
         <div className={classes.driverForm}>
-            <h1>Данные о водителе:</h1>
+            <h2>Заполните данные о предстоящей поездке</h2>
             <DriverForm addDriver={addDriverOnSubmit} telInput={telephone}/>
         </div>
     )

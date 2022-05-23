@@ -15,7 +15,7 @@ export const ChooseRole = (props: {id: string, role: string, text:string, img: s
     }
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, height: 420 }}>
             <CardActionArea onClick={onCardClick}>
                 <CardMedia
                     component="img"

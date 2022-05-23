@@ -7,6 +7,7 @@ import {IPassenger} from "../../redux/store/models/IPassenger";
 import {queryAPI} from "../../redux/services/queryService";
 import Button from "@mui/material/Button";
 import {useNavigate, Link} from "react-router-dom";
+import Container from "@mui/material/Container";
 
 
 export const PassengerPage = (props: {}) => {
@@ -37,10 +38,10 @@ export const PassengerPage = (props: {}) => {
     }
 
     return (
-        <div className={classes.passengerPage}>
-            <h1>Данные о пассажире:</h1>
+        <Container className={classes.passengerPage}>
+            <h2>Заполните данные о желаемой поездке</h2>
             <PassengerForm addPassenger={addPassengerOnSubmit} telInput={telephone}/>
             <Button onClick={goBack}>Назад</Button>
-        </div>
+        </Container>
     )
 }

@@ -82,20 +82,8 @@ export const Navbar = (props: { isAuth: boolean, telephone: string, onAuthClick:
                                          onClick={onAuthClick}>выйти</NavLink>
                             </Typography>
                         </MenuItem>}
-{/*                            {
 
-
-
-                                props.isAuth ?
-                                <MenuItem onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">
-                                        <NavLink to={'/'}
-                                                 onClick={onAuthClick}>{(props.isAuth) ? "выйти" : "войти"}</NavLink>
-                                    </Typography>
-                                </MenuItem> : <></>
-                            }*/}
-
-                            <MenuItem onClick={handleCloseNavMenu}>
+{/*                            <MenuItem onClick={handleCloseNavMenu}>
                                 <Typography textAlign="center">
                                     <NavLink to={'/passenger'}>пассажир</NavLink>
                                 </Typography>
@@ -117,7 +105,7 @@ export const Navbar = (props: { isAuth: boolean, telephone: string, onAuthClick:
                                         className={({isActive}) => isActive ? 'classes.active' : 'classes.navList__item'}
                                         to={'/passengers-list'}>пассажиры</NavLink>
                                 </Typography>
-                            </MenuItem>
+                            </MenuItem>*/}
                             {/*{props.links.map((link:any, index:number) => (
                                     <MenuItem key={index} onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center">
@@ -147,7 +135,7 @@ export const Navbar = (props: { isAuth: boolean, telephone: string, onAuthClick:
                                 </Typography>
                             </MenuItem> : <></>
                         }
-                        <MenuItem onClick={handleCloseNavMenu}>
+{/*                        <MenuItem onClick={handleCloseNavMenu}>
                             <Typography textAlign="center">
                                 <NavLink className={classes.navList__item} to={'/passenger'}>пассажир</NavLink>
                             </Typography>
@@ -166,7 +154,7 @@ export const Navbar = (props: { isAuth: boolean, telephone: string, onAuthClick:
                             <Typography textAlign="center">
                                 <NavLink className={classes.navList__item} to={'/passengers-list'}>пассажиры</NavLink>
                             </Typography>
-                        </MenuItem>
+                        </MenuItem>*/}
 
                         {/*{props.links.map((link:any, index:number) => (
                                 <Button

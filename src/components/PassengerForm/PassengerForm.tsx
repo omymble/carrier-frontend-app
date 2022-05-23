@@ -105,7 +105,7 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
                     error={formik.touched.name && Boolean(formik.errors.telephone)}
                     helperText={formik.touched.name && formik.errors.telephone}
                 />
-
+                <br/>
                 <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
                     <DesktopTimePicker
                         id="time"
@@ -117,6 +117,7 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
                         renderInput={(params: {id: "time", name: "time", label: "Время поездки", variant: "filled"}) => <TextField {...params} />}
                     />
                 </LocalizationProvider>
+                <br/>
                 <Button
                     type="submit"
                     fullWidth
@@ -128,20 +129,21 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
             </Box>
 
 
+            <Box display={"flex"} justifyContent={"center"} margin={"30px auto"}>
             <YMaps
                 query={{
                     apikey: API_1,
                 }}
             >
                 <Map
-                    width={"100%"}
-                    height={500}
                     modules={["geocode", "suggest"]}
                     defaultState={{
                         center: [55.751574, 37.573856],
                         zoom: 9,
                         controls: [],
                     }}
+                    width={"100%"}
+                    height={"40%"}
                 >
                     <RoutePanel
                         instanceRef={async (r) => {
@@ -163,6 +165,7 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
                     />
                 </Map>
             </YMaps>
+            </Box>
 
         </>
     );

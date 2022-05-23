@@ -123,7 +123,7 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
                     error={formik.touched.name && Boolean(formik.errors.telephone)}
                     helperText={formik.touched.name && formik.errors.telephone}
                 />
-
+                <br/>
                 <TextField
                     id="seats"
                     name="seats"
@@ -152,6 +152,7 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
                         renderInput={(params: {id: "time", name: "time", label: "Время поездки", variant: "filled"}) => <TextField {...params} />}
                     />
                 </LocalizationProvider>
+                <br/>
                 <Button
                     type="submit"
                     fullWidth
