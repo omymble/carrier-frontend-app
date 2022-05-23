@@ -28,16 +28,28 @@ export const FoundDriversPage = (props: {}) => {
     const [driversBestRoute, setDriversBestRoute] = useState<IFoundDriver[] | undefined>([])
     const [moreDrivers, setMoreDrivers] = useState<IFoundDriver[] | undefined>([])
 
-/*    useEffect(() => {
+    useEffect(() => {
     if (foundDrivers) {
-        const getData = async () => {
+        const getBestTime = async () => {
             return Promise.all(foundDrivers.driversBestTime.map(driver => parseDriver(driver)))
         }
-        getData().then(data => {
+        getBestTime().then(data => {
             setDriversBestTime(data)
         })
+        const getBestRoute = async () => {
+            return Promise.all(foundDrivers.driversBestRoute.map(driver => parseDriver(driver)))
+        }
+        getBestRoute().then(data => {
+            setDriversBestRoute(data)
+        })
+        const getMore = async () => {
+            return Promise.all(foundDrivers.moreDrivers.map(driver => parseDriver(driver)))
+        }
+        getMore().then(data => {
+            setMoreDrivers(data)
+        })
     }
-    }, [foundDrivers])*/
+    }, [foundDrivers])
 
     const deleteTrip = async(id: string) => {
         await deletePassengerTrip(id)
@@ -65,7 +77,7 @@ export const FoundDriversPage = (props: {}) => {
 
 
             <div>
-                <Accordion>
+                {driversBestTime && <Accordion>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
@@ -74,11 +86,11 @@ export const FoundDriversPage = (props: {}) => {
                         <Typography>Лучшее совпадение времени:</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <DriversList drivers={driversUI.driversBestTime}/>
-                        {/*<DriversList drivers={foundDriversBestTime}/>*/}
+                        {/*<DriversList drivers={driversUI.driversBestTime}/>*/}
+                        <DriversList drivers={driversBestTime}/>
                     </AccordionDetails>
-                </Accordion>
-                <Accordion>
+                </Accordion>}
+                {driversBestRoute && <Accordion>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel2a-content"
@@ -87,10 +99,11 @@ export const FoundDriversPage = (props: {}) => {
                         <Typography>Лучшее совпадение маршрута:</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <DriversList drivers={driversUI.driversBestRoute}/>
+                        {/*<DriversList drivers={driversUI.driversBestRoute}/>*/}
+                        <DriversList drivers={driversBestRoute}/>
                     </AccordionDetails>
-                </Accordion>
-                <Accordion>
+                </Accordion>}
+                {moreDrivers && <Accordion>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel3a-content"
@@ -99,9 +112,10 @@ export const FoundDriversPage = (props: {}) => {
                         <Typography>Еще водители:</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <DriversList drivers={driversUI.moreDrivers}/>
+                        {/*<DriversList drivers={driversUI.moreDrivers}/>*/}
+                        <DriversList drivers={moreDrivers}/>
                     </AccordionDetails>
-                </Accordion>
+                </Accordion>}
             </div>
 
             <Button onClick={() => deleteTrip(passenger.telephone)}

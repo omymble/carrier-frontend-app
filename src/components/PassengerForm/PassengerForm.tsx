@@ -143,7 +143,7 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
                         controls: [],
                     }}
                     width={"100%"}
-                    height={"40%"}
+                    // height={"40%"}
                 >
                     <RoutePanel
                         instanceRef={async (r) => {

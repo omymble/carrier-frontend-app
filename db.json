@@ -210,7 +210,7 @@
     "morePassengers": []
   },
   "auth-user": {
-    "telephone": "89099999999",
+    "telephone": "89099876789",
     "isAuth": true
   },
   "driver": {
@@ -240,5 +240,34 @@
     }
   },
   "drivers": [],
-  "passengers": []
+  "passengers": [
+    {
+      "name": "Арина",
+      "telephone": "89099876543",
+      "time": 1653259178,
+      "from": {
+        "longitude": 30.360532,
+        "latitude": 59.93158
+      },
+      "to": {
+        "longitude": 30.35993,
+        "latitude": 59.874341
+      },
+      "id": 1
+    },
+    {
+      "name": "Арина",
+      "telephone": "89099876789",
+      "time": 1653311515,
+      "from": {
+        "longitude": 30.338353,
+        "latitude": 59.927288
+      },
+      "to": {
+        "longitude": 30.309382,
+        "latitude": 59.956165
+      },
+      "id": 2
+    }
+  ]
 }
