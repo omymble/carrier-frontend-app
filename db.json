@@ -1,5 +1,5 @@
 {
-  "foundDrivers": {
+  "found-drivers": {
     "driversBestTime": [
       {
         "name": "Даниил Мартынов",
@@ -25,7 +25,7 @@
           "latitude": 59.933839
         },
         "to": {
-          "longitude": 30.305160,
+          "longitude": 30.30516,
           "latitude": 59.955944
         }
       },
@@ -54,7 +54,7 @@
         },
         "to": {
           "longitude": 30.284629,
-          "latitude": 59.901210
+          "latitude": 59.90121
         }
       },
       {
@@ -83,8 +83,8 @@
           "latitude": 59.959171
         },
         "to": {
-          "longitude": 30.307020,
-          "latitude": 59.988680
+          "longitude": 30.30702,
+          "latitude": 59.98868
         }
       },
       {
@@ -108,7 +108,7 @@
         "seats": 3,
         "from": {
           "longitude": 30.314818,
-          "latitude": 59.955870
+          "latitude": 59.95587
         },
         "to": {
           "longitude": 30.338025,
@@ -142,7 +142,7 @@
         },
         "to": {
           "longitude": 30.318913,
-          "latitude": 59.906950
+          "latitude": 59.90695
         }
       },
       {
@@ -189,7 +189,7 @@
       }
     ]
   },
-  "foundPassengers": {
+  "found-passengers": {
     "passengersBestTime": [
       {
         "name": "Женя Шабалин",
@@ -198,7 +198,7 @@
         "seats": 1,
         "from": {
           "longitude": 30.291182,
-          "latitude": 59.987280
+          "latitude": 59.98728
         },
         "to": {
           "longitude": 30.330025,
@@ -206,17 +206,12 @@
         }
       }
     ],
-    "passengersBestRoute": [
-
-    ],
-    "morePassengers": [
-
-    ]
+    "passengersBestRoute": [],
+    "morePassengers": []
   },
-
-  "authUser": {
-    "telephone": null,
-    "isAuth": null
+  "auth-user": {
+    "telephone": "89099999999",
+    "isAuth": true
   },
   "driver": {
     "name": null,
@@ -232,16 +227,18 @@
     }
   },
   "passenger": {
-    "name": null,
-    "telephone": null,
-    "time": null,
+    "name": "елена",
+    "telephone": "89091234567",
+    "time": "1653211366",
     "from": {
-      "longitude": null,
-      "latitude": null
+      "longitude": 30.301567,
+      "latitude": 59.863744
     },
     "to": {
-      "longitude": null,
-      "latitude": null
+      "longitude": 30.338353,
+      "latitude": 59.927288
     }
-  }
+  },
+  "drivers": [],
+  "passengers": []
 }

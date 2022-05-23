@@ -11,6 +11,7 @@ export const FoundPassengersPage = (props: {}) => {
     const {driver} = useAppSelector(state => state.driversReducer)
     const dispatch = useAppDispatch()
 
+
     const {data: foundPassengers, error, isLoading} = queryAPI.useFetchAllFoundPassengersQuery()
     const [deleteTrip, {}] = queryAPI.useDeleteDriverTripMutation()
 

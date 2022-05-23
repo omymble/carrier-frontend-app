@@ -22,8 +22,10 @@ export const DriverInfo = (props : {foundDriverData: IFoundDriver; key: number})
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                     {props.foundDriverData.time}
+
                 </Typography>
                 <Typography variant="body2">
+                    {/*<p><span className="ymaps-geolink">{props.foundDriverData.from}</span></p>*/}
                     {props.foundDriverData.from}
                     <br />
                     {props.foundDriverData.to}

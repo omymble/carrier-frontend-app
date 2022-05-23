@@ -9,19 +9,21 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import {setUpStore} from "./redux/store/store";
-import {BrowserRouter} from "react-router-dom";
+import {PersistGate} from "redux-persist/integration/react"
+import {persistor} from "./redux/store/store"
 
 export const axios = require('axios').default;
+
 
 const store = setUpStore()
 
 ReactDOM.render(
     <React.StrictMode>
-        {/*<BrowserRouter>*/}
         <Provider store={store}>
-            <App />
+            <PersistGate persistor={persistor} loading={null}>
+                <App />
+            </PersistGate>
         </Provider>
-        {/*</BrowserRouter>*/}
     </React.StrictMode>,
     document.getElementById('root')
 );

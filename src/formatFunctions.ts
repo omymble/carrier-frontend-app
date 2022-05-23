@@ -6,7 +6,7 @@ import {IPassenger} from "./redux/store/models/IPassenger";
 import {IFoundPassenger} from "./redux/store/models/IFoundPassenger";
 
 export const toUnix = (time: Date) => {
-    return Math.floor(time.getTime() / 1000).toFixed(0)
+    return Math.floor(time.getTime() / 1000)/*.toFixed(0)*/
 }
 
 export const fromUnix = (numTime: number) => {
@@ -35,7 +35,8 @@ export const diffTime = (myTime: number, userTime: number) => {
 // https://geocode-maps.yandex.ru/1.x/?apikey=da486eeb-9bb5-4a59-b6df-fbf45c37765d&geocode=37.597576,55.771899&format=json
 export const getAddress = async (longitude: number, latitude: number) => {
     try {
-        const response = await axios.get(`https://geocode-maps.yandex.ru/1.x/?apikey=${API_1}=${longitude},${latitude}&format=json`)
+        console.log('getAddr', `https://geocode-maps.yandex.ru/1.x/?apikey=${API_1}&geocode=${longitude},${latitude}&format=json`)
+        const response = await axios.get(`https://geocode-maps.yandex.ru/1.x/?apikey=${API_1}&geocode=${longitude},${latitude}&format=json`)
         return response.data.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.text
     } catch (error) {
         throw new Error(`Unable to get addres`)

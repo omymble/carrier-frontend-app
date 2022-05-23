@@ -10,60 +10,75 @@ export const queryAPI = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:80/'
     }),
-    tagTypes: ['tripDriver'],
+    tagTypes: ['driverTrip', 'passengerTrip', 'foundDrivers', 'foundPassengers', 'authUser'],
 
     endpoints: (build) => ({
         fetchAllFoundDrivers: build.query<IDriversList, number | void>({
             query: () => ({
-                url: 'foundDrivers'
-            })
+                url: 'found-drivers'
+            }),
+/*            providesTags: (result) =>
+                // is result available?
+                result
+                    ? // successful query
+                    [
+                        ...result.bestTime.map(({ id }) => ({ type: 'Posts', id } as const)),
+                        { type: 'Posts', id: 'LIST' },
+                    ]
+                    : // an error occurred, but we still want to refetch this query when `{ type: 'Posts', id: 'LIST' }` is invalidated
+                    [{ type: 'Posts', id: 'LIST' }],*/
         }),
         fetchAllFoundPassengers: build.query<IPassenger[], number | void>({
             query: () => ({
-                url: 'foundPassengers'
+                url: 'found-passengers'
             })
         }),
         createAuth: build.mutation<IAuth, IAuth>({
             query: (auth) => ({
-                url: 'authUser',
+                url: 'auth-user',
                 method: 'POST',
                 body: auth
-            })
+            }),
+            invalidatesTags: [{type: 'authUser', id: 'OBJECT'}]
+        }),
+        deleteAuth: build.mutation<IDriver, string>({
+            query: (id) => ({
+                url: `auth-user/${id}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: [{type: 'driverTrip'}]
         }),
 
         createDriver: build.mutation<IDriver, IDriver>({
             query: (driver) => ({
-                url: 'driver',
+                url: 'drivers',
                 method: 'POST',
                 body: driver
             }),
-            invalidatesTags: ['tripDriver']
+            invalidatesTags: [{type: 'driverTrip', id: 'LIST'}]
+        }),
+        deleteDriverTrip: build.mutation<IDriver, string>({
+            query: (id) => ({
+                url: `drivers/${id}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: [{type: 'driverTrip'}]
         }),
 
         createPassenger: build.mutation<IPassenger, IPassenger>({
             query: (passenger) => ({
-                url: 'passenger',
+                url: 'passengers',
                 method: 'POST',
                 body: passenger
-            })
-        }),
-
-        updateDriverTrip: build.mutation<IDriver, IDriver>({
-            query: (driver) => ({
-                url: `update-trip/${driver.telephone}`,
-                method: 'PUT',
-                body: driver
             }),
-            invalidatesTags: ['tripDriver']
+            invalidatesTags: [{type: 'passengerTrip', id: 'LIST'}]
         }),
-
-        deleteDriverTrip: build.mutation<IDriver, string>({
-            query: (tel) => ({
-                url: `delete-trip/${tel}`,
-                method: 'DELETE',
-                body: tel
+        deletePassengerTrip: build.mutation<IPassenger, string>({
+            query: (id) => ({
+                url: `passengers/${id}`,
+                method: 'DELETE'
             }),
-            invalidatesTags: ['tripDriver']
+            invalidatesTags: [{type: 'passengerTrip'}]
         }),
 
     })

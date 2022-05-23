@@ -10,7 +10,7 @@ export interface IDriver {
 }
 
 export interface IDriversList {
-    bestTime: IDriver[],
-    bestRoute: IDriver[],
-    rest: IDriver[]
+    driversBestTime: IDriver[],
+    driversBestRoute: IDriver[],
+    moreDrivers: IDriver[]
 }
