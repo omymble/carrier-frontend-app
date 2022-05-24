@@ -77,8 +77,6 @@ export const FoundDriversPage = (props: {}) => {
                 </>
             }
 
-
-
             <div>
                 {driversBestTime && <Accordion>
                     <AccordionSummary
@@ -95,6 +93,7 @@ export const FoundDriversPage = (props: {}) => {
                         <DriversList drivers={driversBestTime}/>
                     </AccordionDetails>
                 </Accordion>}
+
                 {driversBestRoute && <Accordion>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
@@ -110,6 +109,7 @@ export const FoundDriversPage = (props: {}) => {
                         <DriversList drivers={driversBestRoute}/>
                     </AccordionDetails>
                 </Accordion>}
+
                 {moreDrivers && <Accordion>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}

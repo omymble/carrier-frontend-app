@@ -4,15 +4,15 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from '@mui/material/MenuItem';
 import {Button} from "@mui/material";
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import ruLocale from 'date-fns/locale/ru';
-import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
-import {Map, YMaps, RoutePanel} from "react-yandex-maps";
+import {DesktopTimePicker} from '@mui/x-date-pickers/DesktopTimePicker';
+import {Map, RoutePanel, YMaps} from "react-yandex-maps";
 import {useFormik} from "formik";
 import * as yup from "yup";
 import {IDriver} from "../../redux/store/models/IDriver";
-import {RU_REG_EXP, API1} from "../../consts";
+import {RU_REG_EXP} from "../../consts";
 import {toUnix} from "../../formatFunctions";
 
 const seats = [
@@ -38,7 +38,7 @@ const validationSchema = yup.object({
     name: yup.string().required(),
     telephone: yup
         .string()
-        .matches(RU_REG_EXP, 'Phone number is not valid')
+        .matches(RU_REG_EXP, 'Некорректное значение')
         .required(),
     seats: yup.number().required(),
     pointFromCoords: yup.array().required(),
@@ -58,9 +58,11 @@ const routePanelOptions = {
 };
 
 export const DriverForm = (props: { addDriver: Function, telInput: String }) => {
+
     const handleTimeChange = (tempTime: Date) => {
         formik.setFieldValue("time", tempTime)
     }
+
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -73,11 +75,11 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
         validationSchema: validationSchema,
         onSubmit: async (values) => {
             alert(JSON.stringify(values, null, 2));
-            console.log(values)
+            console.log('driver', values)
             let numTime = toUnix(values.time)
             let newDriver: IDriver = {
                 name: values.name,
-                telephone: values.te,
+                telephone: values.telephone,
                 seats: values.seats,
                 time: numTime,
                 from: {longitude: Number(values.pointFromCoords[0]), latitude: Number(values.pointFromCoords[1])},

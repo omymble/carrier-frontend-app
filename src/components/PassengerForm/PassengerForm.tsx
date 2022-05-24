@@ -19,7 +19,7 @@ const validationSchema = yup.object({
     name: yup.string().required(),
     telephone: yup
         .string()
-        .matches(RU_REG_EXP, 'Phone number is not valid')
+        .matches(RU_REG_EXP, 'Некорректное значение')
         .required(),
     time: yup.date().required(),
     pointFromCoords: yup.array().required(),
@@ -55,6 +55,7 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
         validationSchema: validationSchema,
         onSubmit: async (values) => {
             alert(JSON.stringify(values, null, 2));
+            console.log('passenger', values)
             let numTime = toUnix(values.time)
             let newPassenger: IPassenger = {
                 name: values.name,
@@ -117,7 +118,14 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
                     />
                 </LocalizationProvider>
                 <br/>
-
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{mt: 3, mb: 2}}
+                >
+                    Подтвердить
+                </Button>
             </Box>
 
 
@@ -159,14 +167,6 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
                 </Map>
             </Box>
             </YMaps>
-            <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{mt: 3, mb: 2}}
-            >
-                Подтвердить
-            </Button>
         </>
     );
 };

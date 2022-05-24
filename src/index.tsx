@@ -14,7 +14,6 @@ import {persistor} from "./redux/store/store"
 
 export const axios = require('axios').default;
 
-
 const store = setUpStore()
 
 ReactDOM.render(

@@ -15,11 +15,11 @@ const persistConfig = {
 }
 
 let rootReducer = combineReducers({
+    authReducer,
     driversReducer,
     passengersReducer,
     foundDriversReducer,
     foundPassengersReducer,
-    authReducer,
     [queryAPI.reducerPath]: queryAPI.reducer
 })
 
