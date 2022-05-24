@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {IDriver} from "../store/models/IDriver";
-import {IPassenger} from "../store/models/IPassenger";
+import {IPassenger, IPassengersList} from "../store/models/IPassenger";
 import {IDriversList} from "../store/models/IDriver"
 import {IAuth} from "../store/models/IAuth";
 
@@ -18,18 +18,8 @@ export const queryAPI = createApi({
                 url: 'found-drivers'
             }),
             providesTags: result => ['drivers']
-/*            providesTags: (result) =>
-                // is result available?
-                result
-                    ? // successful query
-                    [
-                        ...result.bestTime.map(({ id }) => ({ type: 'Posts', id } as const)),
-                        { type: 'Posts', id: 'LIST' },
-                    ]
-                    : // an error occurred, but we still want to refetch this query when `{ type: 'Posts', id: 'LIST' }` is invalidated
-                    [{ type: 'Posts', id: 'LIST' }],*/
         }),
-        fetchAllFoundPassengers: build.query<IPassenger[], number | void>({
+        fetchAllFoundPassengers: build.query<IPassengersList, number | void>({
             query: () => ({
                 url: 'found-passengers'
             }),
@@ -60,9 +50,9 @@ export const queryAPI = createApi({
             }),
             invalidatesTags: ['drivers']
         }),
-        deleteDriver: build.mutation<IDriver, string>({
-            query: (id) => ({
-                url: `drivers/${id}`,
+        deleteDriver: build.mutation<IDriver, IDriver>({
+            query: (driver) => ({
+                url: `drivers/${driver.id}`,
                 method: 'DELETE'
             }),
             invalidatesTags: ['drivers']
@@ -77,8 +67,8 @@ export const queryAPI = createApi({
             invalidatesTags: ['passengers']
         }),
         deletePassenger: build.mutation<IPassenger, IPassenger>({
-            query: (id) => ({
-                url: `passengers/${id}`,
+            query: (passenger) => ({
+                url: `passengers/${passenger.id}`,
                 method: 'DELETE'
             }),
             invalidatesTags: ['passengers']

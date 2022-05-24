@@ -3,12 +3,10 @@ import {DriversList} from "../../components/DriversList/DriversList";
 import {queryAPI} from "../../redux/services/queryService";
 import {parseDriver} from "../../formatFunctions";
 import {IFoundDriver} from "../../redux/store/models/IFoundDriver";
-import {fromUnix, getAddress} from "../../formatFunctions";
 import {useEffect, useState} from "react";
 import Button from "@mui/material/Button";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import {passengersSlice} from "../../redux/store/reducers/passengersSlice";
-import {driversUI} from "../../assets/data/driversUI";
 import {useNavigate} from "react-router-dom";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -55,31 +53,23 @@ export const FoundDriversPage = (props: {}) => {
     }
     }, [foundDrivers])
 
-    const deleteTrip = async(passenger: IPassenger) => {
-        console.log('delete1', passenger)
+    const deletePassengerTrip = async(passenger: IPassenger) => {
         await deletePassengerDB(passenger)
             .then((response: any) => {
-                console.log('delete2', response)
                 if (response) {
-                    console.log('delete3', passenger)
-                    dispatch(deletePassenger(passenger.telephone))
+                    dispatch(deletePassenger(passenger.id))
                 }
             })
         navigate('/home')
     }
 
     return (
-        <div className={classes.foundDriversPage}>
+        <div>
 
             <Typography variant={'h4'} gutterBottom={true}>Для вас нашлись водители</Typography>
             {isLoading && <Typography variant={'h4'} gutterBottom={true}>загрузка</Typography>}
             {error && <Typography variant={'h4'} gutterBottom={true}>ошибка на сервере</Typography>}
-            {driversBestTime &&
-                <>
 
-                    {/*<DriversList drivers={driversBestTime}/>*/}
-                </>
-            }
 
             <div>
                 {driversBestTime && <Accordion>
@@ -131,7 +121,8 @@ export const FoundDriversPage = (props: {}) => {
                 </Accordion>}
             </div>
 
-            <Button onClick={() => deleteTrip(passenger)}
+            <Button onClick={() => deletePassengerTrip(passenger)}
+                    sx={{mt: '20px'}}
             >
                 отменить поездку
             </Button>

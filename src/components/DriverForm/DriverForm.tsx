@@ -12,7 +12,7 @@ import {Map, RoutePanel, YMaps} from "react-yandex-maps";
 import {useFormik} from "formik";
 import * as yup from "yup";
 import {IDriver} from "../../redux/store/models/IDriver";
-import {RU_REG_EXP} from "../../consts";
+import {API_1, RU_REG_EXP} from "../../consts";
 import {toUnix} from "../../formatFunctions";
 
 const seats = [
@@ -74,12 +74,10 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
         },
         validationSchema: validationSchema,
         onSubmit: async (values) => {
-            alert(JSON.stringify(values, null, 2));
-            console.log('driver', values)
             let numTime = toUnix(values.time)
             let newDriver: IDriver = {
                 name: values.name,
-                telephone: values.telephone,
+                id: values.telephone,
                 seats: values.seats,
                 time: numTime,
                 from: {longitude: Number(values.pointFromCoords[0]), latitude: Number(values.pointFromCoords[1])},
@@ -104,7 +102,7 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
                     id="name"
                     name="name"
                     label="Имя"
-                    variant="filled"
+                    variant="outlined"
                     type="text"
                     required
                     value={formik.values.name}
@@ -117,7 +115,7 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
                     id="telephone"
                     name="telephone"
                     label="Телефон"
-                    variant="filled"
+                    variant="outlined"
                     type="text"
                     required
                     value={formik.values.telephone}
@@ -167,18 +165,20 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
 
             <YMaps
                 query={{
-                    apikey: 'da486eeb-9bb5-4a59-b6df-fbf45c37765d',
+                    apikey: API_1,
                 }}
             >
+                <Box display={"flex"} justifyContent={"center"} margin={"30px auto 20px"}>
                 <Map
-                    width={"100%"}
-                    height={500}
                     modules={["geocode", "suggest"]}
                     defaultState={{
-                        center: [55.751574, 37.573856],
+                        center: [59.9311, 30.3609],
                         zoom: 9,
                         controls: [],
                     }}
+                    width={"100%"}
+                    // height={"40%"}
+                    height={'400px'}
                 >
                     <RoutePanel
                         instanceRef={async (r) => {
@@ -199,6 +199,7 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
                         options={routePanelOptions}
                     />
                 </Map>
+                </Box>
             </YMaps>
         </>
     );

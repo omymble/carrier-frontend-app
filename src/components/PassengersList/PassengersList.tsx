@@ -4,9 +4,10 @@ import {PassengerInfo} from "../PassengerInfo/PassengerInfo";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import {IPassenger} from "../../redux/store/models/IPassenger";
+import {IFoundPassenger} from "../../redux/store/models/IFoundPassenger";
 
-export const PassengersList = (props: {passengers: Array<IPassenger>}) => {
-    let tsxPassengersList = props.passengers.map((item:IPassenger, i: number) =>
+export const PassengersList = (props: {passengers: Array<IFoundPassenger>}) => {
+    let tsxPassengersList = props.passengers.map((item:IFoundPassenger, i: number) =>
         <PassengerInfo foundPassengerData={item} key={i}/>
     )
     return (

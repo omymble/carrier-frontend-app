@@ -10,7 +10,7 @@ export interface IPassengerTrip {
 const initialState: IPassengerTrip = {
     passenger: {
         name: '',
-        telephone: '',
+        id: '',
         time: 0,
         from: {longitude: 0, latitude: 0},
         to: {longitude: 0, latitude: 0},

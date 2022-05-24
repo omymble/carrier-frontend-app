@@ -8,24 +8,22 @@ import {queryAPI} from "../../redux/services/queryService";
 import {useNavigate} from "react-router-dom";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import {PassengerForm} from "../../components/PassengerForm/PassengerForm";
 import Button from "@mui/material/Button";
 
 export const DriverPage = (props: {}) => {
 
     const {addDriver} = driversSlice.actions
-    const {driver, isLoading, error} = useAppSelector(state => state.driversReducer)
     const {id, isAuth} = useAppSelector(state => state.authReducer)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const goBack = () => navigate(-1)
 
     const [createDriver, {error: createDriverError}] = queryAPI.useCreateDriverMutation()
-    const goBack = () => navigate(-1)
 
     const addDriverOnSubmit = async (newDriver: IDriver) => {
         await createDriver({
             name: newDriver.name,
-            telephone: newDriver.telephone,
+            id: newDriver.id,
             seats: newDriver.seats,
             time: newDriver.time,
             from: {...newDriver.from},

@@ -10,7 +10,7 @@ export interface IDriverTrip {
 const initialState: IDriverTrip = {
     driver: {
         name: '',
-        telephone: '',
+        id: '',
         seats: 0,
         time: 0,
         from: {longitude: 0, latitude: 0},

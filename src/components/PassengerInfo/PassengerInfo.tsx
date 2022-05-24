@@ -7,14 +7,12 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import {IPassenger} from "../../redux/store/models/IPassenger";
+import {IFoundPassenger} from "../../redux/store/models/IFoundPassenger";
 
-export const PassengerInfo = (props : {foundPassengerData: IPassenger; key: number}) => {
+export const PassengerInfo = (props : {foundPassengerData: IFoundPassenger; key: number}) => {
     const card = (
         <React.Fragment>
             <CardContent>
-                <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
-                    ПАССАЖИР
-                </Typography>
                 <Typography sx={{ fontSize: 24 }} color="text.secondary" gutterBottom>
                     {props.foundPassengerData.name}
                 </Typography>

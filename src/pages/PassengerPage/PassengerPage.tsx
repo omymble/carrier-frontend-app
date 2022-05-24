@@ -1,12 +1,12 @@
 import React from "react";
-import classes from './PassengerPage.module.scss'
+import classes from './PassengerPage.module.scss';
 import {PassengerForm} from "../../components/PassengerForm/PassengerForm";
 import {passengersSlice} from "../../redux/store/reducers/passengersSlice";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import {IPassenger} from "../../redux/store/models/IPassenger";
 import {queryAPI} from "../../redux/services/queryService";
 import Button from "@mui/material/Button";
-import {useNavigate, Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
@@ -25,7 +25,7 @@ export const PassengerPage = (props: {}) => {
     const addPassengerOnSubmit = async (newPassenger: IPassenger) => {
         await createPassenger({
             name: newPassenger.name,
-            telephone: newPassenger.telephone,
+            id: newPassenger.id,
             time: newPassenger.time,
             from: {...newPassenger.from},
             to: {...newPassenger.to}} as IPassenger)

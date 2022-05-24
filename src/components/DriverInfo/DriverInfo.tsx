@@ -12,7 +12,6 @@ export const DriverInfo = (props : {foundDriverData: IFoundDriver; key: number})
     return (
 
         <Card sx={{ maxWidth: 320, minWidth: 245}}>
-            {/*<a href="tel:+7-903-7361629" onClick={(event) => {event.stopPropagation()}}>*/}
             <CardActionArea href={"tel:"+props.foundDriverData.telephone}>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
@@ -20,6 +19,9 @@ export const DriverInfo = (props : {foundDriverData: IFoundDriver; key: number})
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         {props.foundDriverData.telephone}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        {props.foundDriverData.time}
                     </Typography>
                 </CardContent>
             </CardActionArea>
@@ -31,10 +33,6 @@ export const DriverInfo = (props : {foundDriverData: IFoundDriver; key: number})
                     {props.foundDriverData.to}
                 </Typography>
             </CardContent>
-            {/*</a>*/}
         </Card>
-/*        <Box sx={{ minWidth: 275 }}>
-            <Card variant="outlined">{card}</Card>
-        </Box>*/
     );
 }

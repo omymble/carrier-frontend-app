@@ -54,12 +54,10 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
         },
         validationSchema: validationSchema,
         onSubmit: async (values) => {
-            alert(JSON.stringify(values, null, 2));
-            console.log('passenger', values)
             let numTime = toUnix(values.time)
             let newPassenger: IPassenger = {
                 name: values.name,
-                telephone: values.telephone,
+                id: values.telephone,
                 time: numTime,
                 from: {longitude: Number(values.pointFromCoords[0]), latitude: Number(values.pointFromCoords[1])},
                 to: {longitude: Number(values.pointToCoords[0]), latitude: Number(values.pointToCoords[1])}

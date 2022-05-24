@@ -20,7 +20,11 @@ function App() {
             <Router>
                 <Routes>
                     <Route path="/" element={<Header/>}>
-                        <Route index element={<SignInPage/>}/>
+                        <Route index element={
+                            <RequireLogout>
+                                <SignInPage/>
+                            </RequireLogout>
+                        }/>
 
                         <Route path="home"
                                element={
@@ -70,6 +74,13 @@ const RequireAuth = ({children}) => {
     const location = useLocation()
     let {isAuth} = useAppSelector(state => state.authReducer)
     return isAuth ? children : <Navigate to='/' state={{from: location}}/>
+}
+
+// @ts-ignore
+const RequireLogout = ({children}) => {
+    const location = useLocation()
+    let {isAuth} = useAppSelector(state => state.authReducer)
+    return !(isAuth) ? children : <Navigate to='/home' state={{from: location}}/>
 }
 
 
