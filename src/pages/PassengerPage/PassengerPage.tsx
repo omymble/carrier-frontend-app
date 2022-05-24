@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 export const PassengerPage = (props: {}) => {
 
     const {addPassenger} = passengersSlice.actions
-    const {telephone, isAuth} = useAppSelector(state => state.authReducer)
+    const {id, isAuth} = useAppSelector(state => state.authReducer)
     const dispatch = useAppDispatch()
 
     const [createPassenger, {error: createPassengerError}] = queryAPI.useCreatePassengerMutation()
@@ -47,7 +47,7 @@ export const PassengerPage = (props: {}) => {
             >
                 Заполните данные о желаемой поездке
             </Typography>
-            <PassengerForm addPassenger={addPassengerOnSubmit} telInput={telephone}/>
+            <PassengerForm addPassenger={addPassengerOnSubmit} telInput={id}/>
             <Button onClick={goBack}>Назад</Button>
         </Container>
     )

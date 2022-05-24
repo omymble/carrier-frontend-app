@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IAuth} from "../models/IAuth";
 
 const initialState: IAuth = {
-    telephone: '',
+    id: '',
     isAuth: false
 }
 
@@ -11,11 +11,11 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         signIn(state, action: PayloadAction<string>) {
-            state.telephone = action.payload
+            state.id = action.payload
             state.isAuth = true
         },
         signOut(state, action: PayloadAction<string>) {
-            state.telephone = ''
+            state.id = ''
             state.isAuth = false
         }
     }

@@ -22,7 +22,7 @@ export const FoundPassengersPage = (props: {}) => {
 
 
     const {data: foundPassengers, error, isLoading} = queryAPI.useFetchAllFoundPassengersQuery()
-    const [deleteTrip, {}] = queryAPI.useDeleteDriverTripMutation()
+    const [deleteTrip, {}] = queryAPI.useDeleteDriverMutation()
 
 
     const deleteDriverTrip = () => {

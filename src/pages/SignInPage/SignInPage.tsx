@@ -29,11 +29,10 @@ const theme = createTheme();
 
 export const SignInPage = () => {
 
-    let {telephone, isAuth} = useAppSelector(state => state.authReducer)
+    let {id, isAuth} = useAppSelector(state => state.authReducer)
     let {signIn, signOut} = authSlice.actions
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
-    const location = useLocation()
 
     const [createAuth, {error: createAuthError}] = queryAPI.useCreateAuthMutation()
 
@@ -43,7 +42,7 @@ export const SignInPage = () => {
         },
         validationSchema: validationSchema,
         onSubmit: async (values) => {
-            await createAuth({telephone: values.telephone, isAuth: true} as IAuth)
+            await createAuth({id: values.telephone, isAuth: true} as IAuth)
             dispatch(signIn(values.telephone))
             navigate('/home', {replace: true})
         },

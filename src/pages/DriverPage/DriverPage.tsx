@@ -15,7 +15,7 @@ export const DriverPage = (props: {}) => {
 
     const {addDriver} = driversSlice.actions
     const {driver, isLoading, error} = useAppSelector(state => state.driversReducer)
-    const {telephone, isAuth} = useAppSelector(state => state.authReducer)
+    const {id, isAuth} = useAppSelector(state => state.authReducer)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
@@ -49,7 +49,7 @@ export const DriverPage = (props: {}) => {
             >
                 Заполните данные о предстоящей поездке
             </Typography>
-            <DriverForm addDriver={addDriverOnSubmit} telInput={telephone}/>
+            <DriverForm addDriver={addDriverOnSubmit} telInput={id}/>
             <Button onClick={goBack}>Назад</Button>
         </Container>
     )

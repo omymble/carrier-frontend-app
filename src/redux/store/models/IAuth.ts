@@ -1,4 +1,4 @@
 export interface IAuth {
-    telephone: string;
+    id: string;
     isAuth: boolean;
 }

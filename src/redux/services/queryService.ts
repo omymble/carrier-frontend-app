@@ -10,13 +10,14 @@ export const queryAPI = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:80/'
     }),
-    tagTypes: ['driverTrip', 'passengerTrip', 'foundDrivers', 'foundPassengers', 'authUser'],
+    tagTypes: ['driverTrip', 'passengerTrip', 'foundDrivers', 'foundPassengers', 'authUser', 'drivers', 'passengers', 'auth'],
 
     endpoints: (build) => ({
         fetchAllFoundDrivers: build.query<IDriversList, number | void>({
             query: () => ({
                 url: 'found-drivers'
             }),
+            providesTags: result => ['drivers']
 /*            providesTags: (result) =>
                 // is result available?
                 result
@@ -31,22 +32,24 @@ export const queryAPI = createApi({
         fetchAllFoundPassengers: build.query<IPassenger[], number | void>({
             query: () => ({
                 url: 'found-passengers'
-            })
+            }),
+            providesTags: result => ['passengers']
         }),
+
         createAuth: build.mutation<IAuth, IAuth>({
             query: (auth) => ({
                 url: 'auth-user',
                 method: 'POST',
                 body: auth
             }),
-            invalidatesTags: [{type: 'authUser', id: 'OBJECT'}]
+            invalidatesTags: ['auth']
         }),
-        deleteAuth: build.mutation<IDriver, string>({
-            query: (id) => ({
-                url: `auth-user/${id}`,
+        deleteAuth: build.mutation<IAuth, IAuth>({
+            query: (authUser) => ({
+                url: `auth-user/${authUser.id}`,
                 method: 'DELETE'
             }),
-            invalidatesTags: [{type: 'driverTrip'}]
+            invalidatesTags: [{type: 'auth'}]
         }),
 
         createDriver: build.mutation<IDriver, IDriver>({
@@ -55,14 +58,14 @@ export const queryAPI = createApi({
                 method: 'POST',
                 body: driver
             }),
-            invalidatesTags: [{type: 'driverTrip', id: 'LIST'}]
+            invalidatesTags: ['drivers']
         }),
-        deleteDriverTrip: build.mutation<IDriver, string>({
+        deleteDriver: build.mutation<IDriver, string>({
             query: (id) => ({
                 url: `drivers/${id}`,
                 method: 'DELETE'
             }),
-            invalidatesTags: [{type: 'driverTrip'}]
+            invalidatesTags: ['drivers']
         }),
 
         createPassenger: build.mutation<IPassenger, IPassenger>({
@@ -71,14 +74,14 @@ export const queryAPI = createApi({
                 method: 'POST',
                 body: passenger
             }),
-            invalidatesTags: [{type: 'passengerTrip', id: 'LIST'}]
+            invalidatesTags: ['passengers']
         }),
-        deletePassengerTrip: build.mutation<IPassenger, string>({
+        deletePassenger: build.mutation<IPassenger, IPassenger>({
             query: (id) => ({
                 url: `passengers/${id}`,
                 method: 'DELETE'
             }),
-            invalidatesTags: [{type: 'passengerTrip'}]
+            invalidatesTags: ['passengers']
         }),
 
     })

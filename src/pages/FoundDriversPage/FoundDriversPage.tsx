@@ -18,6 +18,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import RouteIcon from '@mui/icons-material/Route';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import {IPassenger} from "../../redux/store/models/IPassenger";
 
 export const FoundDriversPage = (props: {}) => {
     const {addPassenger, deletePassenger} = passengersSlice.actions
@@ -26,7 +27,7 @@ export const FoundDriversPage = (props: {}) => {
     const navigate = useNavigate()
 
     const {data: foundDrivers, error, isLoading} = queryAPI.useFetchAllFoundDriversQuery()
-    const [deletePassengerTrip] = queryAPI.useDeletePassengerTripMutation()
+    const [deletePassengerDB] = queryAPI.useDeletePassengerMutation()
     const [driversBestTime, setDriversBestTime] = useState<IFoundDriver[] | undefined>([])
     const [driversBestRoute, setDriversBestRoute] = useState<IFoundDriver[] | undefined>([])
     const [moreDrivers, setMoreDrivers] = useState<IFoundDriver[] | undefined>([])
@@ -54,11 +55,14 @@ export const FoundDriversPage = (props: {}) => {
     }
     }, [foundDrivers])
 
-    const deleteTrip = async(id: string) => {
-        await deletePassengerTrip(id)
-            .then(response => {
+    const deleteTrip = async(passenger: IPassenger) => {
+        console.log('delete1', passenger)
+        await deletePassengerDB(passenger)
+            .then((response: any) => {
+                console.log('delete2', response)
                 if (response) {
-                    dispatch(deletePassenger(id))
+                    console.log('delete3', passenger)
+                    dispatch(deletePassenger(passenger.telephone))
                 }
             })
         navigate('/home')
@@ -127,7 +131,7 @@ export const FoundDriversPage = (props: {}) => {
                 </Accordion>}
             </div>
 
-            <Button onClick={() => deleteTrip(passenger.telephone)}
+            <Button onClick={() => deleteTrip(passenger)}
             >
                 отменить поездку
             </Button>
