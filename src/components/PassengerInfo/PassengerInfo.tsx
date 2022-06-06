@@ -1,4 +1,3 @@
-import classes from './PassengerInfo.module.scss'
 import * as React from "react";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";

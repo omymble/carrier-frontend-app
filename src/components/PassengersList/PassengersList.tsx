@@ -1,5 +1,4 @@
 import React from 'react';
-import classes from './PassengersList.module.scss'
 import {PassengerInfo} from "../PassengerInfo/PassengerInfo";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";

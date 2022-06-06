@@ -1,8 +1,8 @@
 import {IPoint} from "./IPoint";
 
 export interface IDriver {
-    name: string;
     id: string;
+    name: string;
     seats: number;
     time: number;
     from: IPoint;

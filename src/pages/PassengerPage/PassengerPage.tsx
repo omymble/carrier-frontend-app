@@ -1,5 +1,4 @@
 import React from "react";
-import classes from './PassengerPage.module.scss';
 import {PassengerForm} from "../../components/PassengerForm/PassengerForm";
 import {passengersSlice} from "../../redux/store/reducers/passengersSlice";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
@@ -38,7 +37,7 @@ export const PassengerPage = (props: {}) => {
     }
 
     return (
-        <Container className={classes.passengerPage}>
+        <Container>
             <Typography variant={'h4'}
                         gutterBottom={true}
                         sx={{

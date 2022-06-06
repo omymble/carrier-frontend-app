@@ -14,6 +14,7 @@ import * as yup from "yup";
 import {IDriver} from "../../redux/store/models/IDriver";
 import {API_1, RU_REG_EXP} from "../../consts";
 import {toUnix} from "../../formatFunctions";
+import Container from "@mui/material/Container";
 
 const seats = [
     {
@@ -52,8 +53,8 @@ const routePanelOptions = {
     float: "right",
     maxWidth: 270,
     position: {
-        top: 15,
-        right: 15,
+        top: 10,
+        right: 10,
     },
 };
 
@@ -129,7 +130,7 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
                     name="seats"
                     select
                     label="Свободные места"
-                    variant="filled"
+                    variant="outlined"
                     value={formik.values.seats}
                     onChange={formik.handleChange}
                     // error={formik.touched.name && Boolean(formik.errors.name)}
@@ -146,10 +147,9 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
                         id="time"
                         name="time"
                         label="Время поездки"
-                        variant="filled"
                         value={formik.values.time}
                         onChange={(val)=>handleTimeChange(val)}
-                        renderInput={(params: {id: "time", name: "time", label: "Время поездки", variant: "filled"}) => <TextField {...params} />}
+                        renderInput={(params: {id: "time", name: "time", label: "Время поездки"}) => <TextField {...params} />}
                     />
                 </LocalizationProvider>
                 <br/>
@@ -168,7 +168,8 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
                     apikey: API_1,
                 }}
             >
-                <Box display={"flex"} justifyContent={"center"} margin={"30px auto 20px"}>
+                <Container sx={{margin: "30px auto 20px"}} >
+                {/*<Box display={"flex"} justifyContent={"center"} margin={"30px auto 20px"}>*/}
                 <Map
                     modules={["geocode", "suggest"]}
                     defaultState={{
@@ -199,7 +200,8 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
                         options={routePanelOptions}
                     />
                 </Map>
-                </Box>
+                {/*</Box>*/}
+                </Container>
             </YMaps>
         </>
     );

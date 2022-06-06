@@ -20,47 +20,12 @@ function App() {
             <Router>
                 <Routes>
                     <Route path="/" element={<Header/>}>
-                        <Route index element={
-                            <RequireLogout>
-                                <SignInPage/>
-                            </RequireLogout>
-                        }/>
-
-                        <Route path="home"
-                               element={
-                                   <RequireAuth>
-                                       <HomePage/>
-                                   </RequireAuth>
-                               }
-                        />
-                        <Route path="driver"
-                               element={
-                                   <RequireAuth>
-                                       <DriverPage/>
-                                   </RequireAuth>
-                               }
-                        />
-                        <Route path="passenger"
-                               element={
-                                   <RequireAuth>
-                                       <PassengerPage/>
-                                   </RequireAuth>
-                               }
-                        />
-                        <Route path="passengers-list"
-                               element={
-                                   <RequireAuth>
-                                       <FoundPassengersPage/>
-                                   </RequireAuth>
-                               }
-                        />
-                        <Route path="drivers-list"
-                               element={
-                                   <RequireAuth>
-                                       <FoundDriversPage/>
-                                   </RequireAuth>
-                               }
-                        />
+                        <Route index element={<RequireLogout><SignInPage/></RequireLogout>}/>
+                        <Route path="home" element={<RequireAuth><HomePage/></RequireAuth>}/>
+                        <Route path="driver" element={<RequireAuth><DriverPage/></RequireAuth>}/>
+                        <Route path="passenger" element={<RequireAuth><PassengerPage/></RequireAuth>}/>
+                        <Route path="passengers-list" element={<RequireAuth><FoundPassengersPage/></RequireAuth>}/>
+                        <Route path="drivers-list" element={<RequireAuth><FoundDriversPage/></RequireAuth>}/>
                         <Route path="*" element={<NotFoundPage/>}/>
                     </Route>
                 </Routes>

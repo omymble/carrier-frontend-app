@@ -1,5 +1,4 @@
 import React from "react";
-import classes from "./DriverPage.module.scss";
 import {driversSlice} from "../../redux/store/reducers/driversSlice"
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import {IDriver} from "../../redux/store/models/IDriver";
@@ -11,15 +10,12 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 export const DriverPage = (props: {}) => {
-
     const {addDriver} = driversSlice.actions
-    const {id, isAuth} = useAppSelector(state => state.authReducer)
+    const {id} = useAppSelector(state => state.authReducer)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const goBack = () => navigate(-1)
-
-    const [createDriver, {error: createDriverError}] = queryAPI.useCreateDriverMutation()
-
+    const [createDriver] = queryAPI.useCreateDriverMutation()
     const addDriverOnSubmit = async (newDriver: IDriver) => {
         await createDriver({
             name: newDriver.name,
@@ -34,17 +30,10 @@ export const DriverPage = (props: {}) => {
                 }
             })
         navigate('/passengers-list')
-
     }
-
     return (
-        <Container className={classes.passengerPage}>
-            <Typography variant={'h4'}
-                        gutterBottom={true}
-                        sx={{
-
-                        }}
-            >
+        <Container>
+            <Typography variant={'h4'} gutterBottom={true} sx={{}}>
                 Заполните данные о предстоящей поездке
             </Typography>
             <DriverForm addDriver={addDriverOnSubmit} telInput={id}/>

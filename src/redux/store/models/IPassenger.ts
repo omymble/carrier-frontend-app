@@ -1,8 +1,8 @@
 import {IPoint} from "./IPoint";
 
 export interface IPassenger {
-    name: string;
     id: string;
+    name: string;
     time: number;
     from: IPoint;
     to: IPoint;

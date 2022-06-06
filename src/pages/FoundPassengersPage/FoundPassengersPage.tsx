@@ -1,4 +1,3 @@
-import classes from './FoundPassengersPage.module.scss'
 import {queryAPI} from "../../redux/services/queryService";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import Button from "@mui/material/Button";
@@ -14,7 +13,6 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import {DriversList} from "../../components/DriversList/DriversList";
 import RouteIcon from "@mui/icons-material/Route";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import {PassengersList} from "../../components/PassengersList/PassengersList";

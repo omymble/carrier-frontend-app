@@ -379,7 +379,12 @@
       }
     ]
   },
-  "auth-user": [],
+  "auth-user": [
+    {
+      "id": "89099863102",
+      "isAuth": true
+    }
+  ],
   "driver": {
     "name": null,
     "seats": null,

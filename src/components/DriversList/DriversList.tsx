@@ -1,4 +1,3 @@
-import classes from './DriversList.module.scss'
 import  {DriverInfo} from "../DriverInfo/DriverInfo";
 import * as React from 'react';
 import Box from '@mui/material/Box';

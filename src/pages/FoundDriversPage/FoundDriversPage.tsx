@@ -1,4 +1,3 @@
-import classes from './FoundDriversPage.module.scss'
 import {DriversList} from "../../components/DriversList/DriversList";
 import {queryAPI} from "../../redux/services/queryService";
 import {parseDriver} from "../../formatFunctions";
