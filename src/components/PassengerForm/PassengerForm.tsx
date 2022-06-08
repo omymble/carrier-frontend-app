@@ -127,12 +127,13 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
             </Box>
 
 
-            <YMaps
-                query={{
-                    apikey: API_1,
-                }}
-            >
+
             <Box display={"flex"} justifyContent={"center"} margin={"30px auto 20px"}>
+                <YMaps
+                    query={{
+                        apikey: API_1,
+                    }}
+                >
                 <Map
                     modules={["geocode", "suggest"]}
                     defaultState={{
@@ -163,8 +164,9 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
                         options={routePanelOptions}
                     />
                 </Map>
+                </YMaps>
             </Box>
-            </YMaps>
+
         </>
     );
 };

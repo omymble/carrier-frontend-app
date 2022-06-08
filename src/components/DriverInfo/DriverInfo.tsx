@@ -26,15 +26,14 @@ export const DriverInfo = (props : {foundDriverData: IFoundDriver; key: number})
                         </Typography>
                     </Grid>
                 </CardContent>
-
-            <CardContent>
-                <Typography variant="body2" color="text.secondary" paragraph={true}>
-                    {props.foundDriverData.from}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {props.foundDriverData.to}
-                </Typography>
-            </CardContent>
+                <CardContent>
+                    <Typography variant="body2" color="text.secondary" paragraph={true}>
+                        {props.foundDriverData.from}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        {props.foundDriverData.to}
+                    </Typography>
+                </CardContent>
             </CardActionArea>
         </Card>
     );

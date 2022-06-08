@@ -37,7 +37,7 @@ export const PassengerPage = (props: {}) => {
     }
 
     return (
-        <Container>
+        <Container sx={{maxWidth: "975px"}} >
             <Typography variant={'h4'}
                         gutterBottom={true}
                         sx={{

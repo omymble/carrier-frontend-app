@@ -24,7 +24,7 @@ export const Navbar = (props: { isAuth: boolean, telephone: string, onAuthClick:
         <AppBar position="static"
                 sx={{
                     marginBottom: {xs: '30px', sm: '50px'},
-                    height: 80,
+                    height: 70,
                     display: 'flex',
                     justifyContent: 'center'
                 }}
@@ -40,7 +40,7 @@ export const Navbar = (props: { isAuth: boolean, telephone: string, onAuthClick:
                 >
                     <DirectionsCarIcon sx={{fontSize: 55}}/>
                 </IconButton>
-                <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
+                <Typography variant="h4" component="div" sx={{flexGrow: 1, fontSize: "25px", fontWeight: "bold", letterSpacing: "2px"}}>
                     CARRIER APP
                 </Typography>
                 {props.isAuth && (
