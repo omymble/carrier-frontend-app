@@ -37,12 +37,10 @@ export const PassengerPage = (props: {}) => {
     }
 
     return (
-        <Container sx={{maxWidth: "975px"}} >
+        <Container sx={{maxWidth: "1000px"}} maxWidth={false}>
             <Typography variant={'h4'}
                         gutterBottom={true}
-                        sx={{
-
-                        }}
+                        sx={{fontSize: {xs: "20px", md:"35px"}}}
             >
                 Заполните данные о желаемой поездке
             </Typography>

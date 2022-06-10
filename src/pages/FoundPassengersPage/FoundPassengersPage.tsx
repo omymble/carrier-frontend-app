@@ -16,6 +16,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import RouteIcon from "@mui/icons-material/Route";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import {PassengersList} from "../../components/PassengersList/PassengersList";
+import Container from "@mui/material/Container";
 
 export const FoundPassengersPage = (props: {}) => {
     const {addDriver, deleteDriver} = driversSlice.actions
@@ -69,7 +70,7 @@ export const FoundPassengersPage = (props: {}) => {
     }
 
     return (
-        <div>
+        <Container sx={{maxWidth: "1000px"}} maxWidth={false}>
 
             <Typography variant={'h4'} gutterBottom={true}>Для вас нашлись пассажиры</Typography>
             {isLoading && <Typography variant={'h4'} gutterBottom={true}>загрузка</Typography>}
@@ -131,6 +132,6 @@ export const FoundPassengersPage = (props: {}) => {
             >
                 отменить поездку
             </Button>
-        </div>
+        </Container>
     )
 }

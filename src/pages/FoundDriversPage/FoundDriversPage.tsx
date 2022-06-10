@@ -1,6 +1,6 @@
 import {DriversList} from "../../components/DriversList/DriversList";
 import {queryAPI} from "../../redux/services/queryService";
-import {parseDriver} from "../../formatFunctions";
+import {fromUnix, getAddress, parseDriver} from "../../formatFunctions";
 import {IFoundDriver} from "../../redux/store/models/IFoundDriver";
 import {useEffect, useState} from "react";
 import Button from "@mui/material/Button";
@@ -16,6 +16,8 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import RouteIcon from '@mui/icons-material/Route';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import {IPassenger} from "../../redux/store/models/IPassenger";
+import Container from "@mui/material/Container";
+import {Box, Stack} from "@mui/material";
 
 export const FoundDriversPage = (props: {}) => {
     const {addPassenger, deletePassenger} = passengersSlice.actions
@@ -63,7 +65,36 @@ export const FoundDriversPage = (props: {}) => {
     }
 
     return (
-        <div>
+        <Container sx={{maxWidth: "1000px"}} maxWidth={false}>
+            <Box
+                sx={{
+                    bgcolor: 'background.paper',
+                    // pt: 8,
+                    pb: 6,
+                }}
+            >
+                <Container maxWidth="sm">
+                    <Typography
+                        variant="h3"
+                        align="center"
+                        color="text.primary"
+                        gutterBottom
+                    >
+                        ваша поездка:
+                    </Typography>
+                    <Typography variant="h5" align="center" color="text.secondary" paragraph>
+                        Время: {fromUnix(passenger.time)}<br/>
+                        Начало маршрута: {String(getAddress(passenger.from.longitude, passenger.from.latitude))}<br/>
+                        {/*Конец м маршрута: {getAddress(passenger.to.longitude, passenger.to.latitude)}<br/>*/}
+                    </Typography>
+                    <Button onClick={() => deletePassengerTrip(passenger)}
+                            // sx={{mt: '20px'}}
+                            variant="outlined"
+                    >
+                        отменить поездку
+                    </Button>
+                </Container>
+            </Box>
 
             <Typography variant={'h4'} gutterBottom={true}>Для вас нашлись водители</Typography>
             {isLoading && <Typography variant={'h4'} gutterBottom={true}>загрузка</Typography>}
@@ -76,10 +107,10 @@ export const FoundDriversPage = (props: {}) => {
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
                         id="panel1a-header"
-                        sx={{display: 'flex'}}
+                        sx={{display: 'flex', alignItems: 'center'}}
                     >
-                        <AccessTimeIcon sx={{mr: '20px'}}/>
-                        <Typography>Лучшее совпадение времени:</Typography>
+                        <AccessTimeIcon sx={{margin: 'auto 0px', mr: '20px'}}/>
+                        <Typography sx={{fontSize: {xs: "25px", sm: "30px"}}}>Лучшее время:</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         {/*<DriversList drivers={driversUI.driversBestTime}/>*/}
@@ -92,10 +123,10 @@ export const FoundDriversPage = (props: {}) => {
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel2a-content"
                         id="panel2a-header"
-                        sx={{display: 'flex'}}
+                        sx={{display: 'flex', alignItems: 'center'}}
                     >
-                        <RouteIcon sx={{mr: '20px'}}/>
-                        <Typography>Лучшее совпадение маршрута:</Typography>
+                        <RouteIcon sx={{margin: 'auto 0px', mr: '20px'}}/>
+                        <Typography sx={{fontSize: {xs: "25px", sm: "30px"}}}>Лучший маршрут:</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         {/*<DriversList drivers={driversUI.driversBestRoute}/>*/}
@@ -108,10 +139,10 @@ export const FoundDriversPage = (props: {}) => {
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel3a-content"
                         id="panel3a-header"
-                        sx={{display: 'flex'}}
+                        sx={{display: 'flex', alignItems: 'center'}}
                     >
-                        <GroupAddIcon sx={{mr: '20px'}}/>
-                        <Typography>Еще водители:</Typography>
+                        <GroupAddIcon sx={{margin: 'auto 0px', mr: '20px'}}/>
+                        <Typography sx={{fontSize: {xs: "25px", sm: "30px"}}}>Еще водители:</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         {/*<DriversList drivers={driversUI.moreDrivers}/>*/}
@@ -120,12 +151,8 @@ export const FoundDriversPage = (props: {}) => {
                 </Accordion>}
             </div>
 
-            <Button onClick={() => deletePassengerTrip(passenger)}
-                    sx={{mt: '20px'}}
-            >
-                отменить поездку
-            </Button>
 
-        </div>
+
+        </Container>
     )
 }
