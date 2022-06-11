@@ -12,7 +12,7 @@ import {useFormik} from "formik";
 import * as yup from "yup";
 import {IPassenger} from "../../redux/store/models/IPassenger";
 import {toUnix} from "../../formatFunctions";
-import {API_1, RU_REG_EXP} from "../../consts";
+import {API_2, RU_REG_EXP} from "../../consts";
 
 
 const validationSchema = yup.object({
@@ -131,7 +131,7 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
             <Box display={"flex"} justifyContent={"center"} margin={"30px auto 20px"}>
                 <YMaps
                     query={{
-                        apikey: API_1,
+                        apikey: API_2,
                     }}
                 >
                 <Map
