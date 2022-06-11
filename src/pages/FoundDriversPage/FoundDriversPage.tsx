@@ -177,7 +177,6 @@ export const FoundDriversPage = (props: {}) => {
                             <Typography sx={{fontSize: {xs: "25px", sm: "30px"}}}>Лучший маршрут:</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            {/*<DriversList drivers={driversUI.driversBestRoute}/>*/}
                             <DriversList drivers={driversBestRoute}/>
                         </AccordionDetails>
                     </Accordion>}

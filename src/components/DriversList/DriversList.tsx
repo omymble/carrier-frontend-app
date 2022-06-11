@@ -12,10 +12,10 @@ export const DriversList = (props: {drivers: Array<IFoundDriver>}) => {
 
     return (
         <>
-            <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Box>
+                <Grid container spacing={4} justifyContent={{xs: "center", sm: "start"}}>
                     {Array.from(tsxDriversList).map((item, index) => (
-                        <Grid item xs={2} sm={4} md={4} key={index}>
+                        <Grid item xs={12} sm={6} md={4} key={index}>
                             {tsxDriversList[index]}
                         </Grid>
                     ))}
@@ -24,3 +24,6 @@ export const DriversList = (props: {drivers: Array<IFoundDriver>}) => {
         </>
     )
 }
+
+// columns={{ xs: 4, sm: 8, md: 12 }}
+// { xs: 2, sm: 3, md: 4 }

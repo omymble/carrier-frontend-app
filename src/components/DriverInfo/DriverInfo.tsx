@@ -11,8 +11,8 @@ export const DriverInfo = (props : {foundDriverData: IFoundDriver; key: number})
 
     return (
 
-        <Card sx={{ maxWidth: 320, minWidth: 245}}>
-            <CardActionArea href={"tel:"+props.foundDriverData.telephone}>
+        <Card color={"e8eaf6"} sx={{ maxWidth: 320, minWidth: 245, height: 250, bgcolor: "#e3f2fd80", boxShadow: "7"}}>
+            <CardActionArea href={"tel:"+props.foundDriverData.telephone} sx={{height: "100%"}}>
                 <CardContent>
                     <Grid container direction="column" wrap="nowrap" >
                         <Typography gutterBottom variant="h5" component="div">
