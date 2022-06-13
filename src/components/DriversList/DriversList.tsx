@@ -24,6 +24,3 @@ export const DriversList = (props: {drivers: Array<IFoundDriver>}) => {
         </>
     )
 }
-
-// columns={{ xs: 4, sm: 8, md: 12 }}
-// { xs: 2, sm: 3, md: 4 }

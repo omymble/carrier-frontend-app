@@ -18,7 +18,6 @@ export const fromUnix = (numTime: number) => {
 
 export const diffTime = (myTime: number, userTime: number) => {
     let diff: number = Math.floor(Math.abs(myTime - userTime) / 1000)
-    let diffSec: number = diff % 60
     diff = Math.floor(diff / 60)
     let diffMin: number = diff % 60
     diff = Math.floor(diff % 60)
@@ -65,6 +64,5 @@ export const parsePassenger = async (passenger: IPassenger) => {
         from: addrFrom,
         to: addrTo
     }
-    console.log('parsePassenger', foundPassenger)
     return foundPassenger
 }

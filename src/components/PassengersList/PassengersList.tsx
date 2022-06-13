@@ -11,9 +11,9 @@ export const PassengersList = (props: {passengers: Array<IFoundPassenger>}) => {
     )
     return (
             <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Grid container spacing={4} justifyContent={{xs: "center", sm: "start"}}>
                     {Array.from(tsxPassengersList).map((item, index) => (
-                        <Grid item xs={2} sm={4} md={4} key={index}>
+                        <Grid item xs={12} sm={6} md={4} key={index}>
                             {tsxPassengersList[index]}
                         </Grid>
                     ))}

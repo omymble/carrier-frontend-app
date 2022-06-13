@@ -1,6 +1,6 @@
 import {DriversList} from "../../components/DriversList/DriversList";
 import {queryAPI} from "../../redux/services/queryService";
-import {fromUnix, getAddress, parseDriver, parsePassenger} from "../../formatFunctions";
+import {parseDriver, parsePassenger} from "../../formatFunctions";
 import {IFoundDriver} from "../../redux/store/models/IFoundDriver";
 import {useEffect, useState} from "react";
 import Button from "@mui/material/Button";
@@ -17,8 +17,9 @@ import RouteIcon from '@mui/icons-material/Route';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import {IPassenger} from "../../redux/store/models/IPassenger";
 import Container from "@mui/material/Container";
-import {Box, Divider, List, ListItem, ListItemAvatar, ListItemText, responsiveFontSizes, Stack} from "@mui/material";
+import {Box, Divider, List, ListItem, ListItemText} from "@mui/material";
 import {IFoundPassenger} from "../../redux/store/models/IFoundPassenger";
+import LoopIcon from '@mui/icons-material/Loop';
 
 export const FoundDriversPage = (props: {}) => {
     const {addPassenger, deletePassenger} = passengersSlice.actions
@@ -67,9 +68,9 @@ export const FoundDriversPage = (props: {}) => {
             .then((response: any) => {
                 if (response) {
                     dispatch(deletePassenger(passenger.id))
+                    navigate('/home')
                 }
             })
-        navigate('/home')
     }
 
     return (
@@ -80,77 +81,54 @@ export const FoundDriversPage = (props: {}) => {
                 alignItems={"start"}
                 sx={{
                     bgcolor: 'background.paper',
-                    // pt: 8,
                     pb: 6,
                 }}
             >
 
-
-                {/*<Box maxWidth="sm">*/}
-{/*                    <Typography
-                        variant="h3"
-                        align="center"
-                        color="text.primary"
-                        gutterBottom
-                    >
-                        ваша поездка:
-                    </Typography>*/}
-                    {/*<Container>*/}
-                        <List
-                            sx={{
-                                width: '100%',
-                                // maxWidth: 1000,
-                                // minWidth: 300,
-                                bgcolor: 'background.paper'
-                            }}
-                        >
-                            <ListItem sx={{pl: "0px"}}>
-                                <ListItemText primary="Время"
-                                              secondary={passengerTrip?.time}
-                                              primaryTypographyProps={{sx: {fontSize: "30px"}}}
-                                              secondaryTypographyProps={{sx: {fontSize: "20px"}}}
-                                />
-                            </ListItem>
-                            <Divider variant="fullWidth" component="li" />
-                            <ListItem sx={{pl: "0px"}}>
-                                <ListItemText primary="Начало маршрута"
-                                              secondary={passengerTrip?.from}
-                                              primaryTypographyProps={{sx: {fontSize: "30px"}}}
-                                              secondaryTypographyProps={{sx: {fontSize: "20px"}}}
-                                />
-                            </ListItem>
-                            <Divider variant="fullWidth" component="li" />
-                            <ListItem sx={{pl: "0px"}}>
-                                <ListItemText primary="Конец маршрута"
-                                              secondary={passengerTrip?.to}
-                                              primaryTypographyProps={{sx: {fontSize: "30px"}}}
-                                              secondaryTypographyProps={{sx: {fontSize: "20px"}}}
-                                />
-                            </ListItem>
-                        </List>
-                    {/*</Container>*/}
-{/*                    <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                        Время: {fromUnix(passenger.time)}<br/>
-                        <Divider variant="fullWidth" />
-                        Начало маршрута:<br/>{passengerTrip?.from}<br/>
-                        <Divider variant="inset" component="li" />
-                        Конец маршрута:<br/>{passengerTrip?.to}<br/>
-                    </Typography>*/}
-                    <Button onClick={() => deletePassengerTrip(passenger)}
-                        // sx={{mt: '20px'}}
-                            variant="outlined"
-                    >
-                        отменить поездку
-                    </Button>
-                {/*</Box>*/}
+                <List
+                    sx={{
+                        width: '100%'
+                    }}
+                >
+                    <ListItem sx={{pl: "0px"}}>
+                        <ListItemText primary="Время"
+                                      secondary={passengerTrip?.time}
+                                      primaryTypographyProps={{sx: {fontSize: "30px"}}}
+                                      secondaryTypographyProps={{sx: {fontSize: "20px"}}}
+                        />
+                    </ListItem>
+                    <Divider variant="fullWidth" component="li"/>
+                    <ListItem sx={{pl: "0px"}}>
+                        <ListItemText primary="Начало маршрута"
+                                      secondary={passengerTrip?.from}
+                                      primaryTypographyProps={{sx: {fontSize: "30px"}}}
+                                      secondaryTypographyProps={{sx: {fontSize: "20px"}}}
+                        />
+                    </ListItem>
+                    <Divider variant="fullWidth" component="li"/>
+                    <ListItem sx={{pl: "0px"}}>
+                        <ListItemText primary="Конец маршрута"
+                                      secondary={passengerTrip?.to}
+                                      primaryTypographyProps={{sx: {fontSize: "30px"}}}
+                                      secondaryTypographyProps={{sx: {fontSize: "20px"}}}
+                        />
+                    </ListItem>
+                </List>
+                <Button onClick={() => deletePassengerTrip(passenger)} variant="outlined" sx={{margin: "0 auto"}}>
+                    отменить поездку
+                </Button>
             </Box>
 
             <Typography variant={'h4'} gutterBottom={true}>Для вас нашлись водители</Typography>
-            {isLoading && <Typography variant={'h4'} gutterBottom={true}>загрузка</Typography>}
-            {error && <Typography variant={'h4'} gutterBottom={true}>ошибка на сервере</Typography>}
+            {isLoading && <LoopIcon sx={{fontSize: 100}}/>}
+            {error &&
+                <Typography variant={'h4'} gutterBottom={true}>
+                    ошибка на сервере
+                </Typography>
+            }
             {foundDrivers &&
-                <div>
-                    {driversBestTime && <Accordion>
+                <Box>
+                    {driversBestTime && <Accordion color={"#e3f2fd80"} sx={{bgcolor: "#e3f2fd90"}}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon/>}
                             aria-controls="panel1a-content"
@@ -161,12 +139,11 @@ export const FoundDriversPage = (props: {}) => {
                             <Typography sx={{fontSize: {xs: "25px", sm: "30px"}}}>Лучшее время:</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            {/*<DriversList drivers={driversUI.driversBestTime}/>*/}
                             <DriversList drivers={driversBestTime}/>
                         </AccordionDetails>
                     </Accordion>}
 
-                    {driversBestRoute && <Accordion>
+                    {driversBestRoute && <Accordion sx={{bgcolor: "#e3f2fd90"}}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon/>}
                             aria-controls="panel2a-content"
@@ -181,7 +158,7 @@ export const FoundDriversPage = (props: {}) => {
                         </AccordionDetails>
                     </Accordion>}
 
-                    {moreDrivers && <Accordion>
+                    {moreDrivers && <Accordion sx={{bgcolor: "#e3f2fd90"}}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon/>}
                             aria-controls="panel3a-content"
@@ -192,16 +169,16 @@ export const FoundDriversPage = (props: {}) => {
                             <Typography sx={{fontSize: {xs: "25px", sm: "30px"}}}>Еще водители:</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            {/*<DriversList drivers={driversUI.moreDrivers}/>*/}
                             <DriversList drivers={moreDrivers}/>
                         </AccordionDetails>
                     </Accordion>}
-                </div>
+                </Box>
             }
-
-
-
-
+            {!foundDrivers &&
+                <Typography variant={'h4'} gutterBottom={true}>
+                    К сожалению водителей не найдено
+                </Typography>
+            }
         </Container>
     )
 }

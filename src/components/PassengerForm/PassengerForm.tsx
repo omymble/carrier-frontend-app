@@ -67,7 +67,6 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
     });
 
 
-
     return (
         <>
             <Box
@@ -111,8 +110,9 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
                         name="time"
                         label="Время поездки"
                         value={formik.values.time}
-                        onChange={(val)=>handleTimeChange(val)}
-                        renderInput={(params: {id: "time", name: "time", variant: "filled"}) => <TextField {...params} />}
+                        onChange={(val) => handleTimeChange(val)}
+                        renderInput={(params: { id: "time", name: "time", variant: "filled" }) =>
+                            <TextField {...params} />}
                     />
                 </LocalizationProvider>
                 <br/>
@@ -127,43 +127,41 @@ export const PassengerForm = (props: { addPassenger: Function, telInput: String 
             </Box>
 
 
-
             <Box display={"flex"} justifyContent={"center"} margin={"30px auto 20px"}>
                 <YMaps
                     query={{
                         apikey: API_2,
                     }}
                 >
-                <Map
-                    modules={["geocode", "suggest"]}
-                    defaultState={{
-                        center: [59.9311, 30.3609],
-                        zoom: 9,
-                        controls: [],
-                    }}
-                    width={"100%"}
-                    // height={"40%"}
-                    height={'400px'}
-                >
-                    <RoutePanel
-                        instanceRef={async (r) => {
-                            if (!r) return;
-                            const route = await r.routePanel.getRouteAsync();
-                            if (route && !r.routePanel.__eventAdded) {
-                                route.model.events.add("requestsuccess", function (x) {
-                                    const coords = x.originalEvent.target
-                                        .getPoints()
-                                        .map((x) => x.properties.get("coordinates"));
-
-                                    formik.setFieldValue("pointFromCoords", coords[0]);
-                                    formik.setFieldValue("pointToCoords", coords[1]);
-                                });
-                                r.routePanel.__eventAdded = true;
-                            }
+                    <Map
+                        modules={["geocode", "suggest"]}
+                        defaultState={{
+                            center: [59.9311, 30.3609],
+                            zoom: 9,
+                            controls: [],
                         }}
-                        options={routePanelOptions}
-                    />
-                </Map>
+                        width={"100%"}
+                        height={'400px'}
+                    >
+                        <RoutePanel
+                            instanceRef={async (r) => {
+                                if (!r) return;
+                                const route = await r.routePanel.getRouteAsync();
+                                if (route && !r.routePanel.__eventAdded) {
+                                    route.model.events.add("requestsuccess", function (x) {
+                                        const coords = x.originalEvent.target
+                                            .getPoints()
+                                            .map((x) => x.properties.get("coordinates"));
+
+                                        formik.setFieldValue("pointFromCoords", coords[0]);
+                                        formik.setFieldValue("pointToCoords", coords[1]);
+                                    });
+                                    r.routePanel.__eventAdded = true;
+                                }
+                            }}
+                            options={routePanelOptions}
+                        />
+                    </Map>
                 </YMaps>
             </Box>
 

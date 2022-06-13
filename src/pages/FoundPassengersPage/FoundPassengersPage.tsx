@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import Button from "@mui/material/Button";
 import {driversSlice} from "../../redux/store/reducers/driversSlice";
 import {useEffect, useState} from "react";
-import {parsePassenger} from "../../formatFunctions";
+import {parseDriver, parsePassenger} from "../../formatFunctions";
 import {IFoundPassenger} from "../../redux/store/models/IFoundPassenger";
 import {IDriver} from "../../redux/store/models/IDriver";
 import {useNavigate} from "react-router-dom";
@@ -17,6 +17,10 @@ import RouteIcon from "@mui/icons-material/Route";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import {PassengersList} from "../../components/PassengersList/PassengersList";
 import Container from "@mui/material/Container";
+import LoopIcon from '@mui/icons-material/Loop';
+import {IFoundDriver} from "../../redux/store/models/IFoundDriver";
+import {Box, Divider, List, ListItem, ListItemText} from "@mui/material";
+
 
 export const FoundPassengersPage = (props: {}) => {
     const {addDriver, deleteDriver} = driversSlice.actions
@@ -24,12 +28,12 @@ export const FoundPassengersPage = (props: {}) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-
     const {data: foundPassengers, error, isLoading} = queryAPI.useFetchAllFoundPassengersQuery()
     const [deleteDriverDB] = queryAPI.useDeleteDriverMutation()
     const [passengersBestTime, setPassengersBestTime] = useState<IFoundPassenger[] | undefined>([])
     const [passengersBestRoute, setPassengersBestRoute] = useState<IFoundPassenger[] | undefined>([])
     const [morePassengers, setMorePassengers] = useState<IFoundPassenger[] | undefined>([])
+    const [driverTrip, setDriverTrip] = useState<IFoundDriver | undefined>({} as IFoundDriver)
 
     useEffect(() => {
         if (foundPassengers) {
@@ -51,87 +55,134 @@ export const FoundPassengersPage = (props: {}) => {
             getMore().then(data => {
                 setMorePassengers(data)
             })
+            const dTrip = async () => {
+                return Promise.resolve(parseDriver(driver))
+            }
+            dTrip().then(data => {
+                setDriverTrip(data)
+            })
         }
-    }, [foundPassengers])
+    }, [foundPassengers, driver])
 
 
     const deleteDriverTrip = async (driver: IDriver) => {
-        console.log('delete1', driver)
         await deleteDriverDB(driver)
             .then((response: any) => {
-                console.log('delete2', response)
                 if (response) {
-                    console.log('delete3', driver)
                     dispatch(deleteDriver(driver.id))
+                    navigate('/home')
                 }
             })
-        navigate('/home')
-        dispatch(deleteDriver(driver.id))
     }
 
     return (
         <Container sx={{maxWidth: "1000px"}} maxWidth={false}>
 
-            <Typography variant={'h4'} gutterBottom={true}>Для вас нашлись пассажиры</Typography>
-            {isLoading && <Typography variant={'h4'} gutterBottom={true}>загрузка</Typography>}
-            {error && <Typography variant={'h4'} gutterBottom={true}>ошибка на сервере</Typography>}
-
-
-            <div>
-                {passengersBestTime && <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                        sx={{display: 'flex'}}
-                    >
-                        <AccessTimeIcon sx={{mr: '20px'}}/>
-                        <Typography>Лучшее совпадение времени:</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        {/*<DriversList drivers={driversUI.driversBestTime}/>*/}
-                        <PassengersList passengers={passengersBestTime}/>
-                    </AccordionDetails>
-                </Accordion>}
-
-                {passengersBestRoute && <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel2a-content"
-                        id="panel2a-header"
-                        sx={{display: 'flex'}}
-                    >
-                        <RouteIcon sx={{mr: '20px'}}/>
-                        <Typography>Лучшее совпадение маршрута:</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        {/*<DriversList drivers={driversUI.driversBestRoute}/>*/}
-                        <PassengersList passengers={passengersBestRoute}/>
-                    </AccordionDetails>
-                </Accordion>}
-
-                {morePassengers && <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel3a-content"
-                        id="panel3a-header"
-                        sx={{display: 'flex'}}
-                    >
-                        <GroupAddIcon sx={{mr: '20px'}}/>
-                        <Typography>Еще пассажиры:</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        {/*<DriversList drivers={driversUI.moreDrivers}/>*/}
-                        <PassengersList passengers={morePassengers}/>
-                    </AccordionDetails>
-                </Accordion>}
-            </div>
-
-            <Button onClick={() => deleteDriverTrip(driver)}
-                    sx={{mt: '20px'}}
+            <Box
+                display={"flex"}
+                flexDirection={"column"}
+                alignItems={"start"}
+                sx={{
+                    bgcolor: 'background.paper',
+                    pb: 6,
+                }}
             >
-                отменить поездку
-            </Button>
+
+                <List
+                    sx={{
+                        width: '100%'
+                    }}
+                >
+                    <ListItem sx={{pl: "0px"}}>
+                        <ListItemText primary="Время"
+                                      secondary={driverTrip?.time}
+                                      primaryTypographyProps={{sx: {fontSize: "30px"}}}
+                                      secondaryTypographyProps={{sx: {fontSize: "20px"}}}
+                        />
+                    </ListItem>
+                    <Divider variant="fullWidth" component="li"/>
+                    <ListItem sx={{pl: "0px"}}>
+                        <ListItemText primary="Начало маршрута"
+                                      secondary={driverTrip?.from}
+                                      primaryTypographyProps={{sx: {fontSize: "30px"}}}
+                                      secondaryTypographyProps={{sx: {fontSize: "20px"}}}
+                        />
+                    </ListItem>
+                    <Divider variant="fullWidth" component="li"/>
+                    <ListItem sx={{pl: "0px"}}>
+                        <ListItemText primary="Конец маршрута"
+                                      secondary={driverTrip?.to}
+                                      primaryTypographyProps={{sx: {fontSize: "30px"}}}
+                                      secondaryTypographyProps={{sx: {fontSize: "20px"}}}
+                        />
+                    </ListItem>
+                </List>
+                <Button onClick={() => deleteDriverTrip(driver)} variant="outlined" sx={{margin: "0 auto"}}>
+                    отменить поездку
+                </Button>
+            </Box>
+
+            <Typography variant={'h4'} gutterBottom={true}>Для вас нашлись пассажиры</Typography>
+            {isLoading && <LoopIcon sx={{fontSize: 100}}/>}
+            {error &&
+                <Typography variant={'h4'} gutterBottom={true}>
+                    ошибка на сервере
+                </Typography>
+            }
+
+            {foundPassengers &&
+                <Box>
+                    {passengersBestTime && <Accordion color={"#e3f2fd80"} sx={{bgcolor: "#e3f2fd90"}}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon/>}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                            sx={{display: 'flex', alignItems: 'center'}}
+                        >
+                            <AccessTimeIcon sx={{margin: 'auto 0px', mr: '20px'}}/>
+                            <Typography sx={{fontSize: {xs: "25px", sm: "30px"}}}>Лучшее время:</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <PassengersList passengers={passengersBestTime}/>
+                        </AccordionDetails>
+                    </Accordion>}
+
+                    {passengersBestRoute && <Accordion sx={{bgcolor: "#e3f2fd90"}}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon/>}
+                            aria-controls="panel2a-content"
+                            id="panel2a-header"
+                            sx={{display: 'flex', alignItems: 'center'}}
+                        >
+                            <RouteIcon sx={{margin: 'auto 0px', mr: '20px'}}/>
+                            <Typography sx={{fontSize: {xs: "25px", sm: "30px"}}}>Лучший маршрут:</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <PassengersList passengers={passengersBestRoute}/>
+                        </AccordionDetails>
+                    </Accordion>}
+
+                    {morePassengers && <Accordion sx={{bgcolor: "#e3f2fd90"}}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon/>}
+                            aria-controls="panel3a-content"
+                            id="panel3a-header"
+                            sx={{display: 'flex', alignItems: 'center'}}
+                        >
+                            <GroupAddIcon sx={{margin: 'auto 0px', mr: '20px'}}/>
+                            <Typography sx={{fontSize: {xs: "25px", sm: "30px"}}}>Еще водители:</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <PassengersList passengers={morePassengers}/>
+                        </AccordionDetails>
+                    </Accordion>}
+                </Box>
+            }
+            {!foundPassengers &&
+                <Typography variant={'h4'} gutterBottom={true}>
+                    К сожалению в этот раз пассажиров не найдено
+                </Typography>
+            }
         </Container>
     )
 }

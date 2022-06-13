@@ -12,9 +12,8 @@ import {Map, RoutePanel, YMaps} from "react-yandex-maps";
 import {useFormik} from "formik";
 import * as yup from "yup";
 import {IDriver} from "../../redux/store/models/IDriver";
-import {API_1, RU_REG_EXP} from "../../consts";
+import {API_1, API_2, RU_REG_EXP} from "../../consts";
 import {toUnix} from "../../formatFunctions";
-import Container from "@mui/material/Container";
 
 const seats = [
     {
@@ -53,8 +52,8 @@ const routePanelOptions = {
     float: "right",
     maxWidth: 270,
     position: {
-        top: 10,
-        right: 10,
+        top: 15,
+        right: 15,
     },
 };
 
@@ -148,8 +147,9 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
                         name="time"
                         label="Время поездки"
                         value={formik.values.time}
-                        onChange={(val)=>handleTimeChange(val)}
-                        renderInput={(params: {id: "time", name: "time", label: "Время поездки"}) => <TextField {...params} />}
+                        onChange={(val) => handleTimeChange(val)}
+                        renderInput={(params: { id: "time", name: "time", label: "Время поездки" }) =>
+                            <TextField {...params} />}
                     />
                 </LocalizationProvider>
                 <br/>
@@ -163,46 +163,43 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
                 </Button>
             </Box>
 
-            <YMaps
-                query={{
-                    apikey: API_1,
-                }}
-            >
-                <Container sx={{margin: "30px auto 20px"}} >
-                {/*<Box display={"flex"} justifyContent={"center"} margin={"30px auto 20px"}>*/}
-                <Map
-                    modules={["geocode", "suggest"]}
-                    defaultState={{
-                        center: [59.9311, 30.3609],
-                        zoom: 9,
-                        controls: [],
+            <Box display={"flex"} justifyContent={"center"} margin={"30px auto 20px"}>
+                <YMaps
+                    query={{
+                        apikey: API_2,
                     }}
-                    width={"100%"}
-                    // height={"40%"}
-                    height={'400px'}
                 >
-                    <RoutePanel
-                        instanceRef={async (r) => {
-                            if (!r) return;
-                            const route = await r.routePanel.getRouteAsync();
-                            if (route && !r.routePanel.__eventAdded) {
-                                route.model.events.add("requestsuccess", function (x) {
-                                    const coords = x.originalEvent.target
-                                        .getPoints()
-                                        .map((x) => x.properties.get("coordinates"));
-
-                                    formik.setFieldValue("pointFromCoords", coords[0]);
-                                    formik.setFieldValue("pointToCoords", coords[1]);
-                                });
-                                r.routePanel.__eventAdded = true;
-                            }
+                    <Map
+                        modules={["geocode", "suggest"]}
+                        defaultState={{
+                            center: [59.9311, 30.3609],
+                            zoom: 9,
+                            controls: [],
                         }}
-                        options={routePanelOptions}
-                    />
-                </Map>
-                {/*</Box>*/}
-                </Container>
-            </YMaps>
+                        width={"100%"}
+                        height={'400px'}
+                    >
+                        <RoutePanel
+                            instanceRef={async (r) => {
+                                if (!r) return;
+                                const route = await r.routePanel.getRouteAsync();
+                                if (route && !r.routePanel.__eventAdded) {
+                                    route.model.events.add("requestsuccess", function (x) {
+                                        const coords = x.originalEvent.target
+                                            .getPoints()
+                                            .map((x) => x.properties.get("coordinates"));
+
+                                        formik.setFieldValue("pointFromCoords", coords[0]);
+                                        formik.setFieldValue("pointToCoords", coords[1]);
+                                    });
+                                    r.routePanel.__eventAdded = true;
+                                }
+                            }}
+                            options={routePanelOptions}
+                        />
+                    </Map>
+                </YMaps>
+            </Box>
         </>
     );
 }

@@ -31,9 +31,11 @@ export const PassengerPage = (props: {}) => {
             .then(response => {
                 if (response) {
                     dispatch(addPassenger(newPassenger))
+                    navigate('/drivers-list')
                 }
             })
-        navigate('/drivers-list')
+        // alert('Произошла ошибка. Попробуйте позже.')
+
     }
 
     return (
