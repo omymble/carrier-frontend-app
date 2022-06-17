@@ -12,7 +12,7 @@ import {Map, RoutePanel, YMaps} from "react-yandex-maps";
 import {useFormik} from "formik";
 import * as yup from "yup";
 import {IDriver} from "../../redux/store/models/IDriver";
-import {API_1, API_2, RU_REG_EXP} from "../../consts";
+import {API_1, RU_REG_EXP} from "../../consts";
 import {toUnix} from "../../formatFunctions";
 
 const seats = [
@@ -166,7 +166,7 @@ export const DriverForm = (props: { addDriver: Function, telInput: String }) => 
             <Box display={"flex"} justifyContent={"center"} margin={"30px auto 20px"}>
                 <YMaps
                     query={{
-                        apikey: API_2,
+                        apikey: API_1,
                     }}
                 >
                     <Map

@@ -379,27 +379,7 @@
       }
     ]
   },
-  "auth-user": [
-    {
-      "id": "89037361629",
-      "isAuth": true
-    }
-  ],
-  "drivers": [
-    {
-      "name": "Женя",
-      "id": "89037361629",
-      "seats": 3,
-      "time": 1655118983,
-      "from": {
-        "longitude": 30.338353,
-        "latitude": 59.927288
-      },
-      "to": {
-        "longitude": 30.301567,
-        "latitude": 59.863744
-      }
-    }
-  ],
+  "auth-user": [],
+  "drivers": [],
   "passengers": []
 }

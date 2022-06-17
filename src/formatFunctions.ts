@@ -1,7 +1,7 @@
 import {axios} from "./index";
 import {IDriver} from "./redux/store/models/IDriver";
 import {IFoundDriver} from "./redux/store/models/IFoundDriver";
-import {API_1, API_2, API_3, API_4} from "./consts";
+import {API_1} from "./consts";
 import {IPassenger} from "./redux/store/models/IPassenger";
 import {IFoundPassenger} from "./redux/store/models/IFoundPassenger";
 
